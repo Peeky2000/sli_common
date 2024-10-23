@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnimationGradientText extends StatefulWidget {
-  final String text;
+  final String texts;
   final TextStyle? style;
   final TextAlign? textAlign;
   final bool isRepeat;
@@ -11,7 +11,7 @@ class AnimationGradientText extends StatefulWidget {
   final Duration duration;
 
   const AnimationGradientText(
-    this.text, {
+    this.texts, {
     Key? key,
     this.style,
     this.textAlign,
@@ -67,7 +67,7 @@ class _AnimationGradientTextState extends State<AnimationGradientText>
       builder: (context, child) => ShaderMask(
         shaderCallback: (rect) =>
             LinearGradient(colors: widget.colors, stops: stops).createShader(rect),
-        child: Text(widget.text,
+        child: Text(widget.texts,
             textAlign: widget.textAlign,
             style: widget.style ??
                 TextStyle(color: Colors.white, fontSize: 14.0.sp, fontWeight: FontWeight.w700)),
