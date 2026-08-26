@@ -29,12 +29,12 @@ class HorizontalProgress extends StatelessWidget {
       width: width,
       child: CustomPaint(
         painter: _HorizontalProgressPainter(
-            progress: progress,
-            progressColor: colorProgress,
-            backgroundProgressColor: backgroundColorProgress,
-            strokeWidth: strokeWidth,
-            padding: insert,
-            borderRadius: borderRadius,
+          progress: progress,
+          progressColor: colorProgress,
+          backgroundProgressColor: backgroundColorProgress,
+          strokeWidth: strokeWidth,
+          padding: insert,
+          borderRadius: borderRadius,
         ),
       ),
     );
@@ -70,10 +70,12 @@ class AnimationHorizontalProgress extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AnimationHorizontalProgressState createState() => _AnimationHorizontalProgressState();
+  _AnimationHorizontalProgressState createState() =>
+      _AnimationHorizontalProgressState();
 }
 
-class _AnimationHorizontalProgressState extends State<AnimationHorizontalProgress>
+class _AnimationHorizontalProgressState
+    extends State<AnimationHorizontalProgress>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -86,10 +88,13 @@ class _AnimationHorizontalProgressState extends State<AnimationHorizontalProgres
       duration: widget.duration,
       vsync: this,
     );
-    _animation = Tween(begin: widget.fromValue, end: widget.toValue).animate(_animationController)
-      ..addListener(() {
-        setState(() {});
-      });
+    _animation =
+        Tween(
+          begin: widget.fromValue,
+          end: widget.toValue,
+        ).animate(_animationController)..addListener(() {
+          setState(() {});
+        });
     _animationController.forward();
     if (widget.repeat) {
       _animationController.repeat();
@@ -149,25 +154,43 @@ class _HorizontalProgressPainter extends CustomPainter {
       ..strokeWidth = strokeWidth ?? size.height - padding.top - padding.bottom;
 
     canvas.drawRRect(
-        RRect.fromLTRBAndCorners(0.0, 0.0, size.width, size.height,
-            topRight: borderRadius?.topRight ?? Radius.circular(size.height / 4.0),
-            bottomLeft: borderRadius?.bottomLeft ?? Radius.circular(size.height / 4.0),
-            topLeft: borderRadius?.topLeft ?? Radius.circular(size.height / 4.0),
-            bottomRight: borderRadius?.bottomRight ?? Radius.circular(size.height / 4.0)),
-        backgroundProgressPaint);
+      RRect.fromLTRBAndCorners(
+        0.0,
+        0.0,
+        size.width,
+        size.height,
+        topRight: borderRadius?.topRight ?? Radius.circular(size.height / 4.0),
+        bottomLeft:
+            borderRadius?.bottomLeft ?? Radius.circular(size.height / 4.0),
+        topLeft: borderRadius?.topLeft ?? Radius.circular(size.height / 4.0),
+        bottomRight:
+            borderRadius?.bottomRight ?? Radius.circular(size.height / 4.0),
+      ),
+      backgroundProgressPaint,
+    );
 
     canvas.drawRRect(
-        RRect.fromLTRBAndCorners(
-            padding.left,
-            padding.top,
-            (size.width - padding.left) * progress / 100.0 +
-                (100.0 - progress) / 100.0 * padding.left,
-            size.height - padding.bottom,
-            topRight: borderRadius?.topRight ?? Radius.circular((size.height - padding.bottom - padding.top) / 4.0),
-            bottomLeft: borderRadius?.bottomLeft ?? Radius.circular((size.height - padding.bottom - padding.top) / 4.0),
-            topLeft: borderRadius?.topLeft ?? Radius.circular((size.height - padding.bottom - padding.top) / 4.0),
-            bottomRight: borderRadius?.bottomRight ?? Radius.circular((size.height - padding.bottom - padding.top) / 4.0)),
-        progressPaint);
+      RRect.fromLTRBAndCorners(
+        padding.left,
+        padding.top,
+        (size.width - padding.left) * progress / 100.0 +
+            (100.0 - progress) / 100.0 * padding.left,
+        size.height - padding.bottom,
+        topRight:
+            borderRadius?.topRight ??
+            Radius.circular((size.height - padding.bottom - padding.top) / 4.0),
+        bottomLeft:
+            borderRadius?.bottomLeft ??
+            Radius.circular((size.height - padding.bottom - padding.top) / 4.0),
+        topLeft:
+            borderRadius?.topLeft ??
+            Radius.circular((size.height - padding.bottom - padding.top) / 4.0),
+        bottomRight:
+            borderRadius?.bottomRight ??
+            Radius.circular((size.height - padding.bottom - padding.top) / 4.0),
+      ),
+      progressPaint,
+    );
   }
 
   @override

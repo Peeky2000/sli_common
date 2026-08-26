@@ -20,7 +20,8 @@ class ExpandedWidget extends StatefulWidget {
   _ExpandedWidgetState createState() => _ExpandedWidgetState();
 }
 
-class _ExpandedWidgetState extends State<ExpandedWidget> with SingleTickerProviderStateMixin {
+class _ExpandedWidgetState extends State<ExpandedWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController expandController;
   late Animation<double> animation;
 
@@ -33,11 +34,11 @@ class _ExpandedWidgetState extends State<ExpandedWidget> with SingleTickerProvid
 
   ///Setting up the animation
   void prepareAnimations() {
-    expandController = AnimationController(vsync: this, duration: widget.duration);
-    animation = CurvedAnimation(
-      parent: expandController,
-      curve: widget.curve,
+    expandController = AnimationController(
+      vsync: this,
+      duration: widget.duration,
     );
+    animation = CurvedAnimation(parent: expandController, curve: widget.curve);
   }
 
   void _runExpandCheck() {

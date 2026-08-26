@@ -26,8 +26,8 @@ class DayWidget extends StatefulWidget {
     this.onStartDateChanged,
     this.selectedEndDate,
     this.selectedStartDate,
-  })  : assert(!firstDate.isAfter(lastDate)),
-        super(key: key);
+  }) : assert(!firstDate.isAfter(lastDate)),
+       super(key: key);
 
   /// The currently selected date.
   ///
@@ -85,7 +85,9 @@ class _DayPickerState extends State<DayWidget> {
   void initState() {
     super.initState();
     final daysInMonth = utils.getDaysInMonth(
-        widget.displayedMonth.year, widget.displayedMonth.month);
+      widget.displayedMonth.year,
+      widget.displayedMonth.month,
+    );
     _dayFocusNodes = List<FocusNode>.generate(
       daysInMonth,
       (index) => FocusNode(skipTraversal: true, debugLabel: 'Day ${index + 1}'),
@@ -123,9 +125,7 @@ class _DayPickerState extends State<DayWidget> {
     return ['TH 2', 'TH 3', 'TH 4', 'TH 5', 'TH 6', 'TH 7', 'CN']
         .map<Widget>(
           (label) => ExcludeSemantics(
-            child: Center(
-              child: Text(label, style: headerStyle),
-            ),
+            child: Center(child: Text(label, style: headerStyle)),
           ),
         )
         .toList();
@@ -151,11 +151,13 @@ class _DayPickerState extends State<DayWidget> {
         dayItems.add(Container());
       } else {
         final dayToBuild = DateTime(year, month, day);
-        final isDisabled = dayToBuild.isAfter(widget.lastDate) ||
+        final isDisabled =
+            dayToBuild.isAfter(widget.lastDate) ||
             dayToBuild.isBefore(widget.firstDate) ||
             (widget.selectableDayPredicate != null &&
                 !widget.selectableDayPredicate!(dayToBuild));
-        if (widget.selectedDate != null && widget.selectionMode != SelectionMode.range) {
+        if (widget.selectedDate != null &&
+            widget.selectionMode != SelectionMode.range) {
           isSelectedDay = utils.isSameDay(widget.selectedDate, dayToBuild);
         }
 
@@ -167,11 +169,15 @@ class _DayPickerState extends State<DayWidget> {
         var dayStyle = widget.calendarStyle?.dayNormalStyle;
         if (widget.selectionMode == SelectionMode.range) {
           isRangeSelected = widget.selectedEndDate != null;
-          isSelectedDayStart =
-              utils.isSameDay(widget.selectedStartDate, dayToBuild);
-          isSelectedDayEnd = widget.selectedEndDate != null &&
+          isSelectedDayStart = utils.isSameDay(
+            widget.selectedStartDate,
+            dayToBuild,
+          );
+          isSelectedDayEnd =
+              widget.selectedEndDate != null &&
               utils.isSameDay(widget.selectedEndDate!, dayToBuild);
-          isInRange = isRangeSelected &&
+          isInRange =
+              isRangeSelected &&
               dayToBuild.isAfter(widget.selectedStartDate!) &&
               dayToBuild.isBefore(widget.selectedEndDate!);
         }
@@ -187,16 +193,20 @@ class _DayPickerState extends State<DayWidget> {
             dayStyle = widget.calendarStyle?.daySelectedStyle;
             if (isSelectedDayStart) {
               decorationRange = BoxDecoration(
-                  color: dayRangeFocusColor,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(100),
-                      bottomLeft: Radius.circular(100)));
+                color: dayRangeFocusColor,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(100),
+                  bottomLeft: Radius.circular(100),
+                ),
+              );
             } else {
               decorationRange = BoxDecoration(
-                  color: dayRangeFocusColor,
-                  borderRadius: const BorderRadius.only(
-                      bottomRight: Radius.circular(100),
-                      topRight: Radius.circular(100)));
+                color: dayRangeFocusColor,
+                borderRadius: const BorderRadius.only(
+                  bottomRight: Radius.circular(100),
+                  topRight: Radius.circular(100),
+                ),
+              );
             }
           }
         } else if (isDisabled) {
@@ -204,9 +214,7 @@ class _DayPickerState extends State<DayWidget> {
         } else if (isInRange) {
           // The days within the range get a light background highlight.
           dayStyle = widget.calendarStyle?.dayNormalStyle;
-          decorationRange = BoxDecoration(
-            color: dayRangeFocusColor,
-          );
+          decorationRange = BoxDecoration(color: dayRangeFocusColor);
         } else if (isToday) {
           dayStyle = widget.calendarStyle?.currentDayStyle;
         }
@@ -214,23 +222,16 @@ class _DayPickerState extends State<DayWidget> {
         Widget dayWidget = Container(
           decoration: decorationRange,
           child: Container(
-            margin: const EdgeInsets.only(top: 6,bottom: 6, left: 4, right: 4),
+            margin: const EdgeInsets.only(top: 6, bottom: 6, left: 4, right: 4),
             decoration: decoration,
             child: widget.dayBuilder == null
-                ? Center(
-                    child: Text(
-                      day.toString(),
-                      style: dayStyle,
-                    ),
-                  )
+                ? Center(child: Text(day.toString(), style: dayStyle))
                 : widget.dayBuilder!(dayToBuild),
           ),
         );
 
         if (isDisabled) {
-          dayWidget = ExcludeSemantics(
-            child: dayWidget,
-          );
+          dayWidget = ExcludeSemantics(child: dayWidget);
         } else {
           dayWidget = InkResponse(
             focusNode: _dayFocusNodes[day - 1],
@@ -264,10 +265,11 @@ class _DayPickerState extends State<DayWidget> {
         padding: EdgeInsets.zero,
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisSpacing: 9.0,
-            childAspectRatio: 1,
-            mainAxisExtent: dayPickerRowHeight,
-            crossAxisCount: DateTime.daysPerWeek),
+          mainAxisSpacing: 9.0,
+          childAspectRatio: 1,
+          mainAxisExtent: dayPickerRowHeight,
+          crossAxisCount: DateTime.daysPerWeek,
+        ),
         childrenDelegate: SliverChildListDelegate(
           dayItems,
           addRepaintBoundaries: false,
@@ -300,6 +302,7 @@ class DayPickerGridDelegate extends SliverGridDelegate {
 }
 
 const DayPickerGridDelegate _dayPickerGridDelegate = DayPickerGridDelegate();
+
 enum _HighlightPainterStyle {
   /// Paints nothing.
   none,
@@ -336,8 +339,12 @@ class _HighlightPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     final rectLeft = Rect.fromLTWH(0, 0, size.width / 2, size.height);
-    final rectRight =
-        Rect.fromLTWH(size.width / 2, 0, size.width / 2, size.height);
+    final rectRight = Rect.fromLTWH(
+      size.width / 2,
+      0,
+      size.width / 2,
+      size.height,
+    );
 
     switch (style) {
       case _HighlightPainterStyle.highlightTrailing:
@@ -353,10 +360,7 @@ class _HighlightPainter extends CustomPainter {
         );
         break;
       case _HighlightPainterStyle.highlightAll:
-        canvas.drawRect(
-          Rect.fromLTWH(0, 0, size.width, size.height),
-          paint,
-        );
+        canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);
         break;
       default:
         break;

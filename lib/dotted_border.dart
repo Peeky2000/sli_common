@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:path_drawing/path_drawing.dart';
 
-
 /// Add a dotted border around any [child] widget. The [strokeWidth] property
 /// defines the width of the dashed border and [color] determines the stroke
 /// paint color. [CircularIntervalList] is populated with the [dashPattern] to
@@ -53,10 +52,7 @@ class DottedBorder extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: padding,
-          child: child,
-        ),
+        Padding(padding: padding, child: child),
       ],
     );
   }
@@ -160,60 +156,32 @@ class _DashPainter extends CustomPainter {
     double h = size.height;
     double s = size.shortestSide;
 
-    return Path()
-      ..addRRect(
-        RRect.fromRectAndRadius(
-          Rect.fromLTWH(
-            w > s ? (w - s) / 2 : 0,
-            h > s ? (h - s) / 2 : 0,
-            s,
-            s,
-          ),
-          Radius.circular(s / 2),
-        ),
-      );
+    return Path()..addRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(w > s ? (w - s) / 2 : 0, h > s ? (h - s) / 2 : 0, s, s),
+        Radius.circular(s / 2),
+      ),
+    );
   }
 
   /// Returns a Rounded Rectangular Path with [radius] of [size]
   Path _getRRectPath(Size size, Radius radius) {
-    return Path()
-      ..addRRect(
-        RRect.fromRectAndRadius(
-          Rect.fromLTWH(
-            0,
-            0,
-            size.width,
-            size.height,
-          ),
-          radius,
-        ),
-      );
+    return Path()..addRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(0, 0, size.width, size.height),
+        radius,
+      ),
+    );
   }
 
   /// Returns a path of [size]
   Path _getRectPath(Size size) {
-    return Path()
-      ..addRect(
-        Rect.fromLTWH(
-          0,
-          0,
-          size.width,
-          size.height,
-        ),
-      );
+    return Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
   }
 
   /// Return an oval path of [size]
   Path _getOvalPath(Size size) {
-    return Path()
-      ..addOval(
-        Rect.fromLTWH(
-          0,
-          0,
-          size.width,
-          size.height,
-        ),
-      );
+    return Path()..addOval(Rect.fromLTWH(0, 0, size.width, size.height));
   }
 
   @override

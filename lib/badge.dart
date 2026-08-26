@@ -158,12 +158,16 @@ class BadgeState extends State<Badge> with SingleTickerProviderStateMixin {
 
     if (widget.animationType == BadgeAnimationType.slide) {
       _animation = CurvedAnimation(
-          parent: _animationController, curve: Curves.elasticOut);
+        parent: _animationController,
+        curve: Curves.elasticOut,
+      );
     } else if (widget.animationType == BadgeAnimationType.scale) {
       _animation = _scaleTween.animate(_animationController);
     } else if (widget.animationType == BadgeAnimationType.fade) {
-      _animation =
-          CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
+      _animation = CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeIn,
+      );
     }
 
     _animationController.forward();
@@ -195,9 +199,9 @@ class BadgeState extends State<Badge> with SingleTickerProviderStateMixin {
     final border = widget.shape == BadgeShape.circle
         ? CircleBorder(side: widget.borderSide)
         : RoundedRectangleBorder(
-      side: widget.borderSide,
-      borderRadius: widget.borderRadius,
-    );
+            side: widget.borderSide,
+            borderRadius: widget.borderRadius,
+          );
 
     Widget _badgeView() {
       return AnimatedOpacity(
@@ -207,10 +211,7 @@ class BadgeState extends State<Badge> with SingleTickerProviderStateMixin {
           shape: border,
           elevation: widget.elevation,
           color: widget.badgeColor,
-          child: Padding(
-            padding: widget.padding,
-            child: widget.badgeContent,
-          ),
+          child: Padding(padding: widget.padding, child: widget.badgeContent),
         ),
       );
     }
@@ -229,10 +230,7 @@ class BadgeState extends State<Badge> with SingleTickerProviderStateMixin {
                   ? BoxShape.circle
                   : BoxShape.rectangle,
             ),
-            child: Padding(
-              padding: widget.padding,
-              child: widget.badgeContent,
-            ),
+            child: Padding(padding: widget.padding, child: widget.badgeContent),
           ),
         ),
       );
@@ -385,7 +383,7 @@ class BadgePositioned extends StatelessWidget {
   /// See also:
   /// * [PositionedDirectional]
   const BadgePositioned({Key? key, this.position, required this.child})
-      : super(key: key);
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -401,10 +399,7 @@ class BadgePositioned extends StatelessWidget {
 
     if (position.isCenter) {
       return Positioned.fill(
-        child: Align(
-          alignment: Alignment.center,
-          child: child,
-        ),
+        child: Align(alignment: Alignment.center, child: child),
       );
     }
 

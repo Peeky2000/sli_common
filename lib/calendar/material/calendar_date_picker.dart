@@ -69,10 +69,10 @@ class SliCalendarDatePicker extends StatefulWidget {
     this.selectedStartDate,
     this.selectedEndDate,
     this.borderRadius = 0,
-  })  : firstDate = utils.dateOnly(firstDate),
-        lastDate = utils.dateOnly(lastDate),
-        currentDate = utils.dateOnly(currentDate ?? DateTime.now()),
-        super(key: key) {
+  }) : firstDate = utils.dateOnly(firstDate),
+       lastDate = utils.dateOnly(lastDate),
+       currentDate = utils.dateOnly(currentDate ?? DateTime.now()),
+       super(key: key) {
     assert(
       !this.lastDate.isBefore(this.firstDate),
       'lastDate ${this.lastDate} must be on or after firstDate ${this.firstDate}.',
@@ -334,8 +334,9 @@ class _SliCalendarDatePickerState extends State<SliCalendarDatePicker> {
           ),
           _DatePickerModeToggleButton(
             mode: _mode,
-            title:
-                intl.DateFormat("MM/yyyy").format(_currentDisplayedMonthDate),
+            title: intl.DateFormat(
+              "MM/yyyy",
+            ).format(_currentDisplayedMonthDate),
             calendarStyle: widget.calendarStyle,
             onTitlePressed: () {
               // Toggle the day/year mode.
@@ -433,9 +434,7 @@ class _DatePickerModeToggleButtonState
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Row(
                       children: <Widget>[
-                        Flexible(
-                          child: Text(widget.title, style: textTheme),
-                        ),
+                        Flexible(child: Text(widget.title, style: textTheme)),
                         RotationTransition(
                           turns: _controller,
                           child: Icon(
@@ -471,7 +470,7 @@ class _DatePickerModeToggleButtonState
 /// what the currently focused date (if any) should be.
 class FocusedDate extends InheritedWidget {
   const FocusedDate({Key? key, required Widget child, this.date})
-      : super(key: key, child: child);
+    : super(key: key, child: child);
 
   final DateTime? date;
 
@@ -481,8 +480,8 @@ class FocusedDate extends InheritedWidget {
   }
 
   static DateTime? of(BuildContext context) {
-    final focusedDate =
-        context.dependOnInheritedWidgetOfExactType<FocusedDate>();
+    final focusedDate = context
+        .dependOnInheritedWidgetOfExactType<FocusedDate>();
     return focusedDate?.date;
   }
 }

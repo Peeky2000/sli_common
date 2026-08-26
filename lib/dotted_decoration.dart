@@ -9,17 +9,25 @@ class DottedDecoration extends Decoration {
   final List<int> dash;
   final double strokeWidth;
 
-  const DottedDecoration(
-      {this.shape = Shape.line,
-      this.linePosition = LinePosition.bottom,
-      this.color = const Color(0xFF9E9E9E),
-      this.borderRadius,
-      this.dash = const <int>[5, 5],
-      this.strokeWidth = 1});
+  const DottedDecoration({
+    this.shape = Shape.line,
+    this.linePosition = LinePosition.bottom,
+    this.color = const Color(0xFF9E9E9E),
+    this.borderRadius,
+    this.dash = const <int>[5, 5],
+    this.strokeWidth = 1,
+  });
 
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
-    return _DottedDecotatorPainter(shape, linePosition, color, borderRadius, dash, strokeWidth);
+    return _DottedDecotatorPainter(
+      shape,
+      linePosition,
+      color,
+      borderRadius,
+      dash,
+      strokeWidth,
+    );
   }
 }
 
@@ -32,7 +40,13 @@ class _DottedDecotatorPainter extends BoxPainter {
   double strokeWidth;
 
   _DottedDecotatorPainter(
-      this.shape, this.linePosition, this.color, this.borderRadius, this.dash, this.strokeWidth) {
+    this.shape,
+    this.linePosition,
+    this.color,
+    this.borderRadius,
+    this.dash,
+    this.strokeWidth,
+  ) {
     borderRadius = borderRadius ?? BorderRadius.circular(0);
   }
 
@@ -49,11 +63,15 @@ class _DottedDecotatorPainter extends BoxPainter {
       } else if (linePosition == LinePosition.right) {
         outPath.moveTo(offset.dx + configuration.size!.width, offset.dy);
         outPath.lineTo(
-            offset.dx + configuration.size!.width, offset.dy + configuration.size!.height);
+          offset.dx + configuration.size!.width,
+          offset.dy + configuration.size!.height,
+        );
       } else {
         outPath.moveTo(offset.dx, offset.dy + configuration.size!.height);
         outPath.lineTo(
-            offset.dx + configuration.size!.width, offset.dy + configuration.size!.height);
+          offset.dx + configuration.size!.width,
+          offset.dy + configuration.size!.height,
+        );
       }
     } else if (shape == Shape.box) {
       RRect rect = RRect.fromLTRBAndCorners(
@@ -68,8 +86,14 @@ class _DottedDecotatorPainter extends BoxPainter {
       );
       outPath.addRRect(rect);
     } else if (shape == Shape.circle) {
-      outPath.addOval(Rect.fromLTWH(
-          offset.dx, offset.dy, configuration.size!.width, configuration.size!.height));
+      outPath.addOval(
+        Rect.fromLTWH(
+          offset.dx,
+          offset.dy,
+          configuration.size!.width,
+          configuration.size!.height,
+        ),
+      );
     }
 
     PathMetrics metrics = outPath.computeMetrics(forceClosed: false);
@@ -84,18 +108,22 @@ class _DottedDecotatorPainter extends BoxPainter {
         to = to > totalLength ? totalLength : to;
         bool isEven = index % 2 == 0;
         if (isEven) {
-          drawPath.addPath(me.extractPath(start, to, startWithMoveTo: true), Offset.zero);
+          drawPath.addPath(
+            me.extractPath(start, to, startWithMoveTo: true),
+            Offset.zero,
+          );
         }
         start = to;
       }
     }
 
     canvas.drawPath(
-        drawPath,
-        Paint()
-          ..color = color
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = strokeWidth);
+      drawPath,
+      Paint()
+        ..color = color
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = strokeWidth,
+    );
   }
 }
 

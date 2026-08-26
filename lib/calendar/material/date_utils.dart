@@ -95,13 +95,16 @@ int getDaysInMonth(int year, int month) {
 /// is in the same year as the `endDate` then it will use the short month
 /// day format (i.e. 'Asr 21'). Otherwise it will return the short date format
 /// (i.e. 'Asr 21, 2077').
-String formatRangeStartDate(MaterialLocalizations localizations,
-    DateTime? startDate, DateTime? endDate) {
+String formatRangeStartDate(
+  MaterialLocalizations localizations,
+  DateTime? startDate,
+  DateTime? endDate,
+) {
   return startDate == null
       ? localizations.dateRangeStartLabel
       : (endDate == null || startDate.year == endDate.year)
-          ? DateFormat('MMMM d').format(startDate)
-          : DateFormat.yMd().format(startDate);
+      ? DateFormat('MMMM d').format(startDate)
+      : DateFormat.yMd().format(startDate);
 }
 
 /// Returns an locale-appropriate string to describe the end of a date range.
@@ -110,19 +113,25 @@ String formatRangeStartDate(MaterialLocalizations localizations,
 /// is in the same year as the `startDate` and the `currentDate` then it will
 /// just use the short month day format (i.e. 'Asr 21'), otherwise it will
 /// include the year (i.e. 'Asr 21, 2077').
-String formatRangeEndDate(MaterialLocalizations localizations,
-    DateTime? startDate, DateTime? endDate, DateTime currentDate) {
+String formatRangeEndDate(
+  MaterialLocalizations localizations,
+  DateTime? startDate,
+  DateTime? endDate,
+  DateTime currentDate,
+) {
   return endDate == null
       ? localizations.dateRangeEndLabel
       : (startDate != null &&
-              startDate.year == endDate.year &&
-              startDate.year == currentDate.year)
-          ? DateFormat('MMMM d').format(endDate)
-          : DateFormat.yMd().format(endDate);
+            startDate.year == endDate.year &&
+            startDate.year == currentDate.year)
+      ? DateFormat('MMMM d').format(endDate)
+      : DateFormat.yMd().format(endDate);
 }
 
 /// Returns a [DateTimeRange] with the dates of the original without any times set.
 CustomDateTimeRange datesOnly(CustomDateTimeRange range) {
   return CustomDateTimeRange(
-      start: dateOnly(range.start), end: dateOnly(range.end));
+    start: dateOnly(range.start),
+    end: dateOnly(range.end),
+  );
 }

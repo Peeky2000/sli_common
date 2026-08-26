@@ -1,4 +1,29 @@
-## Các widget thông dụng
+# sli_common
+
+Personal reusable Flutter UI toolkit. It combines stable `Sli*` components,
+semantic design tokens, theme extensions, utilities, and compatibility exports for the
+legacy widget collection.
+
+```dart
+import 'package:sli_common/sli_common.dart';
+
+MaterialApp(
+  theme: SliTheme.light(),
+  darkTheme: SliTheme.dark(),
+  builder: (context, child) => SliShadcnScope(
+    child: child ?? const SizedBox.shrink(),
+  ),
+);
+```
+
+Use stable wrappers such as `SliButton` and `SliSurface` from the public barrel. Direct
+`shadcn_flutter` imports are reserved for toolkit implementation or documented
+experiments, so dependency changes do not spread across applications.
+
+See [architecture](docs/architecture.md), [component contract](docs/components.md), and
+[migration guide](docs/migration.md).
+
+## Legacy widget gallery
 
 | UI                                                                      | Class                       | Note |
 |-------------------------------------------------------------------------|-----------------------------|------|

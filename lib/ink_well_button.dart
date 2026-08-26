@@ -51,26 +51,32 @@ class InkWellButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isDisable ? null : onTap,
         style: ElevatedButton.styleFrom(
-            elevation: elevation,
-            padding: padding ?? EdgeInsets.zero,
-            backgroundColor: isDisable ? const Color(0xFF333333).withOpacity(0.2) : buttonColor,
-            minimumSize: Size(50.w, 50.w),
-            disabledBackgroundColor: disableButtonColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(radius ?? 8.r),
-              side: borderColor != null
-                  ? BorderSide(color: borderColor!, width: borderWidth ?? 1)
-                  : BorderSide.none,
-            )),
-        child: labelWidget ??
+          elevation: elevation,
+          padding: padding ?? EdgeInsets.zero,
+          backgroundColor: isDisable
+              ? const Color(0xFF333333).withOpacity(0.2)
+              : buttonColor,
+          minimumSize: Size(50.w, 50.w),
+          disabledBackgroundColor: disableButtonColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radius ?? 8.r),
+            side: borderColor != null
+                ? BorderSide(color: borderColor!, width: borderWidth ?? 1)
+                : BorderSide.none,
+          ),
+        ),
+        child:
+            labelWidget ??
             Text(
               title ?? '',
               style: TextStyle(
-                  fontSize: fontSize,
-                  color: isDisable
-                      ? disabledTextColor ?? const Color(0xFF333333).withOpacity(0.6)
-                      : textColor,
-                  fontWeight: fontWeight ?? FontWeight.w700),
+                fontSize: fontSize,
+                color: isDisable
+                    ? disabledTextColor ??
+                          const Color(0xFF333333).withOpacity(0.6)
+                    : textColor,
+                fontWeight: fontWeight ?? FontWeight.w700,
+              ),
             ),
       ),
     );

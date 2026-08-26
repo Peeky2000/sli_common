@@ -35,7 +35,8 @@ class Miniplayer extends StatefulWidget {
 
   ///Deprecated
   @Deprecated(
-      "Migrate onDismiss to onDismissed as onDismiss will be used differently in a future version.")
+    "Migrate onDismiss to onDismissed as onDismiss will be used differently in a future version.",
+  )
   final Function? onDismiss;
 
   ///If onDismissed is set, the miniplayer can be dismissed
@@ -88,7 +89,7 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
   int updateCount = 0;
 
   StreamController<double> _heightController =
-  StreamController<double>.broadcast();
+      StreamController<double>.broadcast();
   AnimationController? _animationController;
 
   void _statusListener(AnimationStatus status) {
@@ -165,7 +166,8 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
       child: ValueListenableBuilder(
         valueListenable: heightNotifier,
         builder: (BuildContext context, double height, Widget? _) {
-          var percentage = ((height - widget.minHeight)) /
+          var percentage =
+              ((height - widget.minHeight)) /
               (widget.maxHeight - widget.minHeight);
 
           return Stack(
@@ -176,7 +178,10 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
                   onTap: () => _animateToHeight(widget.minHeight),
                   child: Opacity(
                     opacity: borderDouble(
-                        minRange: 0.0, maxRange: 1.0, value: percentage),
+                      minRange: 0.0,
+                      maxRange: 1.0,
+                      value: percentage,
+                    ),
                     child: Container(color: widget.backgroundColor),
                   ),
                 ),
@@ -189,37 +194,45 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
                       valueListenable: dragDownPercentage,
                       builder:
                           (BuildContext context, double value, Widget? child) {
-                        return Opacity(
-                          opacity: borderDouble(
-                              minRange: 0.0,
-                              maxRange: 1.0,
-                              value: 1 - value * 0.8),
-                          child: Transform.translate(
-                            offset: Offset(0.0, widget.minHeight * value * 0.5),
-                            child: child,
-                          ),
-                        );
-                      },
+                            return Opacity(
+                              opacity: borderDouble(
+                                minRange: 0.0,
+                                maxRange: 1.0,
+                                value: 1 - value * 0.8,
+                              ),
+                              child: Transform.translate(
+                                offset: Offset(
+                                  0.0,
+                                  widget.minHeight * value * 0.5,
+                                ),
+                                child: child,
+                              ),
+                            );
+                          },
                       child: Material(
                         child: Container(
                           constraints: const BoxConstraints.expand(),
                           decoration: BoxDecoration(
                             boxShadow: <BoxShadow>[
                               BoxShadow(
-                                  color: widget.backgroundBoxShadow,
-                                  blurRadius: widget.elevation,
-                                  offset: const Offset(0.0, 4))
+                                color: widget.backgroundBoxShadow,
+                                blurRadius: widget.elevation,
+                                offset: const Offset(0.0, 4),
+                              ),
                             ],
-                            color: widget.backgroundColor ??
+                            color:
+                                widget.backgroundColor ??
                                 Theme.of(context).scaffoldBackgroundColor,
                           ),
                           child: widget.builder(height, percentage),
                         ),
                       ),
                     ),
-                    onTap: () => _snapToPosition(_dragHeight != widget.maxHeight
-                        ? PanelState.MAX
-                        : PanelState.MIN),
+                    onTap: () => _snapToPosition(
+                      _dragHeight != widget.maxHeight
+                          ? PanelState.MAX
+                          : PanelState.MIN,
+                    ),
                     onPanStart: (details) {
                       _startHeight = _dragHeight;
                       updateCount = 0;
@@ -230,10 +243,11 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
                     },
                     onPanEnd: (details) async {
                       ///Calculates drag speed
-                      double speed = (_dragHeight - _startHeight * _dragHeight <
-                          _startHeight
-                          ? 1
-                          : -1) /
+                      double speed =
+                          (_dragHeight - _startHeight * _dragHeight <
+                                  _startHeight
+                              ? 1
+                              : -1) /
                           updateCount *
                           100;
 
@@ -251,9 +265,10 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
                       PanelState snap = PanelState.MIN;
 
                       final percentageMax = percentageFromValueInRange(
-                          min: widget.minHeight,
-                          max: widget.maxHeight,
-                          value: _dragHeight);
+                        min: widget.minHeight,
+                        max: widget.maxHeight,
+                        value: _dragHeight,
+                      );
 
                       ///Started from expanded state
                       if (_startHeight > widget.minHeight) {
@@ -261,20 +276,18 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
                           snap = PanelState.MAX;
                         }
                       }
-
                       ///Started from minified state
                       else {
                         if (percentageMax > snapPercentage) {
                           snap = PanelState.MAX;
                         }
-
                         ///DismissedPercentage > 0.2 -> dismiss
                         else if (onDismissed != null &&
                             percentageFromValueInRange(
-                              min: widget.minHeight,
-                              max: 0,
-                              value: _dragHeight,
-                            ) >
+                                  min: widget.minHeight,
+                                  max: 0,
+                                  value: _dragHeight,
+                                ) >
                                 snapPercentage) {
                           snap = PanelState.DISMISS;
                         }
@@ -313,14 +326,17 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
 
       heightNotifier.value = _dragHeight;
     }
-
     ///Drag below minHeight
     else if (onDismissed != null) {
       final percentageDown = borderDouble(
-          minRange: 0.0,
-          maxRange: 1.0,
-          value: percentageFromValueInRange(
-              min: widget.minHeight, max: 0, value: _dragHeight));
+        minRange: 0.0,
+        maxRange: 1.0,
+        value: percentageFromValueInRange(
+          min: widget.minHeight,
+          max: 0,
+          value: _dragHeight,
+        ),
+      );
 
       if (dragDownPercentage.value != percentageDown) {
         dragDownPercentage.value = percentageDown;
@@ -359,11 +375,9 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
       _resetAnimationController(duration: duration);
     }
 
-    Animation<double> sizeAnimation = Tween(
-      begin: startHeight,
-      end: h,
-    ).animate(
-        CurvedAnimation(parent: _animationController!, curve: widget.curve));
+    Animation<double> sizeAnimation = Tween(begin: startHeight, end: h).animate(
+      CurvedAnimation(parent: _animationController!, curve: widget.curve),
+    );
 
     sizeAnimation.addListener(() {
       if (sizeAnimation.value == startHeight) return;
@@ -396,10 +410,7 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
         );
         break;
       case -3:
-        _animateToHeight(
-          0,
-          duration: widget.controller!.value!.duration,
-        );
+        _animateToHeight(0, duration: widget.controller!.value!.duration);
         break;
       default:
         _animateToHeight(
@@ -427,8 +438,11 @@ class MiniplayerController extends ValueNotifier<ControllerData?> {
   MiniplayerController() : super(null);
 
   //Animates to a given height or state(expanded, dismissed, ...)
-  void animateToHeight(
-      {double? height, PanelState? state, Duration? duration}) {
+  void animateToHeight({
+    double? height,
+    PanelState? state,
+    Duration? duration,
+  }) {
     if (height == null && state == null) {
       throw ("Miniplayer: One of the two parameters, height or status, is required.");
     }
@@ -469,15 +483,19 @@ extension SelectedColorExtension on PanelState {
 }
 
 ///Calculates the percentage of a value within a given range of values
-double percentageFromValueInRange(
-    {required double min, required double max, required double value}) {
+double percentageFromValueInRange({
+  required double min,
+  required double max,
+  required double value,
+}) {
   return (value - min) / (max - min);
 }
 
-double borderDouble(
-    {required double minRange,
-      required double maxRange,
-      required double value}) {
+double borderDouble({
+  required double minRange,
+  required double maxRange,
+  required double value,
+}) {
   if (value > maxRange) return maxRange;
   if (value < minRange) return minRange;
   return value;

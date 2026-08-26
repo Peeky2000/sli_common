@@ -1,5 +1,12 @@
 library sli_common;
 
+export 'src/components/sli_button.dart';
+export 'src/components/sli_surface.dart';
+export 'src/foundation/sli_colors.dart';
+export 'src/foundation/sli_theme.dart';
+export 'src/foundation/sli_tokens.dart';
+export 'src/shadcn/sli_shadcn_scope.dart';
+
 export 'animation_gradient_text.dart';
 export 'badge.dart';
 export 'banner_widget.dart';

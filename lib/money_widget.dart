@@ -52,7 +52,8 @@ class MoneyWidget extends StatelessWidget {
   getTextStyle(BuildContext context) {
     return textStyle ??
         TextStyle(
-          fontSize: fontSize ??
+          fontSize:
+              fontSize ??
               (isBigSize == true
                   ? Theme.of(context).textTheme.headlineLarge?.fontSize
                   : null),

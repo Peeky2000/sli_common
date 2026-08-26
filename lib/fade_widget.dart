@@ -35,7 +35,10 @@ class _FadeWidgetState extends State<FadeWidget> with TickerProviderStateMixin {
 
   ///Setting up the animation
   void prepareAnimations() {
-    fadeController = AnimationController(vsync: this, duration: widget.duration);
+    fadeController = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    );
     animation = Tween(
       begin: widget.beginOpacity,
       end: widget.endOpacity,
@@ -52,9 +55,6 @@ class _FadeWidgetState extends State<FadeWidget> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: animation,
-      child: widget.child,
-    );
+    return FadeTransition(opacity: animation, child: widget.child);
   }
 }

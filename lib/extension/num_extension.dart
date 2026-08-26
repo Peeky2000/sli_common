@@ -48,7 +48,8 @@ extension NumExtension on num {
       return '${(_size / divider / divider / divider).toStringAsFixed(round)} GB';
     }
 
-    if (_size < divider * divider * divider * divider * divider && _size % divider == 0) {
+    if (_size < divider * divider * divider * divider * divider &&
+        _size % divider == 0) {
       num r = _size / divider / divider / divider / divider;
       return '${r.toStringAsFixed(0)} TB';
     }
@@ -58,7 +59,8 @@ extension NumExtension on num {
       return '${r.toStringAsFixed(round)} TB';
     }
 
-    if (_size < divider * divider * divider * divider * divider * divider && _size % divider == 0) {
+    if (_size < divider * divider * divider * divider * divider * divider &&
+        _size % divider == 0) {
       num r = _size / divider / divider / divider / divider / divider;
       return '${r.toStringAsFixed(0)} PB';
     } else {

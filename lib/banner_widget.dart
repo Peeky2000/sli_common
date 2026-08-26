@@ -53,10 +53,12 @@ class _BannerWidgetState extends State<BannerWidget> {
   @override
   void initState() {
     super.initState();
-    pageController = widget.pageController ??
+    pageController =
+        widget.pageController ??
         PageController(
-            viewportFraction: widget.viewportFraction,
-            keepPage: widget.keepPage);
+          viewportFraction: widget.viewportFraction,
+          keepPage: widget.keepPage,
+        );
     timer = widget.duration != null
         ? Timer.periodic(widget.duration!, (timer) {
             if (widget.urls.isNotEmpty) {
@@ -67,9 +69,11 @@ class _BannerWidgetState extends State<BannerWidget> {
                   currentIndex++;
                 }
               });
-              pageController?.animateToPage(currentIndex.toInt(),
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.easeInOut);
+              pageController?.animateToPage(
+                currentIndex.toInt(),
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOut,
+              );
             }
           })
         : null;
@@ -113,7 +117,9 @@ class _BannerWidgetState extends State<BannerWidget> {
                     scrollDirection: Axis.horizontal,
                     itemCount: widget.urls.length,
                     itemBuilder: (context, index) => ClipRRect(
-                      borderRadius: BorderRadius.circular(widget.radius ?? 8.0.r),
+                      borderRadius: BorderRadius.circular(
+                        widget.radius ?? 8.0.r,
+                      ),
                       child: CachedNetworkImage(
                         imageUrl: widget.urls[index],
                         placeholder: (context, url) => const ImageLoading(),
@@ -132,27 +138,32 @@ class _BannerWidgetState extends State<BannerWidget> {
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: DotsIndicator(
-                                dotsCount: widget.urls.length,
-                                position: currentIndex.toDouble(),
-                                onTap: (index) => pageController?.animateToPage(
-                                    index.toInt(),
-                                    duration: const Duration(milliseconds: 400),
-                                    curve: Curves.easeInOut),
-                                decorator: DotsDecorator(
-                                  animationDuration:
-                                      const Duration(milliseconds: 400),
-                                  color: widget.unActiveColor ??
-                                      Colors.white.withOpacity(0.5),
-                                  activeColor: widget.activeColor ??
-                                      const Color(0xFFF35A49),
-                                  size: Size.square(9.0.w),
-                                  activeSize: Size(18.0.w, 9.0.h),
-                                  activeShape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0.r),
-                                  ),
-                                )),
+                              dotsCount: widget.urls.length,
+                              position: currentIndex.toDouble(),
+                              onTap: (index) => pageController?.animateToPage(
+                                index.toInt(),
+                                duration: const Duration(milliseconds: 400),
+                                curve: Curves.easeInOut,
+                              ),
+                              decorator: DotsDecorator(
+                                animationDuration: const Duration(
+                                  milliseconds: 400,
+                                ),
+                                color:
+                                    widget.unActiveColor ??
+                                    Colors.white.withOpacity(0.5),
+                                activeColor:
+                                    widget.activeColor ??
+                                    const Color(0xFFF35A49),
+                                size: Size.square(9.0.w),
+                                activeSize: Size(18.0.w, 9.0.h),
+                                activeShape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0.r),
+                                ),
+                              ),
+                            ),
                           ),
-                        )
+                        ),
               ],
             ),
           ),
@@ -163,24 +174,27 @@ class _BannerWidgetState extends State<BannerWidget> {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DotsIndicator(
-                        dotsCount: widget.urls.length,
-                        position: currentIndex.toDouble(),
-                        onTap: (index) => pageController?.animateToPage(
-                            index.toInt(),
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOut),
-                        decorator: DotsDecorator(
-                          animationDuration: const Duration(milliseconds: 400),
-                          color: widget.unActiveColor ??
-                              Colors.white.withOpacity(0.5),
-                          activeColor:
-                              widget.activeColor ?? const Color(0xFFF35A49),
-                          size: Size.square(9.0.w),
-                          activeSize: Size(18.0.w, 9.0.h),
-                          activeShape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0.r),
-                          ),
-                        )),
+                      dotsCount: widget.urls.length,
+                      position: currentIndex.toDouble(),
+                      onTap: (index) => pageController?.animateToPage(
+                        index.toInt(),
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeInOut,
+                      ),
+                      decorator: DotsDecorator(
+                        animationDuration: const Duration(milliseconds: 400),
+                        color:
+                            widget.unActiveColor ??
+                            Colors.white.withOpacity(0.5),
+                        activeColor:
+                            widget.activeColor ?? const Color(0xFFF35A49),
+                        size: Size.square(9.0.w),
+                        activeSize: Size(18.0.w, 9.0.h),
+                        activeShape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0.r),
+                        ),
+                      ),
+                    ),
                   ),
                 )
               : SizedBox.shrink(),

@@ -91,22 +91,22 @@ class _SwipeToState extends State<SwipeTo> with SingleTickerProviderStateMixin {
     _animation = Tween<Offset>(
       begin: const Offset(0.0, 0.0),
       end: const Offset(0.0, 0.0),
-    ).animate(
-      CurvedAnimation(curve: Curves.decelerate, parent: _controller),
-    );
-    _leftIconAnimation = _controller.drive(
-      Tween<double>(begin: 0.0, end: 0.0),
-    );
+    ).animate(CurvedAnimation(curve: Curves.decelerate, parent: _controller));
+    _leftIconAnimation = _controller.drive(Tween<double>(begin: 0.0, end: 0.0));
     _rightIconAnimation = _controller.drive(
       Tween<double>(begin: 0.0, end: 0.0),
     );
-    _onSwipeLeft = widget.onLeftSwipe ?? (details) {
-      log("Left Swipe Not Provided");
-    };
+    _onSwipeLeft =
+        widget.onLeftSwipe ??
+        (details) {
+          log("Left Swipe Not Provided");
+        };
 
-    _onSwipeRight = widget.onRightSwipe ?? (details) {
-      log("Right Swipe Not Provided");
-    };
+    _onSwipeRight =
+        widget.onRightSwipe ??
+        (details) {
+          log("Right Swipe Not Provided");
+        };
     _controller.addListener(() {
       setState(() {});
     });
@@ -125,18 +125,18 @@ class _SwipeToState extends State<SwipeTo> with SingleTickerProviderStateMixin {
     _animation = Tween(
       begin: const Offset(0.0, 0.0),
       end: Offset(onRight ? widget.offsetDx : -widget.offsetDx, 0.0),
-    ).animate(
-      CurvedAnimation(curve: Curves.decelerate, parent: _controller),
-    );
+    ).animate(CurvedAnimation(curve: Curves.decelerate, parent: _controller));
     //set back left/right icon animation
     if (onRight) {
-      _leftIconAnimation = Tween(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(curve: Curves.decelerate, parent: _controller),
-      );
+      _leftIconAnimation = Tween(
+        begin: 0.0,
+        end: 1.0,
+      ).animate(CurvedAnimation(curve: Curves.decelerate, parent: _controller));
     } else {
-      _rightIconAnimation = Tween(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(curve: Curves.decelerate, parent: _controller),
-      );
+      _rightIconAnimation = Tween(
+        begin: 0.0,
+        end: 1.0,
+      ).animate(CurvedAnimation(curve: Curves.decelerate, parent: _controller));
     }
     //Forward animation
     _controller.forward().whenComplete(() {
@@ -160,7 +160,7 @@ class _SwipeToState extends State<SwipeTo> with SingleTickerProviderStateMixin {
     return GestureDetector(
       onPanUpdate: (details) {
         if (details.delta.dx > 1 && widget.onRightSwipe != null) {
-          _runAnimation(onRight: true,  details: details);
+          _runAnimation(onRight: true, details: details);
         }
         if (details.delta.dx < -1 && widget.onLeftSwipe != null) {
           _runAnimation(onRight: false, details: details);
@@ -177,32 +177,31 @@ class _SwipeToState extends State<SwipeTo> with SingleTickerProviderStateMixin {
                 opacity: _leftIconAnimation.value,
                 duration: widget.animationDuration,
                 curve: Curves.decelerate,
-                child: widget.rightSwipeWidget ??
+                child:
+                    widget.rightSwipeWidget ??
                     Icon(
                       widget.iconOnRightSwipe,
                       size: widget.iconSize,
                       color:
-                      widget.iconColor ?? Theme.of(context).iconTheme.color,
+                          widget.iconColor ?? Theme.of(context).iconTheme.color,
                     ),
               ),
               AnimatedOpacity(
                 opacity: _rightIconAnimation.value,
                 duration: widget.animationDuration,
                 curve: Curves.decelerate,
-                child: widget.leftSwipeWidget ??
+                child:
+                    widget.leftSwipeWidget ??
                     Icon(
                       widget.iconOnLeftSwipe,
                       size: widget.iconSize,
                       color:
-                      widget.iconColor ?? Theme.of(context).iconTheme.color,
+                          widget.iconColor ?? Theme.of(context).iconTheme.color,
                     ),
               ),
             ],
           ),
-          SlideTransition(
-            position: _animation,
-            child: widget.child,
-          ),
+          SlideTransition(position: _animation, child: widget.child),
         ],
       ),
     );

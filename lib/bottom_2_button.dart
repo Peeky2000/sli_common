@@ -27,7 +27,8 @@ class Bottom2Button extends StatelessWidget {
   final Color? borderButton1Color;
   final Color? borderButton2Color;
 
-  const Bottom2Button({Key? key,
+  const Bottom2Button({
+    Key? key,
     required this.title1,
     required this.title2,
     required this.onTapButton1,
@@ -86,7 +87,7 @@ class Bottom2Button extends StatelessWidget {
                       borderColor: borderButton1Color,
                     ),
                   ),
-                  const SizedBox(width: 12,),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: InkWellButton(
                       title: title2 ?? '',

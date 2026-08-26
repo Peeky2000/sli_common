@@ -48,15 +48,16 @@ class DotsDecorator {
   /// @Default `EdgeInsets.all(6.0)`
   final Duration animationDuration;
 
-  const DotsDecorator(
-      {this.color = Colors.grey,
-      this.activeColor = Colors.lightBlue,
-      this.size = kDefaultSize,
-      this.activeSize = kDefaultSize,
-      this.shape = kDefaultShape,
-      this.activeShape = kDefaultShape,
-      this.spacing = kDefaultSpacing,
-      this.animationDuration = kAnimationDuration});
+  const DotsDecorator({
+    this.color = Colors.grey,
+    this.activeColor = Colors.lightBlue,
+    this.size = kDefaultSize,
+    this.activeSize = kDefaultSize,
+    this.shape = kDefaultShape,
+    this.activeShape = kDefaultShape,
+    this.spacing = kDefaultSpacing,
+    this.animationDuration = kAnimationDuration,
+  });
 }
 
 typedef OnTap = void Function(double position);
@@ -81,14 +82,10 @@ class DotsIndicator extends StatelessWidget {
     this.mainAxisSize = MainAxisSize.min,
     this.mainAxisAlignment = MainAxisAlignment.center,
     this.onTap,
-  }):
-        assert(dotsCount > 0),
-        assert(position >= 0),
-        assert(
-          position < dotsCount,
-          "Position must be inferior than dotsCount",
-        ),
-        super(key: key);
+  }) : assert(dotsCount > 0),
+       assert(position >= 0),
+       assert(position < dotsCount, "Position must be inferior than dotsCount"),
+       super(key: key);
 
   Widget _buildDot(int index) {
     final state = min(1.0, (position - index).abs());
@@ -106,10 +103,7 @@ class DotsIndicator extends StatelessWidget {
       width: size.width,
       height: size.height,
       margin: decorator.spacing,
-      decoration: ShapeDecoration(
-        color: color,
-        shape: shape,
-      ),
+      decoration: ShapeDecoration(color: color, shape: shape),
     );
     return onTap == null
         ? dot

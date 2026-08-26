@@ -26,7 +26,8 @@ class BlinkText extends StatefulWidget {
   State<BlinkText> createState() => _BlinkTextState();
 }
 
-class _BlinkTextState extends State<BlinkText> with SingleTickerProviderStateMixin {
+class _BlinkTextState extends State<BlinkText>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<Color?> _animationColor;
 
@@ -37,12 +38,14 @@ class _BlinkTextState extends State<BlinkText> with SingleTickerProviderStateMix
       duration: widget.duration ?? const Duration(milliseconds: 800),
       vsync: this,
     );
-    _animationColor = ColorTween(
-            begin: widget.beginColor ?? Colors.white,
-            end: widget.endColor ?? const Color(0xFFFD3549))
-        .animate(CurvedAnimation(parent: _animationController, curve: widget.curve));
-    _animationColor.addListener(() {
-    });
+    _animationColor =
+        ColorTween(
+          begin: widget.beginColor ?? Colors.white,
+          end: widget.endColor ?? const Color(0xFFFD3549),
+        ).animate(
+          CurvedAnimation(parent: _animationController, curve: widget.curve),
+        );
+    _animationColor.addListener(() {});
     _animationController.forward();
     if (widget.isRepeat) {
       _animationController.repeat();
@@ -58,13 +61,14 @@ class _BlinkTextState extends State<BlinkText> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-        animation: _animationColor,
-        builder: (context, child) {
-          return Text(
-            widget.text,
-            style: widget.style?.copyWith(color: _animationColor.value),
-            textAlign: widget.textAlign,
-          );
-        });
+      animation: _animationColor,
+      builder: (context, child) {
+        return Text(
+          widget.text,
+          style: widget.style?.copyWith(color: _animationColor.value),
+          textAlign: widget.textAlign,
+        );
+      },
+    );
   }
 }

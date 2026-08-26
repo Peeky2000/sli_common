@@ -67,21 +67,15 @@ class GradientButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(radius ?? 25.0.r),
             gradient: isDisable
                 ? gradientDisable ??
-                    const LinearGradient(
-                      colors: [
-                        Color(0xFF333333),
-                        Color(0xFF333333),
-                      ],
-                    )
+                      const LinearGradient(
+                        colors: [Color(0xFF333333), Color(0xFF333333)],
+                      )
                 : gradient ??
-                    const LinearGradient(
-                      colors: [
-                        Color(0xFFFAA742),
-                        Color(0xFFEF264F),
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
+                      const LinearGradient(
+                        colors: [Color(0xFFFAA742), Color(0xFFEF264F)],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +86,8 @@ class GradientButton extends StatelessWidget {
                     style: TextStyle(
                       fontSize: fontSize,
                       color: isDisable
-                          ? disabledTextColor ?? const Color(0xFF333333).withOpacity(0.6)
+                          ? disabledTextColor ??
+                                const Color(0xFF333333).withOpacity(0.6)
                           : textColor,
                       fontWeight: fontWeight ?? FontWeight.w700,
                     ),

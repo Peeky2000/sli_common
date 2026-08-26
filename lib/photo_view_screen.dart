@@ -53,24 +53,25 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
       backgroundColor: widget.backgroundColor ?? Colors.white,
       appBar: widget.showAppbar
           ? AppBar(
-        elevation: 0,
-        title: Text(widget.title),
-        centerTitle: true,
-        backgroundColor: widget.appbarBackgroundColor ?? Colors.transparent,
-        actions: [
-          if (widget.onTapDownload != null)
-            IconButton(
-              onPressed: () {
-                if (widget.onTapDownload != null) {
-                  String url = widget.arrUrlImg[currentIndex];
-                  widget.onTapDownload!(url);
-                }
-              },
-              icon: const Icon(Icons.download),
-              splashRadius: 20.r,
+              elevation: 0,
+              title: Text(widget.title),
+              centerTitle: true,
+              backgroundColor:
+                  widget.appbarBackgroundColor ?? Colors.transparent,
+              actions: [
+                if (widget.onTapDownload != null)
+                  IconButton(
+                    onPressed: () {
+                      if (widget.onTapDownload != null) {
+                        String url = widget.arrUrlImg[currentIndex];
+                        widget.onTapDownload!(url);
+                      }
+                    },
+                    icon: const Icon(Icons.download),
+                    splashRadius: 20.r,
+                  ),
+              ],
             )
-        ],
-      )
           : null,
       body: Stack(
         children: [
@@ -93,19 +94,21 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
             ),
             loadingBuilder: (context, event) => Center(
               child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
-                value:
-                event == null ? 0 : event.cumulativeBytesLoaded / event.cumulativeBytesLoaded,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Theme.of(context).primaryColor,
+                ),
+                value: event == null
+                    ? 0
+                    : event.cumulativeBytesLoaded / event.cumulativeBytesLoaded,
               ),
             ),
           ),
           if (!widget.showAppbar)
             Positioned(
-                top: MediaQuery.of(context).padding.top + 12.h,
-                left: 12.w,
-                child: BackButton(
-                  color: widget.backButtonColor ?? Colors.black,
-                )),
+              top: MediaQuery.of(context).padding.top + 12.h,
+              left: 12.w,
+              child: BackButton(color: widget.backButtonColor ?? Colors.black),
+            ),
           if (!widget.showAppbar && widget.onTapDownload != null)
             Positioned(
               top: MediaQuery.of(context).padding.top + 12.h,
@@ -121,7 +124,7 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
                 color: widget.backButtonColor ?? Colors.black,
                 splashRadius: 20.r,
               ),
-            )
+            ),
         ],
       ),
     );

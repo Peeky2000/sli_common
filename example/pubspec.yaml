@@ -1,0 +1,16 @@
+name: sli_common_example
+description: Component showcase for sli_common.
+publish_to: none
+version: 1.0.0
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sli_common:
+    path: ..
+
+flutter:
+  uses-material-design: true

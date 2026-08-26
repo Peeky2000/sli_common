@@ -5,7 +5,9 @@ extension StringExtension on String? {
 
   List<RegExpMatch> get getAllUrlPosition {
     if (isNullOrEmpty) return [];
-    RegExp exp = RegExp(r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?');
+    RegExp exp = RegExp(
+      r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?',
+    );
     return exp.allMatches(this!).toList();
   }
 
@@ -17,5 +19,5 @@ extension StringExtension on String? {
   bool get isUrl {
     if (isNullOrEmpty) return false;
     return this!.contains('http://') || this!.contains('https://');
-}
+  }
 }

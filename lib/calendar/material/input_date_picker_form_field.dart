@@ -56,21 +56,28 @@ class InputDatePickerFormField extends StatefulWidget {
     this.fieldHintText,
     this.fieldLabelText,
     this.autofocus = false,
-  })  : initialDate = initialDate != null ? utils.dateOnly(initialDate) : null,
-        firstDate = utils.dateOnly(firstDate),
-        lastDate = utils.dateOnly(lastDate),
-        super(key: key) {
-    assert(!this.lastDate.isBefore(this.firstDate),
-        'lastDate ${this.lastDate} must be on or after firstDate ${this.firstDate}.');
-    assert(initialDate == null || !this.initialDate!.isBefore(this.firstDate),
-        'initialDate ${this.initialDate} must be on or after firstDate ${this.firstDate}.');
-    assert(initialDate == null || !this.initialDate!.isAfter(this.lastDate),
-        'initialDate ${this.initialDate} must be on or before lastDate ${this.lastDate}.');
+  }) : initialDate = initialDate != null ? utils.dateOnly(initialDate) : null,
+       firstDate = utils.dateOnly(firstDate),
+       lastDate = utils.dateOnly(lastDate),
+       super(key: key) {
     assert(
-        selectableDayPredicate == null ||
-            initialDate == null ||
-            selectableDayPredicate!(this.initialDate!),
-        'Provided initialDate ${this.initialDate} must satisfy provided selectableDayPredicate.');
+      !this.lastDate.isBefore(this.firstDate),
+      'lastDate ${this.lastDate} must be on or after firstDate ${this.firstDate}.',
+    );
+    assert(
+      initialDate == null || !this.initialDate!.isBefore(this.firstDate),
+      'initialDate ${this.initialDate} must be on or after firstDate ${this.firstDate}.',
+    );
+    assert(
+      initialDate == null || !this.initialDate!.isAfter(this.lastDate),
+      'initialDate ${this.initialDate} must be on or before lastDate ${this.lastDate}.',
+    );
+    assert(
+      selectableDayPredicate == null ||
+          initialDate == null ||
+          selectableDayPredicate!(this.initialDate!),
+      'Provided initialDate ${this.initialDate} must satisfy provided selectableDayPredicate.',
+    );
   }
 
   /// If provided, it will be used as the default value of the field.
@@ -165,16 +172,16 @@ class _InputDatePickerFormFieldState extends State<InputDatePickerFormField> {
   void _updateValueForSelectedDate() {
     if (_selectedDate != null) {
       // TODO: Support nepali input
-      _inputText =
-          DateFormat.yMd(Language.english).format(_selectedDate!);
+      _inputText = DateFormat.yMd(Language.english).format(_selectedDate!);
       var textEditingValue = _controller.value.copyWith(text: _inputText);
       // Select the new text if we are auto focused and haven't selected the text before.
       if (widget.autofocus && !_autoSelected) {
         textEditingValue = textEditingValue.copyWith(
-            selection: TextSelection(
-          baseOffset: 0,
-          extentOffset: _inputText!.length,
-        ));
+          selection: TextSelection(
+            baseOffset: 0,
+            extentOffset: _inputText!.length,
+          ),
+        );
         _autoSelected = true;
       }
       _controller.value = textEditingValue;
@@ -186,8 +193,9 @@ class _InputDatePickerFormFieldState extends State<InputDatePickerFormField> {
 
   DateTime? _parseDate(String? text) {
     if (text != null &&
-        RegExp(r'^2[01]\d{2}/(0[1-9]|1[0-2])/(0[1-9]|1[0-9]|2[0-9]|3[0-2])')
-            .hasMatch(text)) {
+        RegExp(
+          r'^2[01]\d{2}/(0[1-9]|1[0-2])/(0[1-9]|1[0-9]|2[0-9]|3[0-2])',
+        ).hasMatch(text)) {
       return DateTime.parse(text.replaceAll('/', '-'));
     }
     return null;

@@ -8,11 +8,12 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final Widget child;
   final ValueNotifier<bool>? overlapsContentNotifier;
 
-  SliverAppBarDelegate(
-      {required this.minHeight,
-        required this.maxHeight,
-        required this.child,
-        this.overlapsContentNotifier});
+  SliverAppBarDelegate({
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
+    this.overlapsContentNotifier,
+  });
 
   @override
   double get minExtent => minHeight;
@@ -21,7 +22,11 @@ class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => max(maxHeight, minHeight);
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     overlapsContentNotifier?.value = overlapsContent;
     return SizedBox.expand(child: child);
   }

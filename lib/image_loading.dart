@@ -9,9 +9,7 @@ class ImageLoading extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: Colors.grey[300]!,
       highlightColor: Colors.grey[200]!,
-      child: Container(
-        color: Colors.white,
-      ),
+      child: Container(color: Colors.white),
     );
   }
 }

@@ -29,8 +29,8 @@ class MonthWidget extends StatefulWidget {
     this.selectionMode = SelectionMode.single,
     this.onEndDateChanged,
     this.onStartDateChanged,
-  })  : assert(!firstDate.isAfter(lastDate)),
-        super(key: key);
+  }) : assert(!firstDate.isAfter(lastDate)),
+       super(key: key);
 
   /// The initial month to display
   final DateTime initialMonth;
@@ -105,24 +105,31 @@ class _MonthPickerState extends State<MonthWidget> {
     _previousMonthDate = utils.addMonthsToMonthDate(_currentMonth, -1);
     _nextMonthDate = utils.addMonthsToMonthDate(_currentMonth, 1);
     _pageController = PageController(
-        initialPage: utils.monthDelta(widget.firstDate, _currentMonth));
+      initialPage: utils.monthDelta(widget.firstDate, _currentMonth),
+    );
     _shortcutMap = <LogicalKeySet, Intent>{
-      LogicalKeySet(LogicalKeyboardKey.arrowLeft):
-          const DirectionalFocusIntent(TraversalDirection.left),
+      LogicalKeySet(LogicalKeyboardKey.arrowLeft): const DirectionalFocusIntent(
+        TraversalDirection.left,
+      ),
       LogicalKeySet(LogicalKeyboardKey.arrowRight):
           const DirectionalFocusIntent(TraversalDirection.right),
-      LogicalKeySet(LogicalKeyboardKey.arrowDown):
-          const DirectionalFocusIntent(TraversalDirection.down),
-      LogicalKeySet(LogicalKeyboardKey.arrowUp):
-          const DirectionalFocusIntent(TraversalDirection.up),
+      LogicalKeySet(LogicalKeyboardKey.arrowDown): const DirectionalFocusIntent(
+        TraversalDirection.down,
+      ),
+      LogicalKeySet(LogicalKeyboardKey.arrowUp): const DirectionalFocusIntent(
+        TraversalDirection.up,
+      ),
     };
     _actionMap = <Type, Action<Intent>>{
-      NextFocusIntent:
-          CallbackAction<NextFocusIntent>(onInvoke: _handleGridNextFocus),
+      NextFocusIntent: CallbackAction<NextFocusIntent>(
+        onInvoke: _handleGridNextFocus,
+      ),
       PreviousFocusIntent: CallbackAction<PreviousFocusIntent>(
-          onInvoke: _handleGridPreviousFocus),
+        onInvoke: _handleGridPreviousFocus,
+      ),
       DirectionalFocusIntent: CallbackAction<DirectionalFocusIntent>(
-          onInvoke: _handleDirectionFocus),
+        onInvoke: _handleDirectionFocus,
+      ),
     };
     _startDate = widget.selectedStartDate;
     _endDate = widget.selectedEndDate;
@@ -286,8 +293,10 @@ class _MonthPickerState extends State<MonthWidget> {
         if (utils.isSameMonth(widget.selectedDate, _currentMonth)) {
           _focusedDay = widget.selectedDate;
         } else if (utils.isSameMonth(widget.currentDate, _currentMonth)) {
-          _focusedDay =
-              _focusableDayForMonth(_currentMonth, widget.currentDate.day);
+          _focusedDay = _focusableDayForMonth(
+            _currentMonth,
+            widget.currentDate.day,
+          );
         } else {
           _focusedDay = _focusableDayForMonth(_currentMonth, 1);
         }
@@ -331,14 +340,16 @@ class _MonthPickerState extends State<MonthWidget> {
 
   static const Map<TraversalDirection, Duration> _directionOffset =
       <TraversalDirection, Duration>{
-    TraversalDirection.up: Duration(days: -DateTime.daysPerWeek),
-    TraversalDirection.right: Duration(days: 1),
-    TraversalDirection.down: Duration(days: DateTime.daysPerWeek),
-    TraversalDirection.left: Duration(days: -1),
-  };
+        TraversalDirection.up: Duration(days: -DateTime.daysPerWeek),
+        TraversalDirection.right: Duration(days: 1),
+        TraversalDirection.down: Duration(days: DateTime.daysPerWeek),
+        TraversalDirection.left: Duration(days: -1),
+      };
 
   Duration _dayDirectionOffset(
-      TraversalDirection traversalDirection, TextDirection textDirection) {
+    TraversalDirection traversalDirection,
+    TextDirection textDirection,
+  ) {
     // Swap left and right if the text direction if RTL
     if (textDirection == TextDirection.rtl) {
       if (traversalDirection == TraversalDirection.left) {
@@ -408,8 +419,9 @@ class _MonthPickerState extends State<MonthWidget> {
                   icon: const Icon(Icons.chevron_left),
                   color: controlColor,
                   tooltip: _isDisplayingFirstMonth ? null : previousTooltipText,
-                  onPressed:
-                      _isDisplayingFirstMonth ? null : _handlePreviousMonth,
+                  onPressed: _isDisplayingFirstMonth
+                      ? null
+                      : _handlePreviousMonth,
                 ),
                 IconButton(
                   icon: const Icon(Icons.chevron_right),

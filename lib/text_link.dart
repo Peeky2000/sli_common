@@ -10,8 +10,13 @@ class TextLink extends StatefulWidget {
   final TextStyle? linkStyle;
   final Function(String)? onTapLink;
 
-  const TextLink(this.str, {Key? key, this.style, this.linkStyle, this.onTapLink})
-      : super(key: key);
+  const TextLink(
+    this.str, {
+    Key? key,
+    this.style,
+    this.linkStyle,
+    this.onTapLink,
+  }) : super(key: key);
 
   @override
   State<TextLink> createState() => _TextLinkState();
@@ -34,11 +39,21 @@ class _TextLinkState extends State<TextLink> {
   }
 
   TextStyle? _getStyleText(int index) {
-    if ((arr.length.isOdd && index.isOdd) || (arr.length.isEven && index.isEven)) {
+    if ((arr.length.isOdd && index.isOdd) ||
+        (arr.length.isEven && index.isEven)) {
       return widget.linkStyle ??
-          TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600, color: const Color(0xFFF35A49));
+          TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
+            color: const Color(0xFFF35A49),
+          );
     } else {
-      return widget.style ?? TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600, color: const Color(0xFF888888));
+      return widget.style ??
+          TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
+            color: const Color(0xFF888888),
+          );
     }
   }
 
@@ -47,26 +62,25 @@ class _TextLinkState extends State<TextLink> {
     if (arr.length > 2) {
       for (int i = 0; i < arr.length - 1; i++) {
         TextSpan tp = TextSpan(
-            text: widget.str.substring(arr[i], arr[i + 1]),
-            style: _getStyleText(i),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () async {
-                String url = widget.str.substring(arr[i], arr[i + 1]);
-                if (widget.onTapLink != null) {
-                  widget.onTapLink!(url);
-                } else {
-                  if (await canLaunchUrlString(url)) {
-                    await launchUrlString(url);
-                  }
+          text: widget.str.substring(arr[i], arr[i + 1]),
+          style: _getStyleText(i),
+          recognizer: TapGestureRecognizer()
+            ..onTap = () async {
+              String url = widget.str.substring(arr[i], arr[i + 1]);
+              if (widget.onTapLink != null) {
+                widget.onTapLink!(url);
+              } else {
+                if (await canLaunchUrlString(url)) {
+                  await launchUrlString(url);
                 }
-              });
+              }
+            },
+        );
         arrTP.add(tp);
       }
       return arrTP;
     }
-    return [
-      TextSpan(text: widget.str, style: widget.style),
-    ];
+    return [TextSpan(text: widget.str, style: widget.style)];
   }
 
   @override

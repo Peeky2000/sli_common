@@ -59,22 +59,19 @@ class GradientText extends StatelessWidget {
   final List<double>? stops;
 
   const GradientText(
-      this.text, {
-        required this.colors,
-        this.gradientDirection = GradientDirection.ltr,
-        this.gradientType = GradientType.linear,
-        super.key,
-        this.overflow,
-        this.radius = 1.0,
-        this.style,
-        this.textAlign,
-        this.stops,
-        this.textScaleFactor,
-        this.maxLines,
-      }) : assert(
-  colors.length >= 2,
-  'Colors list must have at least two colors',
-  );
+    this.text, {
+    required this.colors,
+    this.gradientDirection = GradientDirection.ltr,
+    this.gradientType = GradientType.linear,
+    super.key,
+    this.overflow,
+    this.radius = 1.0,
+    this.style,
+    this.textAlign,
+    this.stops,
+    this.textScaleFactor,
+    this.maxLines,
+  }) : assert(colors.length >= 2, 'Colors list must have at least two colors');
 
   @override
   Widget build(BuildContext context) {

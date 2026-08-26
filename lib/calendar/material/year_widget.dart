@@ -26,8 +26,8 @@ class YearWidget extends StatefulWidget {
     this.calendarStyle,
     this.selectedDate,
     this.onChanged,
-  })  : assert(!firstDate.isAfter(lastDate)),
-        super(key: key);
+  }) : assert(!firstDate.isAfter(lastDate)),
+       super(key: key);
 
   /// The current date.
   ///
@@ -69,12 +69,13 @@ class _YearPickerState extends State<YearWidget> {
     super.initState();
 
     // Set the scroll position to approximately center the initial year.
-    if (widget.selectedDate!=null) {
+    if (widget.selectedDate != null) {
       initialYearIndex = widget.selectedDate!.year - widget.firstDate.year;
       initialYearRow = initialYearIndex! ~/ yearPickerColumnCount;
       final centeredYearRow = initialYearRow! - 2;
-      final scrollOffset =
-      _itemCount < minYears ? 0.0 : centeredYearRow * yearPickerRowHeight;
+      final scrollOffset = _itemCount < minYears
+          ? 0.0
+          : centeredYearRow * yearPickerRowHeight;
       scrollController = ScrollController(initialScrollOffset: scrollOffset);
     }
     // Move the offset down by 2 rows to approximately center it.
@@ -108,17 +109,16 @@ class _YearPickerState extends State<YearWidget> {
 
     BoxDecoration? decoration;
     if (isSelected) {
-      decoration = widget.calendarStyle?.yearFocusDecoration ?? BoxDecoration(
-        color: colorScheme.primary,
-        borderRadius: BorderRadius.circular(decorationHeight / 2),
-        shape: BoxShape.rectangle,
-      );
+      decoration =
+          widget.calendarStyle?.yearFocusDecoration ??
+          BoxDecoration(
+            color: colorScheme.primary,
+            borderRadius: BorderRadius.circular(decorationHeight / 2),
+            shape: BoxShape.rectangle,
+          );
     } else if (isCurrentYear && !isDisabled) {
       decoration = BoxDecoration(
-        border: Border.all(
-          color: colorScheme.primary,
-          width: 1,
-        ),
+        border: Border.all(color: colorScheme.primary, width: 1),
         borderRadius: BorderRadius.circular(decorationHeight / 2),
         shape: BoxShape.rectangle,
       );
@@ -132,29 +132,20 @@ class _YearPickerState extends State<YearWidget> {
         child: Center(
           child: Semantics(
             selected: isSelected,
-            child: Text(
-              year.toString(),
-              style: itemStyle,
-            ),
+            child: Text(year.toString(), style: itemStyle),
           ),
         ),
       ),
     );
 
     if (isDisabled) {
-      yearItem = ExcludeSemantics(
-        child: yearItem,
-      );
+      yearItem = ExcludeSemantics(child: yearItem);
     } else {
       yearItem = InkWell(
         key: ValueKey<int>(year),
         onTap: () {
           widget.onChanged?.call(
-            DateTime(
-              year,
-              widget.initialDate.month,
-              widget.initialDate.day,
-            ),
+            DateTime(year, widget.initialDate.month, widget.initialDate.day),
           );
         },
         child: yearItem,
@@ -193,8 +184,9 @@ class _YearPickerGridDelegate extends SliverGridDelegate {
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) {
-    final tileWidth = (constraints.crossAxisExtent -
-        (yearPickerColumnCount - 1) * yearPickerRowSpacing) /
+    final tileWidth =
+        (constraints.crossAxisExtent -
+            (yearPickerColumnCount - 1) * yearPickerRowSpacing) /
         yearPickerColumnCount;
     return SliverGridRegularTileLayout(
       childCrossAxisExtent: tileWidth,
@@ -211,4 +203,4 @@ class _YearPickerGridDelegate extends SliverGridDelegate {
 }
 
 const _YearPickerGridDelegate _yearPickerGridDelegate =
-_YearPickerGridDelegate();
+    _YearPickerGridDelegate();

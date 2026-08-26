@@ -2,12 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 
 class Log {
-  static void t(
-      {dynamic message = '',
-      int methodCount = 2,
-      int errorMethodCount = 12,
-      int lineLength = 120,
-      dynamic error}) {
+  static void t({
+    dynamic message = '',
+    int methodCount = 2,
+    int errorMethodCount = 12,
+    int lineLength = 120,
+    dynamic error,
+  }) {
     bool isShow = kDebugMode;
     if (isShow) {
       Logger logger = Logger(
@@ -27,12 +28,13 @@ class Log {
     }
   }
 
-  static void d(
-      {dynamic message = '',
-      int methodCount = 2,
-      int errorMethodCount = 12,
-      int lineLength = 120,
-      dynamic error}) {
+  static void d({
+    dynamic message = '',
+    int methodCount = 2,
+    int errorMethodCount = 12,
+    int lineLength = 120,
+    dynamic error,
+  }) {
     bool isShow = kDebugMode;
     if (isShow) {
       Logger logger = Logger(
@@ -52,12 +54,13 @@ class Log {
     }
   }
 
-  static void i(
-      {dynamic message = '',
-      int methodCount = 2,
-      int errorMethodCount = 12,
-      int lineLength = 120,
-      dynamic error}) {
+  static void i({
+    dynamic message = '',
+    int methodCount = 2,
+    int errorMethodCount = 12,
+    int lineLength = 120,
+    dynamic error,
+  }) {
     bool isShow = kDebugMode;
     if (isShow) {
       Logger logger = Logger(
@@ -73,16 +76,17 @@ class Log {
           printTime: true,
         ),
       );
-      logger.i(message,error: error);
+      logger.i(message, error: error);
     }
   }
 
-  static void w(
-      {dynamic message = '',
-      int methodCount = 2,
-      int errorMethodCount = 12,
-      int lineLength = 120,
-      dynamic error}) {
+  static void w({
+    dynamic message = '',
+    int methodCount = 2,
+    int errorMethodCount = 12,
+    int lineLength = 120,
+    dynamic error,
+  }) {
     bool isShow = kDebugMode;
     if (isShow) {
       Logger logger = Logger(
@@ -102,12 +106,13 @@ class Log {
     }
   }
 
-  static void e(
-      {dynamic message = '',
-      int methodCount = 2,
-      int errorMethodCount = 12,
-      int lineLength = 120,
-      dynamic error}) {
+  static void e({
+    dynamic message = '',
+    int methodCount = 2,
+    int errorMethodCount = 12,
+    int lineLength = 120,
+    dynamic error,
+  }) {
     bool isShow = kDebugMode;
     if (isShow) {
       Logger logger = Logger(
@@ -127,12 +132,13 @@ class Log {
     }
   }
 
-  static void f(
-      {dynamic message = '',
-      int methodCount = 2,
-      int errorMethodCount = 12,
-      int lineLength = 120,
-      dynamic error}) {
+  static void f({
+    dynamic message = '',
+    int methodCount = 2,
+    int errorMethodCount = 12,
+    int lineLength = 120,
+    dynamic error,
+  }) {
     bool isShow = kDebugMode;
     if (isShow) {
       Logger logger = Logger(

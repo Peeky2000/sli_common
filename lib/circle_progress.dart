@@ -70,7 +70,8 @@ class AnimationCircleProgress extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AnimationCircleProgressState createState() => _AnimationCircleProgressState();
+  _AnimationCircleProgressState createState() =>
+      _AnimationCircleProgressState();
 }
 
 class _AnimationCircleProgressState extends State<AnimationCircleProgress>
@@ -86,10 +87,13 @@ class _AnimationCircleProgressState extends State<AnimationCircleProgress>
       duration: widget.duration,
       vsync: this,
     );
-    _animation = Tween(begin: widget.fromValue, end: widget.toValue).animate(_animationController)
-      ..addListener(() {
-        setState(() {});
-      });
+    _animation =
+        Tween(
+          begin: widget.fromValue,
+          end: widget.toValue,
+        ).animate(_animationController)..addListener(() {
+          setState(() {});
+        });
     _animationController.forward();
     if (widget.repeat) {
       _animationController.repeat();
@@ -110,12 +114,12 @@ class _AnimationCircleProgressState extends State<AnimationCircleProgress>
       child: RepaintBoundary(
         child: CustomPaint(
           painter: _CircleProgressCirclePainter(
-              value: _animation.value,
-              progressColor: widget.progressColor,
-              backgroundColor: widget.backgroundProgressColor,
-              strokeWidth: widget.strokeWidth,
-              backgroundStrokeWidth: widget.backgroundStrokeWidth,
-              gradientColor: widget.gradientColor,
+            value: _animation.value,
+            progressColor: widget.progressColor,
+            backgroundColor: widget.backgroundProgressColor,
+            strokeWidth: widget.strokeWidth,
+            backgroundStrokeWidth: widget.backgroundStrokeWidth,
+            gradientColor: widget.gradientColor,
           ),
         ),
       ),
@@ -163,18 +167,20 @@ class _CircleProgressCirclePainter extends CustomPainter {
       final rect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
       progressCircle = Paint()
         ..shader = gradient.createShader(rect)
-        ..strokeCap = StrokeCap.round // StrokeCap.round is not recommended.
+        ..strokeCap = StrokeCap
+            .round // StrokeCap.round is not recommended.
         ..style = PaintingStyle.stroke
         ..strokeWidth = strokeWidth;
     }
 
     canvas.drawCircle(
-        center,
-        minDiameter / 2 - strokeWidth / 2,
-        Paint()
-          ..color = backgroundColor ?? Colors.blue.withOpacity(0.25)
-          ..strokeWidth = backgroundStrokeWidth
-          ..style = PaintingStyle.stroke);
+      center,
+      minDiameter / 2 - strokeWidth / 2,
+      Paint()
+        ..color = backgroundColor ?? Colors.blue.withOpacity(0.25)
+        ..strokeWidth = backgroundStrokeWidth
+        ..style = PaintingStyle.stroke,
+    );
 
     canvas.drawArc(
       Rect.fromCenter(

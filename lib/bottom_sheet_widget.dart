@@ -33,14 +33,15 @@ class BottomSheetWidget extends StatelessWidget {
     this.safeAreaBottom = true,
     this.margin,
     this.showHeader = true,
-    this.radius = 10
+    this.radius = 10,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:
-          isIntrinsicHeight == true ? null : height ?? MediaQuery.of(context).size.height * 2 / 3,
+      height: isIntrinsicHeight == true
+          ? null
+          : height ?? MediaQuery.of(context).size.height * 2 / 3,
       decoration: BoxDecoration(
         color: backgroundColor ?? defaultBackgroundColor,
         borderRadius: BorderRadius.only(
@@ -51,13 +52,19 @@ class BottomSheetWidget extends StatelessWidget {
       margin: margin,
       child: Stack(
         children: [
-          isIntrinsicHeight == true ? IntrinsicHeight(child: _body(context)) : _body(context),
+          isIntrinsicHeight == true
+              ? IntrinsicHeight(child: _body(context))
+              : _body(context),
           if (showHeader)
             InkWell(
               onTap: onPop ?? () => Navigator.of(context).pop(),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-                child: backIcon ??
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 12,
+                ),
+                child:
+                    backIcon ??
                     Icon(
                       Icons.close_outlined,
                       color: Theme.of(context).textTheme.bodyMedium!.color,
@@ -87,10 +94,9 @@ class BottomSheetWidget extends StatelessWidget {
           child: showHeader
               ? Text(
                   title ?? '',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(fontWeight: titleFontWeight ?? FontWeight.w500),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight: titleFontWeight ?? FontWeight.w500,
+                  ),
                   textAlign: TextAlign.center,
                 )
               : const SizedBox(),

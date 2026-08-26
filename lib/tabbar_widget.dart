@@ -52,12 +52,9 @@ class TabBarWidget extends StatelessWidget {
             labelStyle: selectedLabelStyle,
             unselectedLabelStyle: unSelectedLabelStyle,
             tabs: isTextLabel && titles?.isNotEmpty == true
-                ? List<Tab>.generate(
-              titles!.length,
-                  (index) {
-                return Tab(text: titles![index]);
-              },
-            )
+                ? List<Tab>.generate(titles!.length, (index) {
+                    return Tab(text: titles![index]);
+                  })
                 : widgets ?? [Container()],
             onTap: onTap,
           ),

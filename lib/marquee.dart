@@ -115,41 +115,41 @@ class Marquee extends StatefulWidget {
     this.decelerationDuration = Duration.zero,
     Curve decelerationCurve = Curves.decelerate,
     this.onDone,
-  })  : assert(!blankSpace.isNaN),
-        assert(blankSpace >= 0, "The blankSpace needs to be positive or zero."),
-        assert(blankSpace.isFinite),
-        assert(!velocity.isNaN),
-        assert(velocity != 0.0, "The velocity cannot be zero."),
-        assert(velocity.isFinite),
-        assert(
-          pauseAfterRound >= Duration.zero,
-          "The pauseAfterRound cannot be negative as time travel isn't "
-          "invented yet.",
-        ),
-        assert(
-          fadingEdgeStartFraction >= 0 && fadingEdgeStartFraction <= 1,
-          "The fadingEdgeGradientFractionOnStart value should be between 0 and "
-          "1, inclusive",
-        ),
-        assert(
-          fadingEdgeEndFraction >= 0 && fadingEdgeEndFraction <= 1,
-          "The fadingEdgeGradientFractionOnEnd value should be between 0 and "
-          "1, inclusive",
-        ),
-        assert(numberOfRounds == null || numberOfRounds > 0),
-        assert(
-          accelerationDuration >= Duration.zero,
-          "The accelerationDuration cannot be negative as time travel isn't "
-          "invented yet.",
-        ),
-        assert(
-          decelerationDuration >= Duration.zero,
-          "The decelerationDuration must be positive or zero as time travel "
-          "isn't invented yet.",
-        ),
-        accelerationCurve = _IntegralCurve(accelerationCurve),
-        decelerationCurve = _IntegralCurve(decelerationCurve),
-        super(key: key);
+  }) : assert(!blankSpace.isNaN),
+       assert(blankSpace >= 0, "The blankSpace needs to be positive or zero."),
+       assert(blankSpace.isFinite),
+       assert(!velocity.isNaN),
+       assert(velocity != 0.0, "The velocity cannot be zero."),
+       assert(velocity.isFinite),
+       assert(
+         pauseAfterRound >= Duration.zero,
+         "The pauseAfterRound cannot be negative as time travel isn't "
+         "invented yet.",
+       ),
+       assert(
+         fadingEdgeStartFraction >= 0 && fadingEdgeStartFraction <= 1,
+         "The fadingEdgeGradientFractionOnStart value should be between 0 and "
+         "1, inclusive",
+       ),
+       assert(
+         fadingEdgeEndFraction >= 0 && fadingEdgeEndFraction <= 1,
+         "The fadingEdgeGradientFractionOnEnd value should be between 0 and "
+         "1, inclusive",
+       ),
+       assert(numberOfRounds == null || numberOfRounds > 0),
+       assert(
+         accelerationDuration >= Duration.zero,
+         "The accelerationDuration cannot be negative as time travel isn't "
+         "invented yet.",
+       ),
+       assert(
+         decelerationDuration >= Duration.zero,
+         "The decelerationDuration must be positive or zero as time travel "
+         "isn't invented yet.",
+       ),
+       accelerationCurve = _IntegralCurve(accelerationCurve),
+       decelerationCurve = _IntegralCurve(decelerationCurve),
+       super(key: key);
 
   /// The text to be displayed.
   ///
@@ -520,7 +520,8 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
 
   // The scroll positions at various scrolling phases.
   late double _startPosition; // At the start, before accelerating.
-  late double _accelerationTarget; // After accelerating, before moving linearly.
+  late double
+  _accelerationTarget; // After accelerating, before moving linearly.
   late double _linearTarget; // After moving linearly, before decelerating.
   late double _decelerationTarget; // After decelerating.
 
@@ -536,9 +537,12 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
   bool _isOnPause = false;
   int _roundCounter = 0;
 
-  bool get isDone => widget.numberOfRounds == null ? false : widget.numberOfRounds == _roundCounter;
+  bool get isDone => widget.numberOfRounds == null
+      ? false
+      : widget.numberOfRounds == _roundCounter;
 
-  bool get showFading => !widget.showFadingOnlyWhenScrolling ? true : !_isOnPause;
+  bool get showFading =>
+      !widget.showFadingOnlyWhenScrolling ? true : !_isOnPause;
 
   @override
   void initState() {
@@ -578,15 +582,18 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
   void _initialize(BuildContext context) {
     // Calculate lengths (amount of pixels that each phase needs).
     final totalLength = _getTextWidth(context) + widget.blankSpace;
-    final accelerationLength = widget.accelerationCurve.integral *
+    final accelerationLength =
+        widget.accelerationCurve.integral *
         widget.velocity *
         _accelerationDuration.inMilliseconds /
         1000.0;
-    final decelerationLength = widget.decelerationCurve.integral *
+    final decelerationLength =
+        widget.decelerationCurve.integral *
         widget.velocity *
         _decelerationDuration.inMilliseconds /
         1000.0;
-    final linearLength = (totalLength - accelerationLength.abs() - decelerationLength.abs()) *
+    final linearLength =
+        (totalLength - accelerationLength.abs() - decelerationLength.abs()) *
         (widget.velocity > 0 ? 1 : -1);
 
     // Calculate scroll positions at various scrolling phases.
@@ -596,10 +603,12 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
     _decelerationTarget = _linearTarget + decelerationLength;
 
     // Calculate durations for the phases.
-    _totalDuration = _accelerationDuration +
+    _totalDuration =
+        _accelerationDuration +
         _decelerationDuration +
         Duration(milliseconds: (linearLength / widget.velocity * 1000).toInt());
-    _linearDuration = _totalDuration - _accelerationDuration - _decelerationDuration;
+    _linearDuration =
+        _totalDuration - _accelerationDuration - _decelerationDuration;
 
     assert(
       _totalDuration > Duration.zero,
@@ -691,10 +700,12 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
     final renderObject = richTextWidget.createRenderObject(context);
     renderObject.layout(constraints);
 
-    final boxes = renderObject.getBoxesForSelection(TextSelection(
-      baseOffset: 0,
-      extentOffset: TextSpan(text: widget.text).toPlainText().length,
-    ));
+    final boxes = renderObject.getBoxesForSelection(
+      TextSelection(
+        baseOffset: 0,
+        extentOffset: TextSpan(text: widget.text).toPlainText().length,
+      ),
+    );
 
     return boxes.last.right;
   }
@@ -711,7 +722,9 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
         alignment = isHorizontal ? Alignment.topCenter : Alignment.centerLeft;
         break;
       case CrossAxisAlignment.end:
-        alignment = isHorizontal ? Alignment.bottomCenter : Alignment.centerRight;
+        alignment = isHorizontal
+            ? Alignment.bottomCenter
+            : Alignment.centerRight;
         break;
       case CrossAxisAlignment.center:
         alignment = Alignment.center;
@@ -729,9 +742,15 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (_, i) {
         final text = i.isEven
-            ? Text(widget.text, style: widget.style, textScaleFactor: widget.textScaleFactor)
+            ? Text(
+                widget.text,
+                style: widget.style,
+                textScaleFactor: widget.textScaleFactor,
+              )
             : _buildBlankSpace();
-        return alignment == null ? text : Align(alignment: alignment, child: text);
+        return alignment == null
+            ? text
+            : Align(alignment: alignment, child: text);
       },
     );
 
@@ -748,7 +767,9 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
 
   Widget _wrapWithFadingEdgeScrollView(Widget child) {
     return FadingEdgeScrollView.fromScrollView(
-      gradientFractionOnStart: !showFading ? 0.0 : widget.fadingEdgeStartFraction,
+      gradientFractionOnStart: !showFading
+          ? 0.0
+          : widget.fadingEdgeStartFraction,
       gradientFractionOnEnd: !showFading ? 0.0 : widget.fadingEdgeEndFraction,
       child: child as ScrollView,
     );

@@ -17,10 +17,15 @@ class AnimationGradientText extends StatefulWidget {
     this.textAlign,
     this.isRepeat = true,
     this.isReverse = true,
-    this.colors = const [Color(0xFFFAA742), Colors.green, Colors.blue, Color(0xFFEF264F)],
+    this.colors = const [
+      Color(0xFFFAA742),
+      Colors.green,
+      Colors.blue,
+      Color(0xFFEF264F),
+    ],
     this.duration = const Duration(milliseconds: 2000),
-  })  : assert(colors.length > 2),
-        super(key: key);
+  }) : assert(colors.length > 2),
+       super(key: key);
 
   @override
   State<AnimationGradientText> createState() => _AnimationGradientTextState();
@@ -36,15 +41,16 @@ class _AnimationGradientTextState extends State<AnimationGradientText>
   void initState() {
     super.initState();
     colors = widget.colors;
-    _animationController =
-        AnimationController(vsync: this, duration: widget.duration);
+    _animationController = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    );
     _animationColor = Tween(begin: 0.0, end: 1.0).animate(_animationController);
     _animationController.forward();
     if (widget.isRepeat) {
       _animationController.repeat(reverse: widget.isReverse);
     }
   }
-
 
   @override
   void dispose() {
@@ -55,7 +61,10 @@ class _AnimationGradientTextState extends State<AnimationGradientText>
   List<double> get stops {
     List<double> stopPoints = [];
     for (int i = 0; i < widget.colors.length; i++) {
-      stopPoints.add(_animationColor.value + (1.5 - (i + 1) * 1.5 / (widget.colors.length - 1)));
+      stopPoints.add(
+        _animationColor.value +
+            (1.5 - (i + 1) * 1.5 / (widget.colors.length - 1)),
+      );
     }
     return stopPoints.reversed.toList();
   }
@@ -65,12 +74,21 @@ class _AnimationGradientTextState extends State<AnimationGradientText>
     return AnimatedBuilder(
       animation: _animationColor,
       builder: (context, child) => ShaderMask(
-        shaderCallback: (rect) =>
-            LinearGradient(colors: widget.colors, stops: stops).createShader(rect),
-        child: Text(widget.texts,
-            textAlign: widget.textAlign,
-            style: widget.style ??
-                TextStyle(color: Colors.white, fontSize: 14.0.sp, fontWeight: FontWeight.w700)),
+        shaderCallback: (rect) => LinearGradient(
+          colors: widget.colors,
+          stops: stops,
+        ).createShader(rect),
+        child: Text(
+          widget.texts,
+          textAlign: widget.textAlign,
+          style:
+              widget.style ??
+              TextStyle(
+                color: Colors.white,
+                fontSize: 14.0.sp,
+                fontWeight: FontWeight.w700,
+              ),
+        ),
       ),
     );
   }

@@ -3,39 +3,36 @@ library readmore;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-enum TrimMode {
-  Length,
-  Line,
-}
+enum TrimMode { Length, Line }
 
 class ReadMoreText extends StatefulWidget {
   const ReadMoreText(
-      this.data, {
-        Key? key,
-        this.preDataText,
-        this.postDataText,
-        this.preDataTextStyle,
-        this.postDataTextStyle,
-        this.trimExpandedText = 'show less',
-        this.trimCollapsedText = 'read more',
-        this.colorClickableText,
-        this.trimLength = 240,
-        this.trimLines = 2,
-        this.trimMode = TrimMode.Length,
-        this.style,
-        this.textAlign,
-        this.textDirection,
-        this.locale,
-        this.textScaleFactor,
-        this.semanticsLabel,
-        this.moreStyle,
-        this.lessStyle,
-        this.delimiter = _kEllipsis + ' ',
-        this.delimiterStyle,
-        this.callback,
-        this.onLinkPressed,
-        this.linkTextStyle,
-      }) : super(key: key);
+    this.data, {
+    Key? key,
+    this.preDataText,
+    this.postDataText,
+    this.preDataTextStyle,
+    this.postDataTextStyle,
+    this.trimExpandedText = 'show less',
+    this.trimCollapsedText = 'read more',
+    this.colorClickableText,
+    this.trimLength = 240,
+    this.trimLines = 2,
+    this.trimMode = TrimMode.Length,
+    this.style,
+    this.textAlign,
+    this.textDirection,
+    this.locale,
+    this.textScaleFactor,
+    this.semanticsLabel,
+    this.moreStyle,
+    this.lessStyle,
+    this.delimiter = _kEllipsis + ' ',
+    this.delimiterStyle,
+    this.callback,
+    this.onLinkPressed,
+    this.linkTextStyle,
+  }) : super(key: key);
 
   /// Used on TrimMode.Length
   final int trimLength;
@@ -122,9 +119,11 @@ class ReadMoreTextState extends State<ReadMoreText> {
 
     final colorClickableText =
         widget.colorClickableText ?? Theme.of(context).colorScheme.secondary;
-    final _defaultLessStyle = widget.lessStyle ??
+    final _defaultLessStyle =
+        widget.lessStyle ??
         effectiveTextStyle?.copyWith(color: colorClickableText);
-    final _defaultMoreStyle = widget.moreStyle ??
+    final _defaultMoreStyle =
+        widget.moreStyle ??
         effectiveTextStyle?.copyWith(color: colorClickableText);
     final _defaultDelimiterStyle = widget.delimiterStyle ?? effectiveTextStyle;
 
@@ -137,8 +136,8 @@ class ReadMoreTextState extends State<ReadMoreText> {
     TextSpan _delimiter = TextSpan(
       text: _readMore
           ? widget.trimCollapsedText.isNotEmpty
-          ? widget.delimiter
-          : ''
+                ? widget.delimiter
+                : ''
           : '',
       style: _defaultDelimiterStyle,
       recognizer: TapGestureRecognizer()..onTap = _onTapLink,
@@ -167,7 +166,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
           children: [
             if (preTextSpan != null) preTextSpan,
             TextSpan(text: widget.data, style: effectiveTextStyle),
-            if (postTextSpan != null) postTextSpan
+            if (postTextSpan != null) postTextSpan,
           ],
         );
 
@@ -200,12 +199,14 @@ class ReadMoreTextState extends State<ReadMoreText> {
 
         if (linkSize.width < maxWidth) {
           final readMoreSize = linkSize.width + delimiterSize.width;
-          final pos = textPainter.getPositionForOffset(Offset(
-            textDirection == TextDirection.rtl
-                ? readMoreSize
-                : textSize.width - readMoreSize,
-            textSize.height,
-          ));
+          final pos = textPainter.getPositionForOffset(
+            Offset(
+              textDirection == TextDirection.rtl
+                  ? readMoreSize
+                  : textSize.width - readMoreSize,
+              textSize.height,
+            ),
+          );
           endIndex = textPainter.getOffsetBefore(pos.offset) ?? 0;
         } else {
           var pos = textPainter.getPositionForOffset(
@@ -249,7 +250,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
               textSpan = _buildData(
                 data: _readMore
                     ? widget.data.substring(0, endIndex) +
-                    (linkLongerThanLine ? _kLineSeparator : '')
+                          (linkLongerThanLine ? _kLineSeparator : '')
                     : widget.data,
                 textStyle: effectiveTextStyle,
                 linkTextStyle: effectiveTextStyle?.copyWith(
@@ -274,7 +275,8 @@ class ReadMoreTextState extends State<ReadMoreText> {
             break;
           default:
             throw Exception(
-                'TrimMode type: ${widget.trimMode} is not supported');
+              'TrimMode type: ${widget.trimMode} is not supported',
+            );
         }
 
         return Text.rich(
@@ -297,9 +299,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
       result = Semantics(
         textDirection: widget.textDirection,
         label: widget.semanticsLabel,
-        child: ExcludeSemantics(
-          child: result,
-        ),
+        child: ExcludeSemantics(child: result),
       );
     }
     return result;
@@ -322,31 +322,18 @@ class ReadMoreTextState extends State<ReadMoreText> {
       final firstTextPart = data.substring(0, match!.start);
       final linkTextPart = data.substring(match.start, match.end);
 
-      contents.add(
-        TextSpan(
-          text: firstTextPart,
-        ),
-      );
+      contents.add(TextSpan(text: firstTextPart));
       contents.add(
         TextSpan(
           text: linkTextPart,
           style: linkTextStyle,
           recognizer: TapGestureRecognizer()
-            ..onTap = () => onPressed?.call(
-              linkTextPart.trim(),
-            ),
+            ..onTap = () => onPressed?.call(linkTextPart.trim()),
         ),
       );
       data = data.substring(match.end, data.length);
     }
-    contents.add(
-      TextSpan(
-        text: data,
-      ),
-    );
-    return TextSpan(
-      children: contents..addAll(children),
-      style: textStyle,
-    );
+    contents.add(TextSpan(text: data));
+    return TextSpan(children: contents..addAll(children), style: textStyle);
   }
 }

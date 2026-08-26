@@ -21,13 +21,16 @@ class MultiImagePicker {
       MultiImageType.video: RequestType.video,
       MultiImageType.common: RequestType.common,
     };
-    Navigator.of(context).push(MaterialPageRoute(
+    Navigator.of(context).push(
+      MaterialPageRoute(
         builder: (context) => _MultiImagePickerScreen(
-              imagesSelected: imagesSelected,
-              limit: limit,
-              onSelected: onSelected,
-              type: map[type] ?? RequestType.image,
-            )));
+          imagesSelected: imagesSelected,
+          limit: limit,
+          onSelected: onSelected,
+          type: map[type] ?? RequestType.image,
+        ),
+      ),
+    );
   }
 }
 
@@ -46,7 +49,8 @@ class _MultiImagePickerScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<_MultiImagePickerScreen> createState() => _MultiImagePickerScreenState();
+  State<_MultiImagePickerScreen> createState() =>
+      _MultiImagePickerScreenState();
 }
 
 class _MultiImagePickerScreenState extends State<_MultiImagePickerScreen> {
@@ -72,7 +76,10 @@ class _MultiImagePickerScreenState extends State<_MultiImagePickerScreen> {
   }
 
   Future<void> _getAllImage() async {
-    final albums = await PhotoManager.getAssetPathList(onlyAll: true, type: widget.type);
+    final albums = await PhotoManager.getAssetPathList(
+      onlyAll: true,
+      type: widget.type,
+    );
     final recentAlbum = albums.first;
     final recentAssets = await recentAlbum.getAssetListRange(
       start: 0,
@@ -106,10 +113,7 @@ class _MultiImagePickerScreenState extends State<_MultiImagePickerScreen> {
                           widget.onSelected(imagesSelected);
                           Navigator.pop(context);
                         },
-                        child: const Icon(
-                          Icons.add,
-                          size: 32.0,
-                        ),
+                        child: const Icon(Icons.add, size: 32.0),
                       ),
                       Positioned(
                         top: 0,
@@ -117,19 +121,22 @@ class _MultiImagePickerScreenState extends State<_MultiImagePickerScreen> {
                         child: Container(
                           height: 22.0,
                           width: 22.0,
-                          decoration:
-                              const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
                           child: Center(
                             child: Text(
                               '$number',
                               style: const TextStyle(
-                                  color: Color(0xFF757575),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
+                                color: Color(0xFF757575),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   )
                 : const SizedBox();
@@ -139,67 +146,65 @@ class _MultiImagePickerScreenState extends State<_MultiImagePickerScreen> {
         },
       ),
       body: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, crossAxisSpacing: 4.0, mainAxisSpacing: 4.0),
-          itemCount: assets.length,
-          itemBuilder: (context, index) {
-            bool isSelected = imagesSelected
-                .where((element) => assetsFile[index].path == element.path)
-                .isNotEmpty;
-            return GestureDetector(
-              onTap: () {
-                if ((widget.limit != null &&
-                        imagesSelected.length < widget.limit! &&
-                        !isSelected) ||
-                    (widget.limit == null && !isSelected)) {
-                  setState(() {
-                    imagesSelected.add(assetsFile[index]);
-                  });
-                  numberSelected.sink.add(imagesSelected.length);
-                } else if (isSelected) {
-                  setState(() {
-                    imagesSelected.removeWhere((element) => element.path == assetsFile[index].path);
-                  });
-                  numberSelected.sink.add(imagesSelected.length);
-                }
-              },
-              child: Stack(
-                children: [
-                  AssetThumbnail(
-                    multiModel: assets[index],
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 5.0, right: 5.0),
-                      width: 20.0,
-                      height: 20.0,
-                      decoration: BoxDecoration(
-                          color: isSelected ? Colors.green : Colors.transparent,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey, width: 2.2)),
-                      child: isSelected
-                          ? const Icon(
-                              Icons.check,
-                              color: Colors.white,
-                              size: 16,
-                            )
-                          : const SizedBox(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 4.0,
+          mainAxisSpacing: 4.0,
+        ),
+        itemCount: assets.length,
+        itemBuilder: (context, index) {
+          bool isSelected = imagesSelected
+              .where((element) => assetsFile[index].path == element.path)
+              .isNotEmpty;
+          return GestureDetector(
+            onTap: () {
+              if ((widget.limit != null &&
+                      imagesSelected.length < widget.limit! &&
+                      !isSelected) ||
+                  (widget.limit == null && !isSelected)) {
+                setState(() {
+                  imagesSelected.add(assetsFile[index]);
+                });
+                numberSelected.sink.add(imagesSelected.length);
+              } else if (isSelected) {
+                setState(() {
+                  imagesSelected.removeWhere(
+                    (element) => element.path == assetsFile[index].path,
+                  );
+                });
+                numberSelected.sink.add(imagesSelected.length);
+              }
+            },
+            child: Stack(
+              children: [
+                AssetThumbnail(multiModel: assets[index]),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 5.0, right: 5.0),
+                    width: 20.0,
+                    height: 20.0,
+                    decoration: BoxDecoration(
+                      color: isSelected ? Colors.green : Colors.transparent,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.grey, width: 2.2),
                     ),
+                    child: isSelected
+                        ? const Icon(Icons.check, color: Colors.white, size: 16)
+                        : const SizedBox(),
                   ),
-                ],
-              ),
-            );
-          }),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
 
 class AssetThumbnail extends StatelessWidget {
-  const AssetThumbnail({
-    Key? key,
-    required this.multiModel,
-  }) : super(key: key);
+  const AssetThumbnail({Key? key, required this.multiModel}) : super(key: key);
 
   final AssetEntity multiModel;
 
@@ -229,22 +234,28 @@ class AssetThumbnail extends StatelessWidget {
         }
         return Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
-              image: DecorationImage(image: MemoryImage(bytes), fit: BoxFit.cover)),
-          child: multiModel.type == AssetType.video ? Align(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 5.0, bottom: 5.0),
-              child: Text(
-                printDuration(multiModel.videoDuration),
-                style: TextStyle(
-                  color: Colors.grey[300],
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
+            borderRadius: BorderRadius.circular(5.0),
+            image: DecorationImage(
+              image: MemoryImage(bytes),
+              fit: BoxFit.cover,
             ),
-          ) : null,
+          ),
+          child: multiModel.type == AssetType.video
+              ? Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 5.0, bottom: 5.0),
+                    child: Text(
+                      printDuration(multiModel.videoDuration),
+                      style: TextStyle(
+                        color: Colors.grey[300],
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ),
+                )
+              : null,
         );
       },
     );

@@ -16,10 +16,7 @@ class CustomDateTimeRange {
   /// Creates a date range for the given start and end [DateTime].
   ///
   /// [start] and [end] must be non-null.
-  const CustomDateTimeRange({
-    required this.start,
-    required this.end,
-  });
+  const CustomDateTimeRange({required this.start, required this.end});
 
   /// The start of the range of dates.
   final DateTime start;
@@ -41,7 +38,7 @@ class CustomDateTimeRange {
   }
 
   @override
-  int get hashCode => hashValues(start, end);
+  int get hashCode => Object.hash(start, end);
 
   @override
   String toString() => '$start - $end';

@@ -32,11 +32,13 @@ class PermissionUtil {
     PermissionType.videos: Permission.videos,
   };
 
-  PermissionUtil(this.context,
-      {required this.permission,
-      this.titleDialogDined = '',
-      this.descDialogDined = '',
-      required this.onGranted});
+  PermissionUtil(
+    this.context, {
+    required this.permission,
+    this.titleDialogDined = '',
+    this.descDialogDined = '',
+    required this.onGranted,
+  });
 
   Future<void> checkPermission() async {
     Permission? androidPermission = _mapPermissionAndroid[permission];
@@ -44,24 +46,32 @@ class PermissionUtil {
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await DeviceInfoPlugin().androidInfo;
       int? androidVersion = int.tryParse(androidInfo.version.release);
-      if (androidVersion != null && androidVersion < 13 && permission == PermissionType.photo) {
+      if (androidVersion != null &&
+          androidVersion < 13 &&
+          permission == PermissionType.photo) {
         androidPermission = _mapPermissionAndroid[PermissionType.storage];
       }
     }
     final status = Platform.isIOS
         ? await iosPermission?.request()
         : await androidPermission?.request();
-    if (status == PermissionStatus.granted || status == PermissionStatus.limited) {
+    if (status == PermissionStatus.granted ||
+        status == PermissionStatus.limited) {
       onGranted();
     } else if (status == PermissionStatus.denied) {
-      Fluttertoast.showToast(msg: context.l10n.permissionDenied, toastLength: Toast.LENGTH_LONG);
+      Fluttertoast.showToast(
+        msg: context.l10n.permissionDenied,
+        toastLength: Toast.LENGTH_LONG,
+      );
     } else if (status == PermissionStatus.permanentlyDenied) {
-      DialogUtil.confirm(context,
-          title: titleDialogDined,
-          content: descDialogDined,
-          onTapSubmit: () => openAppSettings(),
-          cancelText: context.l10n.cancel,
-          submitText: context.l10n.setting);
+      DialogUtil.confirm(
+        context,
+        title: titleDialogDined,
+        content: descDialogDined,
+        onTapSubmit: () => openAppSettings(),
+        cancelText: context.l10n.cancel,
+        submitText: context.l10n.setting,
+      );
     }
   }
 }
