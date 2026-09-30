@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart' as shadcn;
+import 'package:sli_common/src/foundation/sli_tokens.dart';
 import 'package:sli_common/src/shadcn/sli_shadcn_scope.dart';
 
 enum SliButtonVariant { primary, secondary, outline, ghost, destructive }
@@ -78,6 +79,14 @@ class SliButton extends StatelessWidget {
       ),
     };
 
+    final accessibleButton = ConstrainedBox(
+      constraints: BoxConstraints(
+        minWidth: SliTouchTarget.minimum.width,
+        minHeight: SliTouchTarget.minimum.height,
+      ),
+      child: button,
+    );
+
     return Semantics(
       button: true,
       enabled: enabled,
@@ -85,8 +94,8 @@ class SliButton extends StatelessWidget {
       child: ExcludeSemantics(
         child: SliShadcnScope(
           child: expand
-              ? SizedBox(width: double.infinity, child: button)
-              : button,
+              ? SizedBox(width: double.infinity, child: accessibleButton)
+              : accessibleButton,
         ),
       ),
     );

@@ -11,6 +11,8 @@ class ComponentShowcase extends StatelessWidget {
     title: 'sli_common showroom',
     theme: SliTheme.light(),
     darkTheme: SliTheme.dark(),
+    builder: (context, child) =>
+        SliShadcnScope(child: child ?? const SizedBox.shrink()),
     home: const _ShowcaseScreen(),
   );
 }

@@ -5,7 +5,7 @@
 - **Public import:** `package:sli_common/sli_common.dart`
 - **Source:** [`lib/bottom_sheet_widget.dart`](../../lib/bottom_sheet_widget.dart)
 - **Example:** [`example/lib/main.dart`](../../example/lib/main.dart)
-- **Preview:** [`catalog-pilot.png`](../../test/goldens/catalog-pilot.png)
+- **Preview:** [`catalog-pilot-light.png`](../../test/goldens/catalog-pilot-light.png), [`catalog-pilot-dark.png`](../../test/goldens/catalog-pilot-dark.png)
 
 ## Contract hiện tại
 

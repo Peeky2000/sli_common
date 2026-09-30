@@ -35,7 +35,9 @@ facade `Sli*`.
 
 ## Quick gallery
 
-![Catalog pilot](test/goldens/catalog-pilot.png)
+| Light | Dark |
+|---|---|
+| ![Catalog light](test/goldens/catalog-pilot-light.png) | ![Catalog dark](test/goldens/catalog-pilot-dark.png) |
 
 | Nhu cầu | Public API | Trạng thái | Xem cách dùng |
 |---|---|---|---|

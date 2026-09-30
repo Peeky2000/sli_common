@@ -14,7 +14,7 @@ Catalog là mục lục chính thức để trả lời bốn câu hỏi trướ
 | Foundation | `SliColors`, `SliTheme`, `SliSpacing`, `SliRadii`, `SliDurations` | Stable | [Architecture](../architecture.md) | [`lib/src/foundation`](../../lib/src/foundation/) | [`sli_theme_test.dart`](../../test/foundation/sli_theme_test.dart) |
 | Integration | `SliShadcnScope` | Stable | [Architecture](../architecture.md) | [`sli_shadcn_scope.dart`](../../lib/src/shadcn/sli_shadcn_scope.dart) | Covered through component tests |
 | Action | `SliButton` | Stable | [Details](sli-button.md) | [`sli_button.dart`](../../lib/src/components/sli_button.dart) | [`sli_button_test.dart`](../../test/components/sli_button_test.dart) |
-| Container | `SliSurface` | Stable | [Details](sli-surface.md) | [`sli_surface.dart`](../../lib/src/components/sli_surface.dart) | [Pilot golden](../../test/goldens/catalog-pilot.png) |
+| Container | `SliSurface` | Stable | [Details](sli-surface.md) | [`sli_surface.dart`](../../lib/src/components/sli_surface.dart) | [Light/dark golden](../../test/catalog/catalog_pilot_golden_test.dart) |
 
 ## Pilot và legacy
 

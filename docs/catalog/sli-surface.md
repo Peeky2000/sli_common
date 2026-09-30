@@ -5,14 +5,16 @@
 - **Public import:** `package:sli_common/sli_common.dart`
 - **Source:** [`lib/src/components/sli_surface.dart`](../../lib/src/components/sli_surface.dart)
 - **Example:** [`example/lib/main.dart`](../../example/lib/main.dart)
-- **Preview test:** [`test/catalog/catalog_pilot_golden_test.dart`](../../test/catalog/catalog_pilot_golden_test.dart)
+- **Tests:** [`sli_surface_test.dart`](../../test/components/sli_surface_test.dart), [light/dark golden](../../test/catalog/catalog_pilot_golden_test.dart)
 
 ## Dùng khi nào?
 
 Dùng làm container/card trung tính có semantic background, border, radius và
 padding đồng bộ với `SliTheme`.
 
-![SliSurface](../../test/goldens/catalog-pilot.png)
+| Light | Dark |
+|---|---|
+| ![SliSurface light](../../test/goldens/catalog-pilot-light.png) | ![SliSurface dark](../../test/goldens/catalog-pilot-dark.png) |
 
 ```dart
 const SliSurface(

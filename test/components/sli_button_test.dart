@@ -39,4 +39,65 @@ void main() {
     expect(pressed, isFalse);
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
+
+  testWidgets('all variants and sizes preserve the minimum touch target', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: SliTheme.light(),
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                for (final variant in SliButtonVariant.values)
+                  for (final size in SliButtonSize.values)
+                    SliButton(
+                      key: ValueKey('${variant.name}-${size.name}'),
+                      label: '${variant.name}-${size.name}',
+                      variant: variant,
+                      size: size,
+                      onPressed: () {},
+                    ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    for (final variant in SliButtonVariant.values) {
+      for (final size in SliButtonSize.values) {
+        final renderedSize = tester.getSize(
+          find.byKey(ValueKey('${variant.name}-${size.name}')),
+        );
+        expect(renderedSize.width, greaterThanOrEqualTo(48));
+        expect(renderedSize.height, greaterThanOrEqualTo(48));
+      }
+    }
+  });
+
+  testWidgets('exposes one semantic button label and enabled state', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: SliTheme.light(),
+        home: Scaffold(
+          body: SliButton(
+            label: 'Save',
+            semanticLabel: 'Save changes',
+            onPressed: () {},
+          ),
+        ),
+      ),
+    );
+
+    final node = tester.getSemantics(find.bySemanticsLabel('Save changes'));
+    expect(node.flagsCollection.isButton, isTrue);
+    expect(node.flagsCollection.isEnabled, isTrue);
+    semantics.dispose();
+  });
 }

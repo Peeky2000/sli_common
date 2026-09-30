@@ -15,28 +15,38 @@ void main() {
     ]);
   });
 
-  testWidgets('catalog pilot preview stays reviewable', (tester) async {
-    await tester.binding.setSurfaceSize(const Size(720, 1100));
-    addTearDown(() => tester.binding.setSurfaceSize(null));
+  for (final brightness in Brightness.values) {
+    testWidgets('catalog pilot ${brightness.name} preview stays reviewable', (
+      tester,
+    ) async {
+      await tester.binding.setSurfaceSize(const Size(720, 1100));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
 
-    await tester.pumpWidget(
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: _catalogTheme(),
-        home: const _CatalogPilot(),
-      ),
-    );
-    await tester.pumpAndSettle();
+      await tester.pumpWidget(
+        MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: _catalogTheme(Brightness.light),
+          darkTheme: _catalogTheme(Brightness.dark),
+          themeMode: brightness == Brightness.dark
+              ? ThemeMode.dark
+              : ThemeMode.light,
+          home: const _CatalogPilot(),
+        ),
+      );
+      await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(_CatalogPilot),
-      matchesGoldenFile('../goldens/catalog-pilot.png'),
-    );
-  });
+      await expectLater(
+        find.byType(_CatalogPilot),
+        matchesGoldenFile('../goldens/catalog-pilot-${brightness.name}.png'),
+      );
+    });
+  }
 }
 
-ThemeData _catalogTheme() {
-  final theme = SliTheme.light();
+ThemeData _catalogTheme(Brightness brightness) {
+  final theme = brightness == Brightness.dark
+      ? SliTheme.dark()
+      : SliTheme.light();
   return theme.copyWith(
     textTheme: theme.textTheme.apply(fontFamily: 'Roboto'),
     primaryTextTheme: theme.primaryTextTheme.apply(fontFamily: 'Roboto'),

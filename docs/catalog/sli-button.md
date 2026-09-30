@@ -14,7 +14,9 @@ Shadcn chỉ là implementation detail bên trong package.
 
 ## Preview
 
-![SliButton variants](../../test/goldens/catalog-pilot.png)
+| Light | Dark |
+|---|---|
+| ![SliButton light variants](../../test/goldens/catalog-pilot-light.png) | ![SliButton dark variants](../../test/goldens/catalog-pilot-dark.png) |
 
 ## Cách dùng tối thiểu
 
@@ -50,4 +52,5 @@ SliButton(
 ## Theme và accessibility
 
 Component đọc theme từ `SliTheme`, tự bọc `SliShadcnScope`, và expose semantics
-button/enabled/label. App không import `shadcn_flutter` trực tiếp.
+button/enabled/label. Mọi size/variant giữ touch target tối thiểu 48×48. App
+không import `shadcn_flutter` trực tiếp.

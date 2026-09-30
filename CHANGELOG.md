@@ -5,6 +5,8 @@
 - Thêm component catalog, maturity status và inventory cho 45/45 public export.
 - Mở rộng example thành showroom cho component stable và BottomSheet pilot.
 - Thêm golden preview dùng font thật cùng gate kiểm tra export phải có catalog.
+- Khóa Shadcn facade bằng semantics/minimum touch-target tests cho toàn bộ
+  `SliButton` variant/size, `SliSurface` tests và golden light/dark.
 
 ## 1.1.0
 
