@@ -7,6 +7,9 @@
 - Thêm golden preview dùng font thật cùng gate kiểm tra export phải có catalog.
 - Khóa Shadcn facade bằng semantics/minimum touch-target tests cho toàn bộ
   `SliButton` variant/size, `SliSurface` tests và golden light/dark.
+- Thêm stable `showSliBottomSheet` + `SliBottomSheetFrame` với keyboard inset,
+  safe area, viewport-safe sizing, light/dark và accessibility tests; deprecated
+  `BottomSheetWidget` cũ để migration có kiểm soát.
 
 ## 1.1.0
 

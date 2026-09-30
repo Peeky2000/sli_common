@@ -15,20 +15,21 @@ Catalog là mục lục chính thức để trả lời bốn câu hỏi trướ
 | Integration | `SliShadcnScope` | Stable | [Architecture](../architecture.md) | [`sli_shadcn_scope.dart`](../../lib/src/shadcn/sli_shadcn_scope.dart) | Covered through component tests |
 | Action | `SliButton` | Stable | [Details](sli-button.md) | [`sli_button.dart`](../../lib/src/components/sli_button.dart) | [`sli_button_test.dart`](../../test/components/sli_button_test.dart) |
 | Container | `SliSurface` | Stable | [Details](sli-surface.md) | [`sli_surface.dart`](../../lib/src/components/sli_surface.dart) | [Light/dark golden](../../test/catalog/catalog_pilot_golden_test.dart) |
+| Overlay | `SliBottomSheetFrame`, `showSliBottomSheet` | Stable | [Details](sli-bottom-sheet.md) | [`sli_bottom_sheet.dart`](../../lib/src/components/sli_bottom_sheet.dart) | [`sli_bottom_sheet_test.dart`](../../test/components/sli_bottom_sheet_test.dart) |
 
 ## Pilot và legacy
 
 | Category | API | Status | Details |
 |---|---|---|---|
-| Overlay | `BottomSheetWidget` | Legacy / candidate | [BottomSheet pilot](bottom-sheet-widget.md) |
+| Overlay | `BottomSheetWidget` | Deprecated | [Compatibility API](bottom-sheet-widget.md) |
 | All legacy exports | Nhiều API | Legacy | [Legacy inventory](legacy-inventory.md) |
 
 ## Cách tìm nhanh
 
 - Làm CTA/button: dùng `SliButton`.
 - Cần card/surface trung tính: dùng `SliSurface`.
-- Cần bottom sheet: đọc [pilot](bottom-sheet-widget.md) trước; API hiện tại chỉ
-  là content frame, không phải modal presenter hoàn chỉnh.
+- Cần bottom sheet: dùng
+  [`showSliBottomSheet` + `SliBottomSheetFrame`](sli-bottom-sheet.md).
 - Không tìm thấy: kiểm tra [legacy inventory](legacy-inventory.md), sau đó mới
   đề xuất component mới.
 

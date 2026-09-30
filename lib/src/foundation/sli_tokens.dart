@@ -27,4 +27,6 @@ abstract final class SliDurations {
 
 abstract final class SliTouchTarget {
   static const Size minimum = Size(48, 48);
+  static const double minimumWidth = 48;
+  static const double minimumHeight = 48;
 }

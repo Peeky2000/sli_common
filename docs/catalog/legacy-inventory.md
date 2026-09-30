@@ -9,6 +9,7 @@ của `Sli*`; không đồng nghĩa component sai hoặc phải xóa ngay.
 | Export | API chính | Status |
 |---|---|---|
 | `src/components/sli_button.dart` | `SliButton` | Stable |
+| `src/components/sli_bottom_sheet.dart` | `SliBottomSheetFrame`, `showSliBottomSheet` | Stable |
 | `src/components/sli_surface.dart` | `SliSurface` | Stable |
 | `src/foundation/sli_colors.dart` | `SliColors` | Stable |
 | `src/foundation/sli_theme.dart` | `SliTheme` | Stable |
@@ -19,7 +20,7 @@ của `Sli*`; không đồng nghĩa component sai hoặc phải xóa ngay.
 
 | Export | API chính | Status |
 |---|---|---|
-| `bottom_sheet_widget.dart` | `BottomSheetWidget` | Legacy / pilot |
+| `bottom_sheet_widget.dart` | `BottomSheetWidget` | Deprecated |
 | `dialog_util.dart` | `DialogUtil` | Legacy |
 | `circle_progress.dart` | Circle progress widgets | Legacy |
 | `horizontal_progress.dart` | Horizontal progress widgets | Legacy |
@@ -79,6 +80,6 @@ của `Sli*`; không đồng nghĩa component sai hoặc phải xóa ngay.
 | `permission_utils.dart` | `PermissionUtils` | Legacy utility |
 | `log.dart` | `Log` | Legacy utility |
 
-Tổng: **45/45 public exports** đã được phân loại (6 stable foundation/component
-exports và 39 legacy exports). Khi barrel thay đổi, inventory phải đổi trong
+Tổng: **46/46 public exports** đã được phân loại (7 stable foundation/component
+exports và 39 legacy/compatibility exports). Khi barrel thay đổi, inventory phải đổi trong
 cùng commit.

@@ -1,10 +1,12 @@
-# Legacy Migration
+# Migration widget legacy
 
-1. Replace app-local design constants with `SliColors`, `SliSpacing`, and `SliRadii`.
-2. Replace duplicated buttons with `SliButton` while preserving screen behavior.
-3. Prefer `SliSurface` for new reusable panels/cards.
-4. Keep legacy widgets in place until their replacement has parity tests.
-5. Add `@Deprecated` with a replacement and changelog entry before removal.
+1. Thay design constant cục bộ bằng `SliColors`, `SliSpacing` và `SliRadii`.
+2. Thay button trùng bằng `SliButton` nhưng phải giữ nguyên hành vi màn hình.
+3. Ưu tiên `SliSurface` cho panel/card dùng lại.
+4. Với bottom sheet, dùng `showSliBottomSheet` làm presenter và
+   `SliBottomSheetFrame` làm content frame.
+5. Giữ widget legacy cho đến khi replacement có parity test.
+6. Thêm `@Deprecated`, replacement và changelog trước khi xóa API cũ.
 
-Do not migrate every widget in one change. Migrate by component family so visual and
-interaction regressions remain reviewable.
+Không migrate mọi widget trong một thay đổi. Làm theo từng family để visual và
+interaction regression vẫn review được.

@@ -1,7 +1,7 @@
-# `BottomSheetWidget` — Pilot
+# `BottomSheetWidget` — Legacy compatibility
 
 - **Category:** Feedback / Overlay
-- **Status:** Legacy / candidate for redesign
+- **Status:** Deprecated
 - **Public import:** `package:sli_common/sli_common.dart`
 - **Source:** [`lib/bottom_sheet_widget.dart`](../../lib/bottom_sheet_widget.dart)
 - **Example:** [`example/lib/main.dart`](../../example/lib/main.dart)
@@ -49,13 +49,13 @@ showModalBottomSheet<void>(
   nhất;
 - chưa có accessibility/semantics test đầy đủ.
 
-## Hướng stable dự kiến
+## Replacement ổn định
 
-Tách hai trách nhiệm:
+Stable contract đã tách hai trách nhiệm:
 
-1. `showSliBottomSheet<T>()`: presenter điều phối modal, keyboard, safe-area,
+1. `showSliBottomSheet<T>()`: presenter điều phối modal, keyboard,
    dismiss/drag/scroll.
-2. Các primitive frame/header/action bar: chỉ render anatomy.
+2. `SliBottomSheetFrame`: render header/action/content/safe-area và sizing.
 
-Chưa migrate `lib/core/widget/bottom_sheet_widget.dart` của app sang component
-này cho đến khi behavior matrix và parity test hoàn tất.
+Xem [stable BottomSheet](sli-bottom-sheet.md) và migrate theo compatibility
+adapter sau khi behavior của caller đã được kiểm chứng.

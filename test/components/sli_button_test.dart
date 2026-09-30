@@ -1,3 +1,5 @@
+import 'dart:ui' show Tristate;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sli_common/sli_common.dart';
@@ -97,7 +99,7 @@ void main() {
 
     final node = tester.getSemantics(find.bySemanticsLabel('Save changes'));
     expect(node.flagsCollection.isButton, isTrue);
-    expect(node.flagsCollection.isEnabled, isTrue);
+    expect(node.flagsCollection.isEnabled, Tristate.isTrue);
     semantics.dispose();
   });
 }

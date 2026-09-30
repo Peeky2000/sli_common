@@ -1,6 +1,7 @@
 library sli_common;
 
 export 'src/components/sli_button.dart';
+export 'src/components/sli_bottom_sheet.dart';
 export 'src/components/sli_surface.dart';
 export 'src/foundation/sli_colors.dart';
 export 'src/foundation/sli_theme.dart';

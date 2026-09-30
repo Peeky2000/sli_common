@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+@Deprecated(
+  'Use SliBottomSheetFrame and showSliBottomSheet from '
+  'package:sli_common/sli_common.dart.',
+)
 class BottomSheetWidget extends StatelessWidget {
   static Color? defaultBackgroundColor;
 

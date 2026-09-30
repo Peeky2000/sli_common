@@ -84,23 +84,21 @@ class _BottomSheetPilot extends StatelessWidget {
     children: [
       const SliSurface(
         child: Text(
-          'BottomSheetWidget hiện là legacy content frame, chưa phải stable '
-          'modal presenter.',
+          'Stable contract tách modal presenter và content frame để có thể '
+          'dùng lại độc lập.',
         ),
       ),
       const SizedBox(height: SliSpacing.lg),
       SliButton(
         label: 'Mở BottomSheet pilot',
         expand: true,
-        onPressed: () => showModalBottomSheet<void>(
+        onPressed: () => showSliBottomSheet<void>(
           context: context,
-          isScrollControlled: true,
-          backgroundColor: Colors.transparent,
-          builder: (_) => BottomSheetWidget(
+          builder: (_) => const SliBottomSheetFrame(
             title: 'Bộ lọc',
-            height: 420,
-            backgroundColor: Theme.of(context).colorScheme.surface,
-            child: const Center(child: Text('Nội dung bottom sheet')),
+            maxHeight: 420,
+            contentPadding: EdgeInsets.all(SliSpacing.lg),
+            child: Center(child: Text('Nội dung bottom sheet')),
           ),
         ),
       ),

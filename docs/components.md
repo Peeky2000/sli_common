@@ -14,5 +14,6 @@ Every `Sli*` component defines:
 | Component | Variants |
 |---|---|
 | `SliButton` | primary, secondary, outline, ghost, destructive |
+| `SliBottomSheetFrame` | fit-content/fixed, header/subtitle/actions |
 | `SliSurface` | bordered or borderless semantic surface |
 | `SliShadcnScope` | Shadcn theme and overlay bridge |

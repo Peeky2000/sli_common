@@ -104,17 +104,16 @@ class _CatalogPilot extends StatelessWidget {
         ],
         const SizedBox(height: SliSpacing.lg),
         Text(
-          'Legacy pilot: BottomSheetWidget',
+          'Stable: SliBottomSheetFrame',
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: SliSpacing.sm),
         SizedBox(
           height: 280,
-          child: BottomSheetWidget(
+          child: SliBottomSheetFrame(
             title: 'Bộ lọc',
             height: 280,
-            backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
-            onPop: () {},
+            onClose: () {},
             child: const Center(child: Text('Nội dung bottom sheet')),
           ),
         ),

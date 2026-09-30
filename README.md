@@ -43,13 +43,14 @@ facade `Sli*`.
 |---|---|---|---|
 | Button và CTA | `SliButton` | **Stable** | [SliButton](docs/catalog/sli-button.md) |
 | Surface/card container | `SliSurface` | **Stable** | [SliSurface](docs/catalog/sli-surface.md) |
-| Khung nội dung bottom sheet | `BottomSheetWidget` | **Legacy / candidate** | [BottomSheetWidget](docs/catalog/bottom-sheet-widget.md) |
+| Bottom sheet presenter/frame | `showSliBottomSheet`, `SliBottomSheetFrame` | **Stable** | [SliBottomSheet](docs/catalog/sli-bottom-sheet.md) |
+| Bottom sheet compatibility | `BottomSheetWidget` | **Deprecated** | [BottomSheetWidget](docs/catalog/bottom-sheet-widget.md) |
 | Dialog/sheet helpers | `DialogUtil` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#feedback--overlay) |
 | Input/form | `CommonTextField`, `BaseField`, `CommonDropDown` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#input--form) |
 | Loading/progress | `CircleProgress`, `HorizontalProgress`, `ImageLoading` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#feedback--overlay) |
 | Display/media | `BannerWidget`, `Badge`, `MoneyWidget`, `PhotoViewScreen` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#display--media) |
 
-Danh sách đầy đủ 45 public export và maturity status nằm tại
+Danh sách đầy đủ 46 public export và maturity status nằm tại
 [catalog index](docs/catalog/README.md) và
 [legacy inventory](docs/catalog/legacy-inventory.md).
 
@@ -61,7 +62,7 @@ flutter pub get
 flutter run
 ```
 
-Showroom hiện cover foundation, button, surface và BottomSheet pilot. Catalog
+Showroom hiện cover foundation, button, surface và BottomSheet stable. Catalog
 sẽ mở rộng theo từng component family, không migrate hàng loạt chỉ vì trùng tên
 file với app.
 
