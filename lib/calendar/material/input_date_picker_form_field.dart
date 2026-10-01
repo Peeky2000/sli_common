@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import 'date_picker_common.dart' as common;
@@ -44,7 +43,7 @@ class InputDatePickerFormField extends StatefulWidget {
   /// [firstDate], [lastDate], and [autofocus] must be non-null.
   ///
   InputDatePickerFormField({
-    Key? key,
+    super.key,
     DateTime? initialDate,
     required DateTime firstDate,
     required DateTime lastDate,
@@ -58,8 +57,7 @@ class InputDatePickerFormField extends StatefulWidget {
     this.autofocus = false,
   }) : initialDate = initialDate != null ? utils.dateOnly(initialDate) : null,
        firstDate = utils.dateOnly(firstDate),
-       lastDate = utils.dateOnly(lastDate),
-       super(key: key) {
+       lastDate = utils.dateOnly(lastDate) {
     assert(
       !this.lastDate.isBefore(this.firstDate),
       'lastDate ${this.lastDate} must be on or after firstDate ${this.firstDate}.',
@@ -127,7 +125,7 @@ class InputDatePickerFormField extends StatefulWidget {
   final bool autofocus;
 
   @override
-  _InputDatePickerFormFieldState createState() =>
+  State<InputDatePickerFormField> createState() =>
       _InputDatePickerFormFieldState();
 }
 

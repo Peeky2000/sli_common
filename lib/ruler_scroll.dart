@@ -27,7 +27,7 @@ class RulerScroll extends StatefulWidget {
   final Widget? unitWidget;
 
   const RulerScroll({
-    Key? key,
+    super.key,
     required this.startValue,
     required this.endValue,
     required this.onChange,
@@ -53,10 +53,10 @@ class RulerScroll extends StatefulWidget {
     this.unit = '',
     this.unitStyle,
     this.unitWidget,
-  }) : super(key: key);
+  });
 
   @override
-  _RulerScrollState createState() => _RulerScrollState();
+  State<RulerScroll> createState() => _RulerScrollState();
 }
 
 class _RulerScrollState extends State<RulerScroll> {

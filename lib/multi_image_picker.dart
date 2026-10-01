@@ -41,12 +41,11 @@ class _MultiImagePickerScreen extends StatefulWidget {
   final RequestType type;
 
   const _MultiImagePickerScreen({
-    Key? key,
     this.imagesSelected = const [],
     this.limit,
     required this.onSelected,
     this.type = RequestType.image,
-  }) : super(key: key);
+  });
 
   @override
   State<_MultiImagePickerScreen> createState() =>
@@ -204,7 +203,7 @@ class _MultiImagePickerScreenState extends State<_MultiImagePickerScreen> {
 }
 
 class AssetThumbnail extends StatelessWidget {
-  const AssetThumbnail({Key? key, required this.multiModel}) : super(key: key);
+  const AssetThumbnail({super.key, required this.multiModel});
 
   final AssetEntity multiModel;
 

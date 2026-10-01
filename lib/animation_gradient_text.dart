@@ -12,7 +12,7 @@ class AnimationGradientText extends StatefulWidget {
 
   const AnimationGradientText(
     this.texts, {
-    Key? key,
+    super.key,
     this.style,
     this.textAlign,
     this.isRepeat = true,
@@ -24,8 +24,7 @@ class AnimationGradientText extends StatefulWidget {
       Color(0xFFEF264F),
     ],
     this.duration = const Duration(milliseconds: 2000),
-  }) : assert(colors.length > 2),
-       super(key: key);
+  }) : assert(colors.length > 2);
 
   @override
   State<AnimationGradientText> createState() => _AnimationGradientTextState();

@@ -11,7 +11,7 @@ class HorizontalProgress extends StatelessWidget {
   final BorderRadius? borderRadius;
 
   const HorizontalProgress({
-    Key? key,
+    super.key,
     required this.progress,
     this.colorProgress,
     this.backgroundColorProgress,
@@ -20,7 +20,7 @@ class HorizontalProgress extends StatelessWidget {
     this.strokeWidth,
     this.insert = const EdgeInsets.all(4.0),
     this.borderRadius,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class AnimationHorizontalProgress extends StatefulWidget {
   final BorderRadius? borderRadius;
 
   const AnimationHorizontalProgress({
-    Key? key,
+    super.key,
     required this.fromValue,
     required this.toValue,
     this.colorProgress,
@@ -67,10 +67,10 @@ class AnimationHorizontalProgress extends StatefulWidget {
     this.duration = const Duration(seconds: 30),
     this.repeat = false,
     this.borderRadius,
-  }) : super(key: key);
+  });
 
   @override
-  _AnimationHorizontalProgressState createState() =>
+  State<AnimationHorizontalProgress> createState() =>
       _AnimationHorizontalProgressState();
 }
 
@@ -146,7 +146,7 @@ class _HorizontalProgressPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint backgroundProgressPaint = Paint()
-      ..color = backgroundProgressColor ?? Colors.blue.withOpacity(0.25)
+      ..color = backgroundProgressColor ?? Colors.blue.withValues(alpha: 0.25)
       ..strokeWidth = size.height;
 
     Paint progressPaint = Paint()

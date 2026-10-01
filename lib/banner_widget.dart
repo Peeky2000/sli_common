@@ -23,7 +23,7 @@ class BannerWidget extends StatefulWidget {
   final bool dotUnder;
 
   const BannerWidget({
-    Key? key,
+    super.key,
     required this.urls,
     this.height,
     this.activeColor,
@@ -39,10 +39,10 @@ class BannerWidget extends StatefulWidget {
     this.errorWidget,
     this.fit,
     this.dotUnder = false,
-  }) : super(key: key);
+  });
 
   @override
-  _BannerWidgetState createState() => _BannerWidgetState();
+  State<BannerWidget> createState() => _BannerWidgetState();
 }
 
 class _BannerWidgetState extends State<BannerWidget> {
@@ -151,7 +151,7 @@ class _BannerWidgetState extends State<BannerWidget> {
                                 ),
                                 color:
                                     widget.unActiveColor ??
-                                    Colors.white.withOpacity(0.5),
+                                    Colors.white.withValues(alpha: 0.5),
                                 activeColor:
                                     widget.activeColor ??
                                     const Color(0xFFF35A49),
@@ -185,7 +185,7 @@ class _BannerWidgetState extends State<BannerWidget> {
                         animationDuration: const Duration(milliseconds: 400),
                         color:
                             widget.unActiveColor ??
-                            Colors.white.withOpacity(0.5),
+                            Colors.white.withValues(alpha: 0.5),
                         activeColor:
                             widget.activeColor ?? const Color(0xFFF35A49),
                         size: Size.square(9.0.w),

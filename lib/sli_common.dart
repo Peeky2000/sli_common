@@ -1,4 +1,4 @@
-library sli_common;
+library;
 
 export 'src/components/sli_button.dart';
 export 'src/components/sli_bottom_sheet.dart';

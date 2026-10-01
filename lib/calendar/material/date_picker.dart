@@ -2,11 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'dart:math' as math;
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart' as intl;
 
@@ -170,7 +166,6 @@ Future<DateTime?> showMaterialDatePicker({
 
 class _DatePickerDialog extends StatefulWidget {
   _DatePickerDialog({
-    super.key,
     required DateTime initialDate,
     required DateTime firstDate,
     required DateTime lastDate,
@@ -255,7 +250,6 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
   late DatePickerEntryMode _entryMode;
   late DateTime _selectedDate;
   late ValueNotifier<AutovalidateMode> _autoValidateMode;
-  final GlobalKey _calendarPickerKey = GlobalKey();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -343,10 +337,9 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
     final textTheme = theme.textTheme;
     // Constrain the textScaleFactor to the largest supported value to prevent
     // layout issues.
-    final textScaleFactor = math.min(
-      MediaQuery.of(context).textScaleFactor,
-      1.3,
-    );
+    final textScaleFactor =
+        MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 1.3).scale(14) /
+        14;
 
     final dateText = intl.DateFormat('EE, MMM d').format(_selectedDate);
     final onPrimarySurface = colorScheme.brightness == Brightness.light
@@ -478,7 +471,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
         child: MediaQuery(
           data: MediaQuery.of(
             context,
-          ).copyWith(textScaleFactor: textScaleFactor),
+          ).copyWith(textScaler: TextScaler.linear(textScaleFactor)),
           child: Builder(
             builder: (BuildContext context) {
               switch (orientation) {
@@ -626,7 +619,7 @@ class DatePickerHeader extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Expanded(child: title),
-                      if (entryModeButton != null) entryModeButton!,
+                      ?entryModeButton,
                     ],
                   ),
                 ],
@@ -836,7 +829,6 @@ Future<CustomDateTimeRange?> showMaterialDateRangePicker({
 
 class _DateRangePickerDialog extends StatefulWidget {
   const _DateRangePickerDialog({
-    Key? key,
     this.initialDateRange,
     required this.firstDate,
     required this.lastDate,
@@ -853,7 +845,7 @@ class _DateRangePickerDialog extends StatefulWidget {
     this.fieldEndHintText,
     this.fieldStartLabelText,
     this.fieldEndLabelText,
-  }) : super(key: key);
+  });
 
   final CustomDateTimeRange? initialDateRange;
   final DateTime firstDate;
@@ -965,7 +957,8 @@ class _DateRangePickerDialogState extends State<_DateRangePickerDialog> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final orientation = mediaQuery.orientation;
-    final textScaleFactor = math.min(mediaQuery.textScaleFactor, 1.3);
+    final textScaleFactor =
+        mediaQuery.textScaler.clamp(maxScaleFactor: 1.3).scale(14) / 14;
     final localizations = MaterialLocalizations.of(context);
     final colors = Theme.of(context).colorScheme;
     final onPrimarySurface = colors.brightness == Brightness.light
@@ -1092,7 +1085,7 @@ class _DateRangePickerDialogState extends State<_DateRangePickerDialog> {
         child: MediaQuery(
           data: MediaQuery.of(
             context,
-          ).copyWith(textScaleFactor: textScaleFactor),
+          ).copyWith(textScaler: TextScaler.linear(textScaleFactor)),
           child: Builder(
             builder: (BuildContext context) {
               return contents;
@@ -1106,7 +1099,7 @@ class _DateRangePickerDialogState extends State<_DateRangePickerDialog> {
 
 class _CalendarRangePickerDialog extends StatelessWidget {
   const _CalendarRangePickerDialog({
-    Key? key,
+    super.key,
     required this.selectedStartDate,
     required this.selectedEndDate,
     required this.firstDate,
@@ -1119,7 +1112,7 @@ class _CalendarRangePickerDialog extends StatelessWidget {
     required this.confirmText,
     required this.helpText,
     this.entryModeButton,
-  }) : super(key: key);
+  });
 
   final DateTime? selectedStartDate;
   final DateTime? selectedEndDate;
@@ -1144,7 +1137,7 @@ class _CalendarRangePickerDialog extends StatelessWidget {
     final headerForeground = colorScheme.brightness == Brightness.light
         ? colorScheme.onPrimary
         : colorScheme.onSurface;
-    final headerDisabledForeground = headerForeground.withOpacity(0.38);
+    final headerDisabledForeground = headerForeground.withValues(alpha: 0.38);
     final startDateText = utils.formatRangeStartDate(
       localizations,
       selectedStartDate,
@@ -1258,7 +1251,6 @@ class _CalendarRangePickerDialog extends StatelessWidget {
 
 class _CalendarKeyboardNavigator extends StatefulWidget {
   const _CalendarKeyboardNavigator({
-    super.key,
     required this.child,
     required this.firstDate,
     required this.lastDate,
@@ -1413,7 +1405,6 @@ class _CalendarKeyboardNavigatorState
 
 class _InputDateRangePickerDialog extends StatelessWidget {
   const _InputDateRangePickerDialog({
-    Key? key,
     required this.selectedStartDate,
     required this.selectedEndDate,
     required this.currentDate,
@@ -1425,7 +1416,7 @@ class _InputDateRangePickerDialog extends StatelessWidget {
     required this.cancelText,
     required this.helpText,
     required this.entryModeButton,
-  }) : super(key: key);
+  });
 
   final DateTime? selectedStartDate;
   final DateTime? selectedEndDate;
@@ -1552,7 +1543,7 @@ class InputDateRangePicker extends StatefulWidget {
   /// Creates a row with two text fields configured to accept the start and end dates
   /// of a date range.
   InputDateRangePicker({
-    Key? key,
+    super.key,
     DateTime? initialStartDate,
     DateTime? initialEndDate,
     required DateTime firstDate,
@@ -1576,8 +1567,7 @@ class InputDateRangePicker extends StatefulWidget {
            ? null
            : utils.dateOnly(initialEndDate),
        firstDate = utils.dateOnly(firstDate),
-       lastDate = utils.dateOnly(lastDate),
-       super(key: key);
+       lastDate = utils.dateOnly(lastDate);
 
   /// The [DateTime] that represents the start of the initial date range selection.
   final DateTime? initialStartDate;
@@ -1634,7 +1624,7 @@ class InputDateRangePicker extends StatefulWidget {
   final bool autovalidate;
 
   @override
-  _InputDateRangePickerState createState() => _InputDateRangePickerState();
+  State<InputDateRangePicker> createState() => _InputDateRangePickerState();
 }
 
 /// The current state of an [InputDateRangePicker]. Can be used to

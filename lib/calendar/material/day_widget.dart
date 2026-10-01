@@ -11,7 +11,7 @@ import 'date_utils.dart';
 class DayWidget extends StatefulWidget {
   /// Creates a day picker.
   DayWidget({
-    Key? key,
+    super.key,
     required this.currentDate,
     required this.displayedMonth,
     required this.firstDate,
@@ -26,8 +26,7 @@ class DayWidget extends StatefulWidget {
     this.onStartDateChanged,
     this.selectedEndDate,
     this.selectedStartDate,
-  }) : assert(!firstDate.isAfter(lastDate)),
-       super(key: key);
+  }) : assert(!firstDate.isAfter(lastDate));
 
   /// The currently selected date.
   ///
@@ -74,7 +73,7 @@ class DayWidget extends StatefulWidget {
   final ValueChanged<DateTime>? onEndDateChanged;
 
   @override
-  _DayPickerState createState() => _DayPickerState();
+  State<DayWidget> createState() => _DayPickerState();
 }
 
 class _DayPickerState extends State<DayWidget> {
@@ -299,74 +298,4 @@ class DayPickerGridDelegate extends SliverGridDelegate {
 
   @override
   bool shouldRelayout(DayPickerGridDelegate oldDelegate) => false;
-}
-
-const DayPickerGridDelegate _dayPickerGridDelegate = DayPickerGridDelegate();
-
-enum _HighlightPainterStyle {
-  /// Paints nothing.
-  none,
-
-  /// Paints a rectangle that occupies the leading half of the space.
-  highlightLeading,
-
-  /// Paints a rectangle that occupies the trailing half of the space.
-  highlightTrailing,
-
-  /// Paints a rectangle that occupies all available space.
-  highlightAll,
-}
-
-class _HighlightPainter extends CustomPainter {
-  _HighlightPainter({
-    required this.color,
-    this.style = _HighlightPainterStyle.none,
-    this.textDirection,
-  });
-
-  final Color color;
-  final _HighlightPainterStyle style;
-  final TextDirection? textDirection;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (style == _HighlightPainterStyle.none) {
-      return;
-    }
-
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    final rectLeft = Rect.fromLTWH(0, 0, size.width / 2, size.height);
-    final rectRight = Rect.fromLTWH(
-      size.width / 2,
-      0,
-      size.width / 2,
-      size.height,
-    );
-
-    switch (style) {
-      case _HighlightPainterStyle.highlightTrailing:
-        canvas.drawRect(
-          textDirection == TextDirection.ltr ? rectRight : rectLeft,
-          paint,
-        );
-        break;
-      case _HighlightPainterStyle.highlightLeading:
-        canvas.drawRect(
-          textDirection == TextDirection.ltr ? rectLeft : rectRight,
-          paint,
-        );
-        break;
-      case _HighlightPainterStyle.highlightAll:
-        canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);
-        break;
-      default:
-        break;
-    }
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

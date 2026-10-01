@@ -8,16 +8,16 @@ class ExpandedWidget extends StatefulWidget {
   final Duration duration;
 
   const ExpandedWidget({
-    Key? key,
+    super.key,
     this.expand = false,
     this.child,
     this.curve = Curves.easeInOut,
     this.axis = Axis.vertical,
     this.duration = const Duration(milliseconds: 500),
-  }) : super(key: key);
+  });
 
   @override
-  _ExpandedWidgetState createState() => _ExpandedWidgetState();
+  State<ExpandedWidget> createState() => _ExpandedWidgetState();
 }
 
 class _ExpandedWidgetState extends State<ExpandedWidget>
@@ -64,7 +64,7 @@ class _ExpandedWidgetState extends State<ExpandedWidget>
   @override
   Widget build(BuildContext context) {
     return SizeTransition(
-      axisAlignment: 1.0,
+      alignment: Alignment.bottomCenter,
       sizeFactor: animation,
       axis: widget.axis,
       child: widget.child,

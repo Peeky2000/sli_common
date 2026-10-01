@@ -54,7 +54,7 @@ class SwipeTo extends StatefulWidget {
   final AlignmentGeometry alignment;
 
   const SwipeTo({
-    Key? key,
+    super.key,
     required this.child,
     this.onRightSwipe,
     this.onLeftSwipe,
@@ -67,10 +67,10 @@ class SwipeTo extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 150),
     this.offsetDx = 0.3,
     this.alignment = Alignment.center,
-  }) : super(key: key);
+  });
 
   @override
-  _SwipeToState createState() => _SwipeToState();
+  State<SwipeTo> createState() => _SwipeToState();
 }
 
 class _SwipeToState extends State<SwipeTo> with SingleTickerProviderStateMixin {

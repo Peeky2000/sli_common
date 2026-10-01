@@ -22,7 +22,7 @@ class InkWellButton extends StatelessWidget {
   final Color? disableButtonColor;
 
   const InkWellButton({
-    Key? key,
+    super.key,
     this.title,
     this.isDisable = false,
     this.buttonColor,
@@ -41,7 +41,7 @@ class InkWellButton extends StatelessWidget {
     this.elevation,
     this.borderWidth,
     this.disableButtonColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class InkWellButton extends StatelessWidget {
           elevation: elevation,
           padding: padding ?? EdgeInsets.zero,
           backgroundColor: isDisable
-              ? const Color(0xFF333333).withOpacity(0.2)
+              ? const Color(0xFF333333).withValues(alpha: 0.2)
               : buttonColor,
           minimumSize: Size(50.w, 50.w),
           disabledBackgroundColor: disableButtonColor,
@@ -73,7 +73,7 @@ class InkWellButton extends StatelessWidget {
                 fontSize: fontSize,
                 color: isDisable
                     ? disabledTextColor ??
-                          const Color(0xFF333333).withOpacity(0.6)
+                          const Color(0xFF333333).withValues(alpha: 0.6)
                     : textColor,
                 fontWeight: fontWeight ?? FontWeight.w700,
               ),

@@ -12,7 +12,7 @@ class BlinkText extends StatefulWidget {
 
   const BlinkText(
     this.text, {
-    Key? key,
+    super.key,
     this.style,
     this.beginColor,
     this.endColor,
@@ -20,7 +20,7 @@ class BlinkText extends StatefulWidget {
     this.curve = Curves.easeInOut,
     this.textAlign,
     this.isRepeat = true,
-  }) : super(key: key);
+  });
 
   @override
   State<BlinkText> createState() => _BlinkTextState();

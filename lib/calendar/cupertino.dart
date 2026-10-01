@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:ui' as ui;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -209,9 +211,8 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePicker> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    textDirectionFactor = Directionality.maybeOf(context) == TextDirection.LTR
-        ? 1
-        : -1;
+    textDirectionFactor =
+        Directionality.maybeOf(context) == ui.TextDirection.ltr ? 1 : -1;
 
     alignCenterLeft = textDirectionFactor == 1
         ? Alignment.centerLeft
@@ -260,6 +261,7 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePicker> {
           );
         }
       },
+      looping: true,
       children: List<Widget>.generate(32, (int index) {
         TextStyle? disableTextStyle; // Null if not out of range.
         if (index >= daysInCurrentMonth) {
@@ -272,7 +274,6 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePicker> {
           Text('${index + 1}', style: disableTextStyle),
         );
       }),
-      looping: true,
     );
   }
 
@@ -297,6 +298,7 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePicker> {
           );
         }
       },
+      looping: true,
       children: List<Widget>.generate(12, (int index) {
         return itemPositioningBuilder(
           context,
@@ -307,7 +309,6 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePicker> {
           ),
         );
       }),
-      looping: true,
     );
   }
 
@@ -347,7 +348,7 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePicker> {
     // automatically scrolls to a valid one.
     final desiredDay = selectedDay % daysInCurrentMonth;
     if (desiredDay != selectedDay) {
-      SchedulerBinding.instance!.addPostFrameCallback((Duration timestamp) {
+      SchedulerBinding.instance.addPostFrameCallback((Duration timestamp) {
         dayController.animateToItem(
           // The next valid date is also the amount of days overflown.
           dayController.selectedItem - desiredDay,
@@ -417,8 +418,6 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePicker> {
           _getEstimatedColumnWidth(_PickerColumnType.month),
         ];
         break;
-      default:
-        assert(false, 'date order is not specified');
     }
 
     final pickers = <Widget>[];
@@ -455,7 +454,7 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePicker> {
     }
 
     return MediaQuery(
-      data: const MediaQueryData(textScaleFactor: 1.0),
+      data: const MediaQueryData(textScaler: TextScaler.linear(1.0)),
       child: NotificationListener<ScrollEndNotification>(
         onNotification: _keepInValidRange,
         child: DefaultTextStyle.merge(
@@ -571,7 +570,7 @@ Future<DateTime?> _showCupertinoDatePicker({
   return await _showCupertinoPopup<DateTime>(
     context: context,
     builder: (BuildContext context) {
-      DateTime? _selectedDate;
+      DateTime? selectedDate;
       return Container(
         height: _kPickerSheetHeight + 40.0,
         padding: const EdgeInsets.only(top: 6.0),
@@ -601,7 +600,7 @@ Future<DateTime?> _showCupertinoDatePicker({
                         child: Text(
                           language == Language.english ? 'DONE' : 'ठिक छ',
                         ),
-                        onPressed: () => Navigator.pop(context, _selectedDate),
+                        onPressed: () => Navigator.pop(context, selectedDate),
                       ),
                     ],
                   ),
@@ -610,7 +609,7 @@ Future<DateTime?> _showCupertinoDatePicker({
                       initialDate: DateTime.now(),
                       minimumYear: firstDate.year,
                       maximumYear: lastDate.year,
-                      onDateChanged: (date) => _selectedDate = date,
+                      onDateChanged: (date) => selectedDate = date,
                       language: language,
                       dateOrder: dateOrder,
                     ),
@@ -696,8 +695,8 @@ class _CupertinoPopupRoute<T> extends PopupRoute<T> {
   _CupertinoPopupRoute({
     required this.builder,
     required this.barrierLabel,
-    RouteSettings? settings,
-  }) : super(settings: settings);
+    super.settings,
+  });
 
   final WidgetBuilder builder;
 

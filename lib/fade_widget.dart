@@ -9,14 +9,14 @@ class FadeWidget extends StatefulWidget {
   final double endOpacity;
 
   const FadeWidget({
-    Key? key,
+    super.key,
     this.child,
     this.show = false,
     this.curve = Curves.easeInOut,
     this.duration = const Duration(milliseconds: 500),
     this.beginOpacity = 0.0,
     this.endOpacity = 1.0,
-  }) : super(key: key);
+  });
 
   @override
   State<FadeWidget> createState() => _FadeWidgetState();

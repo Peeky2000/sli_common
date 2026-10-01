@@ -21,7 +21,7 @@ class GradientButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
 
   const GradientButton({
-    Key? key,
+    super.key,
     this.title,
     this.onTap,
     this.isWrapContent = false,
@@ -39,7 +39,7 @@ class GradientButton extends StatelessWidget {
     this.height,
     this.shadows,
     this.padding,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +87,7 @@ class GradientButton extends StatelessWidget {
                       fontSize: fontSize,
                       color: isDisable
                           ? disabledTextColor ??
-                                const Color(0xFF333333).withOpacity(0.6)
+                                const Color(0xFF333333).withValues(alpha: 0.6)
                           : textColor,
                       fontWeight: fontWeight ?? FontWeight.w700,
                     ),

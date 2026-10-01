@@ -94,7 +94,7 @@ class _IntegralCurve extends Curve {
 ///   scrolling and manual scrolling enabled.
 class Marquee extends StatefulWidget {
   Marquee({
-    Key? key,
+    super.key,
     required this.text,
     this.style,
     this.textScaleFactor,
@@ -147,9 +147,8 @@ class Marquee extends StatefulWidget {
          "The decelerationDuration must be positive or zero as time travel "
          "isn't invented yet.",
        ),
-       accelerationCurve = _IntegralCurve(accelerationCurve),
-       decelerationCurve = _IntegralCurve(decelerationCurve),
-       super(key: key);
+       _accelerationCurve = _IntegralCurve(accelerationCurve),
+       _decelerationCurve = _IntegralCurve(decelerationCurve);
 
   /// The text to be displayed.
   ///
@@ -454,7 +453,8 @@ class Marquee extends StatefulWidget {
   ///
   /// * [accelerationDuration] to change the duration of the acceleration.
   /// * [decelerationCurve], the equivalent for decelerating.
-  final _IntegralCurve accelerationCurve;
+  Curve get accelerationCurve => _accelerationCurve.original;
+  final _IntegralCurve _accelerationCurve;
 
   /// How long the deceleration takes.
   ///
@@ -504,7 +504,8 @@ class Marquee extends StatefulWidget {
   ///
   /// * [decelerationDuration] to change the duration of the acceleration.
   /// * [accelerationCurve], the equivalent for decelerating.
-  final _IntegralCurve decelerationCurve;
+  Curve get decelerationCurve => _decelerationCurve.original;
+  final _IntegralCurve _decelerationCurve;
 
   /// This function will be called if [numberOfRounds] is set and the [Marquee]
   /// finished scrolled the specified number of rounds.
@@ -583,12 +584,12 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
     // Calculate lengths (amount of pixels that each phase needs).
     final totalLength = _getTextWidth(context) + widget.blankSpace;
     final accelerationLength =
-        widget.accelerationCurve.integral *
+        widget._accelerationCurve.integral *
         widget.velocity *
         _accelerationDuration.inMilliseconds /
         1000.0;
     final decelerationLength =
-        widget.decelerationCurve.integral *
+        widget._decelerationCurve.integral *
         widget.velocity *
         _decelerationDuration.inMilliseconds /
         1000.0;
@@ -659,7 +660,7 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
     await _animateTo(
       _accelerationTarget,
       _accelerationDuration,
-      widget.accelerationCurve,
+      widget._accelerationCurve,
     );
   }
 
@@ -671,7 +672,7 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
     await _animateTo(
       _decelerationTarget,
       _decelerationDuration,
-      widget.decelerationCurve.flipped,
+      widget._decelerationCurve.flipped,
     );
   }
 
@@ -745,7 +746,9 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
             ? Text(
                 widget.text,
                 style: widget.style,
-                textScaleFactor: widget.textScaleFactor,
+                textScaler: widget.textScaleFactor == null
+                    ? null
+                    : TextScaler.linear(widget.textScaleFactor!),
               )
             : _buildBlankSpace();
         return alignment == null

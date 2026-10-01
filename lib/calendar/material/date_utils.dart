@@ -67,13 +67,13 @@ int monthDelta(DateTime startDate, DateTime endDate) {
 /// Returns a [DateTime] with the added number of months and truncates any day
 /// and time information.
 DateTime addMonthsToMonthDate(DateTime monthDate, int monthsToAdd) {
-  var _year = monthDate.year;
-  var _month = monthDate.month + monthsToAdd;
+  var year = monthDate.year;
+  var month = monthDate.month + monthsToAdd;
 
-  _year += (_month - 1) ~/ 12;
-  _month = _month % 12;
-  if (_month == 0) _month = 12;
-  return DateTime(_year, _month);
+  year += (month - 1) ~/ 12;
+  month = month % 12;
+  if (month == 0) month = 12;
+  return DateTime(year, month);
 }
 
 /// Computes the offset from the first day of the week that the first day of

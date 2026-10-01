@@ -12,11 +12,11 @@ class TextLink extends StatefulWidget {
 
   const TextLink(
     this.str, {
-    Key? key,
+    super.key,
     this.style,
     this.linkStyle,
     this.onTapLink,
-  }) : super(key: key);
+  });
 
   @override
   State<TextLink> createState() => _TextLinkState();

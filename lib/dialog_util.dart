@@ -433,7 +433,7 @@ class DialogUtil {
     );
   }
 
-  static showFlushBar(
+  static void showFlushBar(
     BuildContext context,
     String message, {
     Color? backgroundColor,

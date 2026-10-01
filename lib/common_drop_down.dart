@@ -27,7 +27,7 @@ class CommonDropDown extends StatelessWidget {
   final Color? backgroundColor;
 
   const CommonDropDown({
-    Key? key,
+    super.key,
     this.title,
     this.hint = '',
     this.value,
@@ -46,7 +46,7 @@ class CommonDropDown extends StatelessWidget {
     this.maxLine,
     this.error,
     this.backgroundColor,
-  }) : super(key: key);
+  });
 
   EdgeInsets get _padding => padding ?? commonDropDownStyle.padding!;
 

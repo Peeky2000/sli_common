@@ -10,6 +10,10 @@
 - Thêm stable `showSliBottomSheet` + `SliBottomSheetFrame` với keyboard inset,
   safe area, viewport-safe sizing, light/dark và accessibility tests; deprecated
   `BottomSheetWidget` cũ để migration có kiểm soát.
+- Dọn analyzer toàn package từ 241 finding xuống 0: cập nhật syntax/API Flutter,
+  loại bỏ dead code calendar, sửa export date-range và guard `BuildContext`
+  trong permission flow. Thêm smoke tests cho calendar legacy; giữ tên enum và
+  async back callback cũ bằng ngoại lệ tương thích có chú thích.
 
 ## 1.1.0
 

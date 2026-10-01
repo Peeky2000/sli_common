@@ -15,7 +15,7 @@ class PhotoViewScreen extends StatefulWidget {
   final Function(String)? onTapDownload;
 
   const PhotoViewScreen({
-    Key? key,
+    super.key,
     required this.arrUrlImg,
     this.indexSelected = 0,
     this.title = '',
@@ -24,7 +24,7 @@ class PhotoViewScreen extends StatefulWidget {
     this.backButtonColor,
     this.appbarBackgroundColor,
     this.onTapDownload,
-  }) : super(key: key);
+  });
 
   @override
   State<PhotoViewScreen> createState() => _PhotoViewScreenState();

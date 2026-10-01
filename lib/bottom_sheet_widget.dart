@@ -23,7 +23,7 @@ class BottomSheetWidget extends StatelessWidget {
   final double radius;
 
   const BottomSheetWidget({
-    Key? key,
+    super.key,
     this.title,
     required this.child,
     this.action,
@@ -38,7 +38,7 @@ class BottomSheetWidget extends StatelessWidget {
     this.margin,
     this.showHeader = true,
     this.radius = 10,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class BottomSheetWidget extends StatelessWidget {
     );
   }
 
-  _body(BuildContext context) {
+  Column _body(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [

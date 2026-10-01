@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 ///Type definition for the builder function
-typedef Widget MiniplayerBuilder(double height, double percentage);
+typedef MiniplayerBuilder = Widget Function(double height, double percentage);
 
 ///Type definition for onDismiss. Will be used in a future version.
-typedef void DismissCallback(double percentage);
+typedef DismissCallback = void Function(double percentage);
 
 ///Miniplayer class
 class Miniplayer extends StatefulWidget {
@@ -49,7 +49,7 @@ class Miniplayer extends StatefulWidget {
   final Color backgroundBoxShadow;
 
   const Miniplayer({
-    Key? key,
+    super.key,
     required this.minHeight,
     required this.maxHeight,
     required this.builder,
@@ -62,10 +62,10 @@ class Miniplayer extends StatefulWidget {
     this.onDismissed,
     this.controller,
     this.backgroundBoxShadow = Colors.black45,
-  }) : super(key: key);
+  });
 
   @override
-  _MiniplayerState createState() => _MiniplayerState();
+  State<Miniplayer> createState() => _MiniplayerState();
 }
 
 class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
@@ -88,7 +88,7 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
   ///Counts how many updates were required for a distance (onPanUpdate) -> necessary to calculate the drag speed
   int updateCount = 0;
 
-  StreamController<double> _heightController =
+  final StreamController<double> _heightController =
       StreamController<double>.broadcast();
   AnimationController? _animationController;
 
@@ -423,6 +423,8 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
 }
 
 ///-1 Min, -2 Max, -3 Dismiss
+// Public legacy enum spellings remain until a major-version migration.
+// ignore: constant_identifier_names
 enum PanelState { MAX, MIN, DISMISS }
 
 //ControllerData class. Used for the controller
@@ -476,8 +478,6 @@ extension SelectedColorExtension on PanelState {
         return -2;
       case PanelState.DISMISS:
         return -3;
-      default:
-        return -1;
     }
   }
 }
@@ -503,18 +503,20 @@ double borderDouble({
 
 class MiniplayerWillPopScope extends StatefulWidget {
   const MiniplayerWillPopScope({
-    Key? key,
+    super.key,
     required this.child,
     required this.onWillPop,
-  }) : super(key: key);
+  });
 
   final Widget child;
+  // Retain the async veto contract for existing callers until a major release.
+  // ignore: deprecated_member_use
   final WillPopCallback onWillPop;
 
   @override
-  _MiniplayerWillPopScopeState createState() => _MiniplayerWillPopScopeState();
+  State<MiniplayerWillPopScope> createState() => _MiniplayerWillPopScopeState();
 
-  static _MiniplayerWillPopScopeState? of(BuildContext context) {
+  static _MiniplayerWillPopScopeState? _of(BuildContext context) {
     return context.findAncestorStateOfType<_MiniplayerWillPopScopeState>();
   }
 }
@@ -524,7 +526,7 @@ class _MiniplayerWillPopScopeState extends State<MiniplayerWillPopScope> {
 
   _MiniplayerWillPopScopeState? _descendant;
 
-  set descendant(state) {
+  set descendant(_MiniplayerWillPopScopeState state) {
     _descendant = state;
     updateRouteCallback();
   }
@@ -541,15 +543,17 @@ class _MiniplayerWillPopScopeState extends State<MiniplayerWillPopScope> {
   }
 
   void updateRouteCallback() {
+    // ignore: deprecated_member_use
     _route?.removeScopedWillPopCallback(onWillPop);
     _route = ModalRoute.of(context);
+    // ignore: deprecated_member_use
     _route?.addScopedWillPopCallback(onWillPop);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    var parentGuard = MiniplayerWillPopScope.of(context);
+    var parentGuard = MiniplayerWillPopScope._of(context);
     if (parentGuard != null) {
       parentGuard.descendant = this;
     }
@@ -558,6 +562,7 @@ class _MiniplayerWillPopScopeState extends State<MiniplayerWillPopScope> {
 
   @override
   void dispose() {
+    // ignore: deprecated_member_use
     _route?.removeScopedWillPopCallback(onWillPop);
     super.dispose();
   }

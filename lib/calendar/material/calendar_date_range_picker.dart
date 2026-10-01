@@ -65,12 +65,11 @@ class CalendarDateRangePicker extends StatefulWidget {
   final ValueChanged<DateTime>? onEndDateChanged;
 
   @override
-  _CalendarDateRangePickerState createState() =>
+  State<CalendarDateRangePicker> createState() =>
       _CalendarDateRangePickerState();
 }
 
 class _CalendarDateRangePickerState extends State<CalendarDateRangePicker> {
-  final GlobalKey _scrollViewKey = GlobalKey();
   DateTime? _startDate;
   DateTime? _endDate;
   int _initialMonthIndex = 0;
@@ -118,9 +117,6 @@ class _CalendarDateRangePickerState extends State<CalendarDateRangePicker> {
       });
     }
   }
-
-  int get _numberOfMonths =>
-      utils.monthDelta(widget.firstDate, widget.lastDate) + 1;
 
   void _vibrate() {
     switch (Theme.of(context).platform) {
@@ -176,8 +172,6 @@ class _CalendarDateRangePickerState extends State<CalendarDateRangePicker> {
 
   @override
   Widget build(BuildContext context) {
-    const sliverAfterKey = Key('sliverAfterKey');
-
     return Column(
       children: <Widget>[
         _DayHeaders(),
@@ -416,7 +410,6 @@ class _MonthSliverGridLayout extends SliverGridLayout {
 class _MonthItem extends StatefulWidget {
   /// Creates a month item.
   _MonthItem({
-    Key? key,
     required this.selectedDateStart,
     required this.selectedDateEnd,
     required this.currentDate,
@@ -424,8 +417,8 @@ class _MonthItem extends StatefulWidget {
     required this.firstDate,
     required this.lastDate,
     required this.displayedMonth,
-    this.dragStartBehavior = DragStartBehavior.start,
-  }) : assert(!firstDate.isAfter(lastDate)),
+  }) : dragStartBehavior = DragStartBehavior.start,
+       assert(!firstDate.isAfter(lastDate)),
        assert(
          selectedDateStart == null || !selectedDateStart.isBefore(firstDate),
        ),
@@ -438,8 +431,7 @@ class _MonthItem extends StatefulWidget {
          selectedDateStart == null ||
              selectedDateEnd == null ||
              !selectedDateStart.isAfter(selectedDateEnd),
-       ),
-       super(key: key);
+       );
 
   /// The currently selected start date.
   ///
@@ -526,7 +518,7 @@ class _MonthItemState extends State<_MonthItem> {
   }
 
   Color _highlightColor(BuildContext context) {
-    return Theme.of(context).colorScheme.primary.withOpacity(0.12);
+    return Theme.of(context).colorScheme.primary.withValues(alpha: 0.12);
   }
 
   void _dayFocusChanged(bool focused) {
@@ -618,7 +610,7 @@ class _MonthItemState extends State<_MonthItem> {
       );
     } else if (isDisabled) {
       itemStyle = textTheme.bodyMedium?.apply(
-        color: colorScheme.onSurface.withOpacity(0.38),
+        color: colorScheme.onSurface.withValues(alpha: 0.38),
       );
     } else if (utils.isSameDay(widget.currentDate, dayToBuild)) {
       // The current day gets a different text color and a circle stroke
@@ -668,7 +660,7 @@ class _MonthItemState extends State<_MonthItem> {
         focusNode: _dayFocusNodes[day - 1],
         onTap: () => widget.onChanged(dayToBuild),
         radius: monthItemRowHeight / 2 + 4,
-        splashColor: colorScheme.primary.withOpacity(0.38),
+        splashColor: colorScheme.primary.withValues(alpha: 0.38),
         onFocusChange: _dayFocusChanged,
         child: dayWidget,
       );
@@ -879,11 +871,11 @@ enum _HighlightPainterStyle {
 /// what the currently focused date (if any) should be.
 class FocusedDate extends InheritedWidget {
   const FocusedDate({
-    Key? key,
-    required Widget child,
+    super.key,
+    required super.child,
     this.date,
     this.scrollDirection,
-  }) : super(key: key, child: child);
+  });
 
   final DateTime? date;
   final TraversalDirection? scrollDirection;
@@ -901,12 +893,11 @@ class FocusedDate extends InheritedWidget {
 
 class _CalendarKeyboardNavigator extends StatefulWidget {
   const _CalendarKeyboardNavigator({
-    Key? key,
     required this.child,
     required this.firstDate,
     required this.lastDate,
     required this.initialFocusedDay,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final DateTime firstDate;

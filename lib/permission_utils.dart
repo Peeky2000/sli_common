@@ -58,7 +58,10 @@ class PermissionUtil {
     if (status == PermissionStatus.granted ||
         status == PermissionStatus.limited) {
       onGranted();
-    } else if (status == PermissionStatus.denied) {
+      return;
+    }
+    if (!context.mounted) return;
+    if (status == PermissionStatus.denied) {
       Fluttertoast.showToast(
         msg: context.l10n.permissionDenied,
         toastLength: Toast.LENGTH_LONG,

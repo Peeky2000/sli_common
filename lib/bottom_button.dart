@@ -22,7 +22,7 @@ class BottomButton extends StatelessWidget {
   final Color? disabledTextColor;
 
   const BottomButton({
-    Key? key,
+    super.key,
     required this.title,
     required this.onTap,
     this.width,
@@ -40,7 +40,7 @@ class BottomButton extends StatelessWidget {
     this.elevation,
     this.disableButtonColor,
     this.disabledTextColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class BottomButton extends StatelessWidget {
           children: [
             isDivider == true ? const Divider(height: 1) : Container(),
             const SizedBox(height: 15),
-            if (hint != null) hint!,
+            ?hint,
             Container(
               padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
               child: InkWellButton(

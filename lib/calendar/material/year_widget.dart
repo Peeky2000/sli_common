@@ -18,7 +18,7 @@ class YearWidget extends StatefulWidget {
   /// The [currentDate, [firstDate], [lastDate], [selectedDate], and [onChanged]
   /// arguments must be non-null. The [lastDate] must be after the [firstDate].
   YearWidget({
-    Key? key,
+    super.key,
     required this.currentDate,
     required this.firstDate,
     required this.lastDate,
@@ -26,8 +26,7 @@ class YearWidget extends StatefulWidget {
     this.calendarStyle,
     this.selectedDate,
     this.onChanged,
-  }) : assert(!firstDate.isAfter(lastDate)),
-       super(key: key);
+  }) : assert(!firstDate.isAfter(lastDate));
 
   /// The current date.
   ///
@@ -54,7 +53,7 @@ class YearWidget extends StatefulWidget {
   final ValueChanged<DateTime>? onChanged;
 
   @override
-  _YearPickerState createState() => _YearPickerState();
+  State<YearWidget> createState() => _YearPickerState();
 }
 
 class _YearPickerState extends State<YearWidget> {
@@ -99,11 +98,11 @@ class _YearPickerState extends State<YearWidget> {
     if (isSelected) {
       textColor = colorScheme.onPrimary;
     } else if (isDisabled) {
-      textColor = colorScheme.onSurface.withOpacity(0.38);
+      textColor = colorScheme.onSurface.withValues(alpha: 0.38);
     } else if (isCurrentYear) {
       textColor = colorScheme.primary;
     } else {
-      textColor = colorScheme.onSurface.withOpacity(0.87);
+      textColor = colorScheme.onSurface.withValues(alpha: 0.87);
     }
     final itemStyle = textTheme.bodyLarge?.apply(color: textColor);
 

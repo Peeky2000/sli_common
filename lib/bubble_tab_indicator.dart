@@ -13,6 +13,7 @@ class BubbleTabIndicator extends Decoration {
   final double indicatorHeight;
   final Color indicatorColor;
   final double indicatorRadius;
+  @override
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry insets;
   final TabBarIndicatorSize tabBarIndicatorSize;
@@ -49,7 +50,7 @@ class BubbleTabIndicator extends Decoration {
   }
 
   @override
-  _BubblePainter createBoxPainter([VoidCallback? onChanged]) {
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
     return _BubblePainter(this, onChanged);
   }
 }

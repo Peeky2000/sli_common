@@ -13,7 +13,7 @@ import 'day_widget.dart';
 class MonthWidget extends StatefulWidget {
   /// Creates a month picker.
   MonthWidget({
-    Key? key,
+    super.key,
     required this.initialMonth,
     required this.currentDate,
     required this.firstDate,
@@ -29,8 +29,7 @@ class MonthWidget extends StatefulWidget {
     this.selectionMode = SelectionMode.single,
     this.onEndDateChanged,
     this.onStartDateChanged,
-  }) : assert(!firstDate.isAfter(lastDate)),
-       super(key: key);
+  }) : assert(!firstDate.isAfter(lastDate));
 
   /// The initial month to display
   final DateTime initialMonth;
@@ -233,7 +232,8 @@ class _MonthPickerState extends State<MonthWidget> {
   /// Navigate to the next month.
   void _handleNextMonth() {
     if (!_isDisplayingLastMonth) {
-      SemanticsService.announce(
+      SemanticsService.sendAnnouncement(
+        View.of(context),
         intl.DateFormat.yMMMM().format(_nextMonthDate),
         _textDirection,
       );
@@ -247,7 +247,8 @@ class _MonthPickerState extends State<MonthWidget> {
   /// Navigate to the previous month.
   void _handlePreviousMonth() {
     if (!_isDisplayingFirstMonth) {
-      SemanticsService.announce(
+      SemanticsService.sendAnnouncement(
+        View.of(context),
         intl.DateFormat.yMMMM().format(_previousMonthDate),
         _textDirection,
       );

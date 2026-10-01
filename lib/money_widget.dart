@@ -16,7 +16,7 @@ class MoneyWidget extends StatelessWidget {
   final Color? color;
   final bool? hasSign;
   const MoneyWidget({
-    Key? key,
+    super.key,
     this.amount,
     this.unit,
     this.textStyle,
@@ -27,7 +27,7 @@ class MoneyWidget extends StatelessWidget {
     this.textAlign,
     this.color,
     this.hasSign = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class MoneyWidget extends StatelessWidget {
     );
   }
 
-  getTextStyle(BuildContext context) {
+  TextStyle getTextStyle(BuildContext context) {
     return textStyle ??
         TextStyle(
           fontSize:

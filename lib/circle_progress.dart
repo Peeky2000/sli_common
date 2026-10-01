@@ -12,7 +12,7 @@ class CircleProgress extends StatelessWidget {
   final List<Color> gradientColor;
 
   const CircleProgress({
-    Key? key,
+    super.key,
     required this.value,
     this.progressColor,
     this.backgroundProgressColor,
@@ -20,7 +20,7 @@ class CircleProgress extends StatelessWidget {
     this.backgroundStrokeWidth = 8.0,
     this.size = 56.0,
     this.gradientColor = const [],
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class AnimationCircleProgress extends StatefulWidget {
   final List<Color> gradientColor;
 
   const AnimationCircleProgress({
-    Key? key,
+    super.key,
     required this.fromValue,
     required this.toValue,
     this.progressColor,
@@ -67,10 +67,10 @@ class AnimationCircleProgress extends StatefulWidget {
     this.repeat = false,
     this.backgroundStrokeWidth = 8.0,
     this.gradientColor = const [],
-  }) : super(key: key);
+  });
 
   @override
-  _AnimationCircleProgressState createState() =>
+  State<AnimationCircleProgress> createState() =>
       _AnimationCircleProgressState();
 }
 
@@ -177,7 +177,7 @@ class _CircleProgressCirclePainter extends CustomPainter {
       center,
       minDiameter / 2 - strokeWidth / 2,
       Paint()
-        ..color = backgroundColor ?? Colors.blue.withOpacity(0.25)
+        ..color = backgroundColor ?? Colors.blue.withValues(alpha: 0.25)
         ..strokeWidth = backgroundStrokeWidth
         ..style = PaintingStyle.stroke,
     );

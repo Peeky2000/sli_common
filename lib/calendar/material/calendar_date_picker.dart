@@ -52,7 +52,7 @@ class SliCalendarDatePicker extends StatefulWidget {
   /// If [selectableDayPredicate] is non-null, it must return `true` for the
   /// [initialDate].
   SliCalendarDatePicker({
-    Key? key,
+    super.key,
     this.initialDate,
     required DateTime firstDate,
     required DateTime lastDate,
@@ -71,8 +71,7 @@ class SliCalendarDatePicker extends StatefulWidget {
     this.borderRadius = 0,
   }) : firstDate = utils.dateOnly(firstDate),
        lastDate = utils.dateOnly(lastDate),
-       currentDate = utils.dateOnly(currentDate ?? DateTime.now()),
-       super(key: key) {
+       currentDate = utils.dateOnly(currentDate ?? DateTime.now()) {
     assert(
       !this.lastDate.isBefore(this.firstDate),
       'lastDate ${this.lastDate} must be on or after firstDate ${this.firstDate}.',
@@ -134,7 +133,7 @@ class SliCalendarDatePicker extends StatefulWidget {
   final common.SelectableDayPredicate? selectableDayPredicate;
 
   @override
-  _SliCalendarDatePickerState createState() => _SliCalendarDatePickerState();
+  State<SliCalendarDatePicker> createState() => _SliCalendarDatePickerState();
 }
 
 class _SliCalendarDatePickerState extends State<SliCalendarDatePicker> {
@@ -191,7 +190,8 @@ class _SliCalendarDatePickerState extends State<SliCalendarDatePicker> {
     _textDirection = Directionality.of(context);
     if (_selectedDate != null && !_announcedInitialDate) {
       _announcedInitialDate = true;
-      SemanticsService.announce(
+      SemanticsService.sendAnnouncement(
+        View.of(context),
         intl.DateFormat.yMMMMEEEEd().format(_selectedDate!),
         _textDirection,
       );
@@ -218,12 +218,14 @@ class _SliCalendarDatePickerState extends State<SliCalendarDatePicker> {
       setState(() {
         _mode = mode;
         if (_mode == DatePickerMode.day) {
-          SemanticsService.announce(
+          SemanticsService.sendAnnouncement(
+            View.of(context),
             intl.DateFormat.yMMMM().format(_selectedDate!),
             _textDirection,
           );
         } else {
-          SemanticsService.announce(
+          SemanticsService.sendAnnouncement(
+            View.of(context),
             intl.DateFormat.y().format(_selectedDate!),
             _textDirection,
           );
@@ -426,7 +428,7 @@ class _DatePickerModeToggleButtonState
               label: 'Select year',
               excludeSemantics: true,
               button: true,
-              child: Container(
+              child: SizedBox(
                 height: subHeaderHeight,
                 child: InkWell(
                   onTap: widget.onTitlePressed,
@@ -469,8 +471,7 @@ class _DatePickerModeToggleButtonState
 /// This is used by the [_MonthPicker] to let its children [_DayPicker]s know
 /// what the currently focused date (if any) should be.
 class FocusedDate extends InheritedWidget {
-  const FocusedDate({Key? key, required Widget child, this.date})
-    : super(key: key, child: child);
+  const FocusedDate({super.key, required super.child, this.date});
 
   final DateTime? date;
 

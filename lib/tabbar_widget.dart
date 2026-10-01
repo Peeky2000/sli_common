@@ -16,7 +16,7 @@ class TabBarWidget extends StatelessWidget {
   final Function(int)? onTap;
 
   const TabBarWidget({
-    Key? key,
+    super.key,
     required this.tabController,
     this.titles,
     this.widgets,
@@ -30,7 +30,7 @@ class TabBarWidget extends StatelessWidget {
     this.labelPadding,
     this.indicatorPadding,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

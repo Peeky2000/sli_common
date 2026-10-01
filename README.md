@@ -66,6 +66,19 @@ Showroom hiện cover foundation, button, surface và BottomSheet stable. Catalo
 sẽ mở rộng theo từng component family, không migrate hàng loạt chỉ vì trùng tên
 file với app.
 
+## Kiểm tra chất lượng
+
+```bash
+fvm flutter analyze
+fvm flutter test
+```
+
+Analyzer kiểm tra **toàn package**, gồm legacy, stable API, test và example.
+Ba enum legacy (`BorderType`, `PanelState`, `TrimMode`) giữ nguyên tên value
+để không phá caller hiện có; các ngoại lệ lint này được ghi ngay tại khai báo.
+`MiniplayerWillPopScope` giữ callback chặn back bất đồng bộ cho tương thích;
+việc chuyển sang `PopScope` cần một migration hành vi riêng.
+
 ## Quy tắc thêm component
 
 1. Tìm trong [catalog](docs/catalog/README.md) trước khi tạo API mới.

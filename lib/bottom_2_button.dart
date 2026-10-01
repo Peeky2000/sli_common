@@ -28,7 +28,7 @@ class Bottom2Button extends StatelessWidget {
   final Color? borderButton2Color;
 
   const Bottom2Button({
-    Key? key,
+    super.key,
     required this.title1,
     required this.title2,
     required this.onTapButton1,
@@ -53,7 +53,7 @@ class Bottom2Button extends StatelessWidget {
     this.disableButton2Color,
     this.borderButton1Color,
     this.borderButton2Color,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class Bottom2Button extends StatelessWidget {
           children: [
             isDivider == true ? const Divider(height: 1) : Container(),
             const SizedBox(height: 15),
-            if (hint != null) hint!,
+            ?hint,
             Container(
               padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
               child: Row(

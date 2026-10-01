@@ -14,7 +14,7 @@ class TitleWidget extends StatelessWidget {
   final CrossAxisAlignment crossAxisAlignment;
 
   const TitleWidget({
-    Key? key,
+    super.key,
     required this.title,
     this.titleStyle,
     this.titleWidget,
@@ -23,7 +23,7 @@ class TitleWidget extends StatelessWidget {
     this.valueWidget,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

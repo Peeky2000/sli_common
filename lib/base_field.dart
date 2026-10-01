@@ -17,7 +17,7 @@ class BaseField extends StatelessWidget {
   final BaseFieldType type;
 
   const BaseField({
-    Key? key,
+    super.key,
     this.title,
     this.value,
     this.titleWidget,
@@ -29,7 +29,7 @@ class BaseField extends StatelessWidget {
     this.crossAxisAlignment,
     this.mainAxisAlignment,
     this.type = BaseFieldType.horizontal,
-  }) : super(key: key);
+  });
 
   Widget _buildBaseHorizontal() {
     return Row(
