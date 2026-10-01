@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Đồng bộ `ExpandedWidget` ngang với app adapter (căn phải khi mở/đóng),
+  khóa hành vi hai trục bằng widget tests.
 - Thêm component catalog, maturity status và inventory cho 45/45 public export.
 - Mở rộng example thành showroom cho component stable và BottomSheet pilot.
 - Thêm golden preview dùng font thật cùng gate kiểm tra export phải có catalog.

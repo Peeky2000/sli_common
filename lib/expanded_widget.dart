@@ -64,7 +64,9 @@ class _ExpandedWidgetState extends State<ExpandedWidget>
   @override
   Widget build(BuildContext context) {
     return SizeTransition(
-      alignment: Alignment.bottomCenter,
+      alignment: widget.axis == Axis.vertical
+          ? Alignment.bottomCenter
+          : Alignment.centerRight,
       sizeFactor: animation,
       axis: widget.axis,
       child: widget.child,

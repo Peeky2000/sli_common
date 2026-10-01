@@ -47,6 +47,7 @@ facade `Sli*`.
 | Bottom sheet compatibility | `BottomSheetWidget` | **Deprecated** | [BottomSheetWidget](docs/catalog/bottom-sheet-widget.md) |
 | Dialog/sheet helpers | `DialogUtil` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#feedback--overlay) |
 | Input/form | `CommonTextField`, `BaseField`, `CommonDropDown` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#input--form) |
+| Expand/collapse | `ExpandedWidget` | Legacy | [Cách dùng và giới hạn](docs/catalog/expanded-widget.md) |
 | Loading/progress | `CircleProgress`, `HorizontalProgress`, `ImageLoading` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#feedback--overlay) |
 | Display/media | `BannerWidget`, `Badge`, `MoneyWidget`, `PhotoViewScreen` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#display--media) |
 

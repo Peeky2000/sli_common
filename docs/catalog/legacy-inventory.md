@@ -73,7 +73,7 @@ của `Sli*`; không đồng nghĩa component sai hoặc phải xóa ngay.
 
 | Export | API chính | Status |
 |---|---|---|
-| `expanded_widget.dart` | Expanded/collapse widget | Legacy |
+| `expanded_widget.dart` | [`ExpandedWidget`](expanded-widget.md) | Legacy |
 | `fade_widget.dart` | Fade widget | Legacy |
 | `dotted_border.dart` | Dotted border | Legacy |
 | `dotted_decoration.dart` | Dotted decoration | Legacy |
