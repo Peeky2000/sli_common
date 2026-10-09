@@ -15,7 +15,7 @@ void main() {
         .where((path) => !inventory.contains('`$path`'))
         .toList();
 
-    expect(exports, hasLength(46), reason: 'Update the documented baseline.');
+    expect(exports, hasLength(50), reason: 'Update the documented baseline.');
     expect(
       undocumented,
       isEmpty,

@@ -16,6 +16,15 @@ của `Sli*`; không đồng nghĩa component sai hoặc phải xóa ngay.
 | `src/foundation/sli_tokens.dart` | Spacing/radius/duration tokens | Stable |
 | `src/shadcn/sli_shadcn_scope.dart` | `SliShadcnScope` | Stable |
 
+## Kit (sinh từ the-forge-design)
+
+| Export | API chính | Status |
+|---|---|---|
+| `src/kit/kit_tokens.dart` | `KitTokens` (theme extension, `KitTokens.theme()`) | Trial — kit `trial-kit@1.0.0` |
+| `src/kit/kit_button.dart` | `SliKitButton` | Trial — kit `trial-kit@1.0.0` |
+| `src/kit/kit_text_field.dart` | `SliKitTextField` | Trial — kit `trial-kit@1.0.0` |
+| `src/kit/kit_otp_field.dart` | `SliKitOtpField` | Trial — kit `trial-kit@1.0.0` |
+
 ## Feedback / overlay
 
 | Export | API chính | Status |
