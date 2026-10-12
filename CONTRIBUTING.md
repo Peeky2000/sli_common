@@ -13,3 +13,14 @@
 
 Run `flutter pub get`, `dart format lib test example`, `flutter analyze`, and
 `flutter test` before committing.
+
+## Golden images
+
+Goldens are recorded and compared on Linux only, so macOS and Linux never
+disagree about glyph edges. On macOS `flutter test` still builds every golden
+widget but skips the image comparison, and `--update-goldens` is refused.
+
+After an intended visual change, push the branch and run
+`scripts/update_goldens.sh`. It starts the "Update goldens" workflow on GitHub,
+waits, and pulls the commit with the new images. Review the image changes
+before keeping them; never re-record to make a failing comparison pass.

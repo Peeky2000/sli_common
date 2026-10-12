@@ -47,9 +47,9 @@ void main() {
   ) async {
     await tester.runAsync(() async {
       File('${dir.path}/g.png').writeAsBytesSync(await _png(0));
-      // 130 of 10000 pixels: the 1.3% seen between macOS and Linux CI.
+      // 30 of 10000 pixels: rasterizer noise between two Linux runs.
       expect(
-        await comparator.compare(await _png(130), Uri.parse('g.png')),
+        await comparator.compare(await _png(30), Uri.parse('g.png')),
         isTrue,
       );
     });
@@ -59,7 +59,7 @@ void main() {
     await tester.runAsync(() async {
       File('${dir.path}/g.png').writeAsBytesSync(await _png(0));
       await expectLater(
-        comparator.compare(await _png(800), Uri.parse('g.png')),
+        comparator.compare(await _png(200), Uri.parse('g.png')),
         throwsA(isA<FlutterError>()),
       );
     });

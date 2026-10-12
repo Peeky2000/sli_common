@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' show Platform;
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart' show FlutterError;
@@ -6,22 +7,51 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// Allowed share of differing pixels when comparing a golden image.
 ///
-/// Goldens are recorded on macOS. Linux CI rasterizes text with a different
-/// font backend, which moves glyph edges by a pixel and changed about 1.3% of
-/// the catalog pilot image while the layout stayed identical. 2% absorbs that
-/// anti-aliasing noise; a moved, recolored or missing component changes far
-/// more pixels and still fails.
-const double goldenDiffTolerance = 0.02;
+/// Goldens are recorded and compared on Linux only (GitHub Actions
+/// `ubuntu-latest`, workflow `update-goldens.yml`), so the same font backend
+/// draws both sides and only tiny noise is expected. A moved, recolored or
+/// missing component changes far more pixels and still fails.
+const double goldenDiffTolerance = 0.005;
+
+/// The only platform whose rendering the committed goldens describe.
+///
+/// macOS and Windows draw glyph edges differently, which moved 2-4% of the
+/// text field goldens while nothing visual had changed.
+bool get isGoldenPlatform => Platform.isLinux;
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   final current = goldenFileComparator;
   if (current is LocalFileComparator) {
-    goldenFileComparator = TolerantGoldenComparator(
-      current.basedir,
-      tolerance: goldenDiffTolerance,
-    );
+    goldenFileComparator = isGoldenPlatform
+        ? TolerantGoldenComparator(
+            current.basedir,
+            tolerance: goldenDiffTolerance,
+          )
+        : SkippingGoldenComparator(current.basedir);
   }
   await testMain();
+}
+
+/// Renders golden tests off Linux without comparing or writing images.
+///
+/// The widget still builds and lays out, so crashes and overflows fail as
+/// usual. Regenerate images with the `update-goldens` workflow instead of
+/// `--update-goldens` on this machine.
+class SkippingGoldenComparator extends LocalFileComparator {
+  SkippingGoldenComparator(Uri basedir)
+    : super(basedir.resolve('flutter_test_config.dart'));
+
+  @override
+  Future<bool> compare(Uint8List imageBytes, Uri golden) async => true;
+
+  @override
+  Future<void> update(Uri golden, Uint8List imageBytes) async {
+    throw FlutterError(
+      'Goldens are recorded on Linux only. Run the "update-goldens" workflow '
+      'on GitHub (scripts/update_goldens.sh) instead of --update-goldens on '
+      '${Platform.operatingSystem}.',
+    );
+  }
 }
 
 /// A [LocalFileComparator] that accepts a small share of differing pixels.
