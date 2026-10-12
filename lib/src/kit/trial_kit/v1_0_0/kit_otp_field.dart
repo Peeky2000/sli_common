@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sli_common/src/kit/kit_tokens.dart';
+import 'package:sli_common/src/kit/trial_kit/v1_0_0/kit_tokens.dart';
 
 /// Kit component `otp-field` (variant six-digit). States: default, partial, error. Display of the entered code;
 /// input comes from the system keyboard through [onChanged] of a hidden field in the host screen.

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "kit": "trial-kit",
+  "version": "1.0.0",
+  "kitHash": "b5555a662ea15cfdd7e92aa96b10f307dc126bb96a51ba0ef151cc472ff99a36",
+  "source": "the-forge-design/kits/trial-kit/1.0.0",
+  "designApprovedBy": null,
+  "designApprovedAt": null,
+  "codeApprovedBy": null,
+  "codeApprovedAt": null,
+  "rulesVersion": "1.0.0",
+  "forgeJob": null,
+  "goldenDir": "test/goldens/kit/trial-kit/1.0.0",
+  "goldenPlatform": "linux",
+  "note": "Trial kit to exercise the flow. Never approved; replace with the first real project kit."
+}

@@ -1,9 +1,9 @@
 library;
 
-export 'src/kit/kit_tokens.dart';
-export 'src/kit/kit_button.dart';
-export 'src/kit/kit_text_field.dart';
-export 'src/kit/kit_otp_field.dart';
+export 'src/kit/trial_kit/v1_0_0/kit_tokens.dart';
+export 'src/kit/trial_kit/v1_0_0/kit_button.dart';
+export 'src/kit/trial_kit/v1_0_0/kit_text_field.dart';
+export 'src/kit/trial_kit/v1_0_0/kit_otp_field.dart';
 export 'src/components/sli_button.dart';
 export 'src/components/sli_bottom_sheet.dart';
 export 'src/components/sli_surface.dart';

@@ -20,10 +20,10 @@ của `Sli*`; không đồng nghĩa component sai hoặc phải xóa ngay.
 
 | Export | API chính | Status |
 |---|---|---|
-| `src/kit/kit_tokens.dart` | `KitTokens` (theme extension, `KitTokens.theme()`) | Trial — kit `trial-kit@1.0.0` |
-| `src/kit/kit_button.dart` | `SliKitButton` | Trial — kit `trial-kit@1.0.0` |
-| `src/kit/kit_text_field.dart` | `SliKitTextField` | Trial — kit `trial-kit@1.0.0` |
-| `src/kit/kit_otp_field.dart` | `SliKitOtpField` | Trial — kit `trial-kit@1.0.0` |
+| `src/kit/trial_kit/v1_0_0/kit_tokens.dart` | `KitTokens` (theme extension, `KitTokens.theme()`) | Trial — kit `trial-kit@1.0.0` |
+| `src/kit/trial_kit/v1_0_0/kit_button.dart` | `SliKitButton` | Trial — kit `trial-kit@1.0.0` |
+| `src/kit/trial_kit/v1_0_0/kit_text_field.dart` | `SliKitTextField` | Trial — kit `trial-kit@1.0.0` |
+| `src/kit/trial_kit/v1_0_0/kit_otp_field.dart` | `SliKitOtpField` | Trial — kit `trial-kit@1.0.0` |
 
 ## Feedback / overlay
 

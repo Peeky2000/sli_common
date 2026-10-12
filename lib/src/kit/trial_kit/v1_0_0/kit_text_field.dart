@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sli_common/src/kit/kit_tokens.dart';
+import 'package:sli_common/src/kit/trial_kit/v1_0_0/kit_tokens.dart';
 
 /// Kit component `text-field` (variant outlined). States: default, focused, filled, error, pressed, disabled.
 class SliKitTextField extends StatelessWidget {

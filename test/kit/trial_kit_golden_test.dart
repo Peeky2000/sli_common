@@ -92,7 +92,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 400));
       await expectLater(
         find.byKey(key),
-        matchesGoldenFile('../goldens/kit/${entry.key}.png'),
+        matchesGoldenFile('../goldens/kit/trial-kit/1.0.0/${entry.key}.png'),
       );
     });
   }
