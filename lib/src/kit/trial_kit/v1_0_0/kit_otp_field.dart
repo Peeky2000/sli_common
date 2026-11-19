@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:sli_common/src/kit/trial_kit/v1_0_0/kit_tokens.dart';
 
 /// Kit component `otp-field` (variant six-digit). States: default, partial, error. Display of the entered code;

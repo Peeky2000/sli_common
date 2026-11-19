@@ -1,5 +1,5 @@
 // GENERATED from the-forge-design kits/trial-kit/1.0.0/tokens/tokens.json — do not edit by hand.
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Token values of one kit. Components read them by role through [KitTokens.of].
 @immutable

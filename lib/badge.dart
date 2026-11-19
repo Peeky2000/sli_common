@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// This widget allows you to add badges to any of your [Widget].
 class Badge extends StatefulWidget {

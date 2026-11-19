@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:sli_common/src/foundation/sli_colors.dart';
 
 abstract final class SliTheme {

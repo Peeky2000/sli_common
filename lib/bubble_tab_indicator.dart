@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Used with [TabBar.indicator] to draw a bubble on the
 /// selected tab.

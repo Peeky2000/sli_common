@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'app_localizations.dart';
 
 /// The translations for English (`en`).

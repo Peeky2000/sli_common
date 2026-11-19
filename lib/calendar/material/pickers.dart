@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-export 'package:flutter/material.dart' show DateTimeRange;
+export 'package:material_ui/material_ui.dart' show DateTimeRange;
 
 export 'calendar_date_picker.dart' show SliCalendarDatePicker;
 export 'calendar_date_range_picker.dart' show CalendarDateRangePicker;

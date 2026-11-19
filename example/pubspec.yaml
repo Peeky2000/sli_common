@@ -12,5 +12,6 @@ dependencies:
   sli_common:
     path: ..
 
+  material_ui: ^1.11.1
 flutter:
   uses-material-design: true

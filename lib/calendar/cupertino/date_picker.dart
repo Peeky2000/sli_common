@@ -4,7 +4,7 @@
 
 import 'dart:math' as math;
 
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter/scheduler.dart';
 
 // Values derived from https://developer.apple.com/design/resources/ and on iOS

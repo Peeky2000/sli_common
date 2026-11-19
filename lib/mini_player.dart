@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 ///Type definition for the builder function
 typedef MiniplayerBuilder = Widget Function(double height, double percentage);

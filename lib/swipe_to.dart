@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// SwipeTo is a wrapper widget to other Widget that we can swipe horizontally
 /// to initiate a callback when animation gets end.

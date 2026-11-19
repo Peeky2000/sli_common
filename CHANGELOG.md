@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Chuyển sang Flutter 3.50.0: import `package:material_ui` và
+  `package:cupertino_ui` thay cho `material.dart`/`cupertino.dart` đã
+  deprecated; file l10n sinh ra có header bỏ qua deprecation của
+  `flutter_localizations`. CI chạy Flutter 3.50.0.
 - Đồng bộ `ExpandedWidget` ngang với app adapter (căn phải khi mở/đóng),
   khóa hành vi hai trục bằng widget tests.
 - Thêm component catalog, maturity status và inventory cho 45/45 public export.

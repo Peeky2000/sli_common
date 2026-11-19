@@ -2,7 +2,7 @@
 // 358 logical px wide, white background, 16 px padding, device pixel ratio 2.
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sli_common/sli_common.dart';
