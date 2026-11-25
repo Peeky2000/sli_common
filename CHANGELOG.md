@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Nâng `permission_handler` lên 13 (Android plugin 14, compileSdk 37) và
+  `device_info_plus` lên 13 (`win32` 6) để app lên `alice` 2; bỏ override
+  `win32: ^5.13.0` đã cũ. API dùng trong `PermissionUtil` không đổi.
 - Thêm `SliIcons`: bộ icon Lucide (ISC) có sẵn trong shadcn_flutter, đặt tên
   theo ngữ nghĩa (điều hướng, thao tác, tài khoản, trạng thái, giao hàng).
 - Rút gọn bộ legacy từ 46 xuống 20 export: chỉ giữ widget app đang dùng
