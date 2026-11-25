@@ -49,10 +49,9 @@ facade `Sli*`.
 | Input/form | `CommonTextField`, `BaseField`, `CommonDropDown` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#input--form) |
 | Icon | `SliIcons` (Lucide) | **Stable** | [Inventory](docs/catalog/legacy-inventory.md#foundation-và-stable-surface) |
 | Expand/collapse | `ExpandedWidget` | Legacy | [Cách dùng và giới hạn](docs/catalog/expanded-widget.md) |
-| Date/time, thước cuộn, vuốt | `calendar/material/pickers.dart`, `RulerScrollWidget`, `SwipeTo` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#input--form) |
-| Display/media | `MoneyWidget`, `Marquee`, `ReadMoreText`, `PhotoViewScreen` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#display--media) |
+| Tiền tệ | `MoneyWidget` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#display) |
 
-Danh sách đầy đủ 28 public export và maturity status nằm tại
+Danh sách đầy đủ 20 public export và maturity status nằm tại
 [catalog index](docs/catalog/README.md) và
 [legacy inventory](docs/catalog/legacy-inventory.md).
 

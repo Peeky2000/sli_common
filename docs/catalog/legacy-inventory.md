@@ -3,12 +3,9 @@
 Inventory này phản ánh toàn bộ public barrel `lib/sli_common.dart`. “Legacy”
 nghĩa là API vẫn dùng được nhưng chưa vượt maturity gate của `Sli*`.
 
-Ngày 2026-11-25 bộ legacy được rút gọn: giữ widget app đang dùng và widget khó
-tự viết lại cho đúng (lịch, thước cuộn, marquee, viền chấm, vuốt, xem ảnh), bỏ
-23 widget agent viết lại nhanh hơn đọc API cũ hoặc đã có trong
-`material_ui`/Shadcn (badge, các kiểu text gradient/nhấp nháy, nút đáy, tab bar,
-progress, dots indicator, mini player, picker nhiều ảnh, logger). Cần lại thì
-lấy từ lịch sử git trước commit này.
+Ngày 2026-11-25 bộ legacy được rút gọn chỉ còn widget app đang dùng. Agent viết
+UI mới từ luật và spec, không chép widget cũ; widget đã bỏ vẫn lấy lại được từ
+lịch sử git trước commit này.
 
 ## Foundation và stable surface
 
@@ -46,28 +43,20 @@ lấy từ lịch sử git trước commit này.
 | `base_field.dart` | `BaseField` | Legacy |
 | `common_text_field.dart` | `CommonTextField` | Legacy |
 | `common_drop_down.dart` | `CommonDropDown` | Legacy |
-| `calendar/material/pickers.dart` | Material date/time pickers | Legacy |
-| `ruler_scroll.dart` | `RulerScrollWidget` | Legacy |
-| `swipe_to.dart` | Swipe interaction | Legacy |
 
-## Display / media
+## Display
 
 | Export | API chính | Status |
 |---|---|---|
-| `marquee.dart` | `Marquee` | Legacy |
 | `money_widget.dart` | `MoneyWidget` | Legacy |
-| `read_more.dart` | Read-more text | Legacy |
-| `photo_view_screen.dart` | `PhotoViewScreen` | Legacy |
 
 ## Layout / decoration / utility
 
 | Export | API chính | Status |
 |---|---|---|
 | `expanded_widget.dart` | [`ExpandedWidget`](expanded-widget.md) | Legacy |
-| `dotted_border.dart` | Dotted border | Legacy |
-| `dotted_decoration.dart` | Dotted decoration | Legacy |
 | `permission_utils.dart` | `PermissionUtils` | Legacy utility |
 
-Tổng: **28/28 public exports** đã được phân loại (8 stable foundation/component,
-4 kit trial và 16 legacy/compatibility). Khi barrel thay đổi, inventory phải đổi
+Tổng: **20/20 public exports** đã được phân loại (8 stable foundation/component,
+4 kit trial và 8 legacy/compatibility). Khi barrel thay đổi, inventory phải đổi
 trong cùng commit.
