@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Nâng `fluttertoast` lên 10 và `device_info_plus` lên 12: hai plugin này
+  chưa có Swift Package Manager ở bản cũ, chặn app chuyển iOS sang SPM.
+  API dùng trong `PermissionUtil` không đổi.
 - Chuyển sang Flutter 3.50.0: import `package:material_ui` và
   `package:cupertino_ui` thay cho `material.dart`/`cupertino.dart` đã
   deprecated; file l10n sinh ra có header bỏ qua deprecation của
