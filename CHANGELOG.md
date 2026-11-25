@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Thêm `SliIcons`: bộ icon Lucide (ISC) có sẵn trong shadcn_flutter, đặt tên
+  theo ngữ nghĩa (điều hướng, thao tác, tài khoản, trạng thái, giao hàng).
+- Rút gọn bộ legacy từ 46 xuống 28 export: bỏ 23 widget app không dùng và dễ
+  viết lại (badge, gradient/blink text, nút đáy, tab bar, progress, dots,
+  mini player, picker nhiều ảnh, logger, picker Cupertino). Giữ widget app
+  đang dùng và widget khó tự viết (lịch, thước cuộn, marquee, viền chấm,
+  vuốt, read more, xem ảnh). Bỏ dependency `logger`, `url_launcher`,
+  `shimmer`, `photo_manager`, `cupertino_icons` và thư mục ảnh `guide/`.
+- CI và workflow vẽ golden chạy Flutter 3.50.1, `actions/checkout@v5`.
 - Nâng `fluttertoast` lên 10 và `device_info_plus` lên 12: hai plugin này
   chưa có Swift Package Manager ở bản cũ, chặn app chuyển iOS sang SPM.
   API dùng trong `PermissionUtil` không đổi.

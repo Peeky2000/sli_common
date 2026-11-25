@@ -12,6 +12,7 @@ Catalog là mục lục chính thức để trả lời bốn câu hỏi trướ
 | Category | API | Status | Preview/usage | Source | Test |
 |---|---|---|---|---|---|
 | Foundation | `SliColors`, `SliTheme`, `SliSpacing`, `SliRadii`, `SliDurations` | Stable | [Architecture](../architecture.md) | [`lib/src/foundation`](../../lib/src/foundation/) | [`sli_theme_test.dart`](../../test/foundation/sli_theme_test.dart) |
+| Icon | `SliIcons` | Stable | Lucide qua shadcn_flutter, tên theo ngữ nghĩa | [`sli_icons.dart`](../../lib/src/foundation/sli_icons.dart) | [`sli_icons_test.dart`](../../test/foundation/sli_icons_test.dart) |
 | Integration | `SliShadcnScope` | Stable | [Architecture](../architecture.md) | [`sli_shadcn_scope.dart`](../../lib/src/shadcn/sli_shadcn_scope.dart) | Covered through component tests |
 | Action | `SliButton` | Stable | [Details](sli-button.md) | [`sli_button.dart`](../../lib/src/components/sli_button.dart) | [`sli_button_test.dart`](../../test/components/sli_button_test.dart) |
 | Container | `SliSurface` | Stable | [Details](sli-surface.md) | [`sli_surface.dart`](../../lib/src/components/sli_surface.dart) | [Light/dark golden](../../test/catalog/catalog_pilot_golden_test.dart) |
@@ -27,6 +28,8 @@ Catalog là mục lục chính thức để trả lời bốn câu hỏi trướ
 ## Cách tìm nhanh
 
 - Làm CTA/button: dùng `SliButton`.
+- Cần icon: dùng `SliIcons`; thiếu thì thêm tên Lucide vào `SliIcons`, không
+  dùng `Icons.*` của Material trong UI app.
 - Cần card/surface trung tính: dùng `SliSurface`.
 - Cần bottom sheet: dùng
   [`showSliBottomSheet` + `SliBottomSheetFrame`](sli-bottom-sheet.md).

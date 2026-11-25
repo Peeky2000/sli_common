@@ -9,7 +9,8 @@
 4. Define variants and disabled/loading/error behavior explicitly.
 5. Add semantics and preserve a minimum 48x48 interactive target.
 6. Add widget tests for behavior, light/dark themes, and public imports.
-7. Add a changelog entry. Deprecate before removing a legacy API.
+7. Add a changelog entry. Deprecate before removing a legacy API that an app
+   still imports; an export no app uses can be removed directly.
 
 Run `flutter pub get`, `dart format lib test example`, `flutter analyze`, and
 `flutter test` before committing.

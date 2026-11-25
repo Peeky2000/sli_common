@@ -47,11 +47,12 @@ facade `Sli*`.
 | Bottom sheet compatibility | `BottomSheetWidget` | **Deprecated** | [BottomSheetWidget](docs/catalog/bottom-sheet-widget.md) |
 | Dialog/sheet helpers | `DialogUtil` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#feedback--overlay) |
 | Input/form | `CommonTextField`, `BaseField`, `CommonDropDown` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#input--form) |
+| Icon | `SliIcons` (Lucide) | **Stable** | [Inventory](docs/catalog/legacy-inventory.md#foundation-và-stable-surface) |
 | Expand/collapse | `ExpandedWidget` | Legacy | [Cách dùng và giới hạn](docs/catalog/expanded-widget.md) |
-| Loading/progress | `CircleProgress`, `HorizontalProgress`, `ImageLoading` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#feedback--overlay) |
-| Display/media | `BannerWidget`, `Badge`, `MoneyWidget`, `PhotoViewScreen` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#display--media) |
+| Date/time, thước cuộn, vuốt | `calendar/material/pickers.dart`, `RulerScrollWidget`, `SwipeTo` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#input--form) |
+| Display/media | `MoneyWidget`, `Marquee`, `ReadMoreText`, `PhotoViewScreen` | Legacy | [Inventory](docs/catalog/legacy-inventory.md#display--media) |
 
-Danh sách đầy đủ 46 public export và maturity status nằm tại
+Danh sách đầy đủ 28 public export và maturity status nằm tại
 [catalog index](docs/catalog/README.md) và
 [legacy inventory](docs/catalog/legacy-inventory.md).
 
@@ -98,5 +99,4 @@ việc chuyển sang `PopScope` cần một migration hành vi riêng.
 - [Catalog và maturity](docs/catalog/README.md)
 - [Changelog](CHANGELOG.md)
 
-Các ảnh legacy cũ vẫn được lưu trong [`guide/`](guide/) để truy vết, nhưng catalog
-mới là nơi xác định API và trạng thái hiện hành.
+Catalog là nơi xác định API và trạng thái hiện hành.

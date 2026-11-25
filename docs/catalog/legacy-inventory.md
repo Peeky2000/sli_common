@@ -1,8 +1,14 @@
-# Legacy Public Export Inventory
+# Public Export Inventory
 
-Inventory này phản ánh toàn bộ public barrel `lib/sli_common.dart` tại ngày
-2026-08-28. “Legacy” nghĩa là API vẫn dùng được nhưng chưa vượt maturity gate
-của `Sli*`; không đồng nghĩa component sai hoặc phải xóa ngay.
+Inventory này phản ánh toàn bộ public barrel `lib/sli_common.dart`. “Legacy”
+nghĩa là API vẫn dùng được nhưng chưa vượt maturity gate của `Sli*`.
+
+Ngày 2026-11-25 bộ legacy được rút gọn: giữ widget app đang dùng và widget khó
+tự viết lại cho đúng (lịch, thước cuộn, marquee, viền chấm, vuốt, xem ảnh), bỏ
+23 widget agent viết lại nhanh hơn đọc API cũ hoặc đã có trong
+`material_ui`/Shadcn (badge, các kiểu text gradient/nhấp nháy, nút đáy, tab bar,
+progress, dots indicator, mini player, picker nhiều ảnh, logger). Cần lại thì
+lấy từ lịch sử git trước commit này.
 
 ## Foundation và stable surface
 
@@ -12,6 +18,7 @@ của `Sli*`; không đồng nghĩa component sai hoặc phải xóa ngay.
 | `src/components/sli_bottom_sheet.dart` | `SliBottomSheetFrame`, `showSliBottomSheet` | Stable |
 | `src/components/sli_surface.dart` | `SliSurface` | Stable |
 | `src/foundation/sli_colors.dart` | `SliColors` | Stable |
+| `src/foundation/sli_icons.dart` | `SliIcons` (Lucide qua shadcn_flutter) | Stable |
 | `src/foundation/sli_theme.dart` | `SliTheme` | Stable |
 | `src/foundation/sli_tokens.dart` | Spacing/radius/duration tokens | Stable |
 | `src/shadcn/sli_shadcn_scope.dart` | `SliShadcnScope` | Stable |
@@ -31,9 +38,6 @@ của `Sli*`; không đồng nghĩa component sai hoặc phải xóa ngay.
 |---|---|---|
 | `bottom_sheet_widget.dart` | `BottomSheetWidget` | Deprecated |
 | `dialog_util.dart` | `DialogUtil` | Legacy |
-| `circle_progress.dart` | Circle progress widgets | Legacy |
-| `horizontal_progress.dart` | Horizontal progress widgets | Legacy |
-| `dots_indicator.dart` | `DotIndicator` | Legacy |
 
 ## Input / form
 
@@ -46,49 +50,24 @@ của `Sli*`; không đồng nghĩa component sai hoặc phải xóa ngay.
 | `ruler_scroll.dart` | `RulerScrollWidget` | Legacy |
 | `swipe_to.dart` | Swipe interaction | Legacy |
 
-## Action / navigation
-
-| Export | API chính | Status |
-|---|---|---|
-| `bottom_button.dart` | `BottomButton` | Legacy |
-| `bottom_2_button.dart` | `Bottom2Button` | Legacy |
-| `gradient_button.dart` | `GradientButton` | Legacy |
-| `ink_well_button.dart` | `InkwellButton` | Legacy |
-| `text_link.dart` | `TextLink` | Legacy |
-| `tabbar_widget.dart` | `TabBarWidget` | Legacy |
-| `bubble_tab_indicator.dart` | `BubbleTabIndicator` | Legacy |
-| `sliver_appbar_delegate.dart` | Sliver app bar delegate | Legacy |
-
 ## Display / media
 
 | Export | API chính | Status |
 |---|---|---|
-| `badge.dart` | `Badge` | Legacy |
-| `banner_widget.dart` | `BannerWidget` | Legacy |
-| `blink_text.dart` | `BlinkText` | Legacy |
-| `gradient_text.dart` | `GradientText` | Legacy |
-| `animation_gradient_text.dart` | Animated gradient text | Legacy |
 | `marquee.dart` | `Marquee` | Legacy |
 | `money_widget.dart` | `MoneyWidget` | Legacy |
-| `title_widget.dart` | `TitleWidget` | Legacy |
 | `read_more.dart` | Read-more text | Legacy |
-| `image_loading.dart` | Image loading widget | Legacy |
-| `image_test.dart` | Legacy image helper | Legacy / review |
-| `multi_image_picker.dart` | Multi image picker UI | Legacy |
 | `photo_view_screen.dart` | `PhotoViewScreen` | Legacy |
-| `mini_player.dart` | `MiniPlayer` | Legacy |
 
 ## Layout / decoration / utility
 
 | Export | API chính | Status |
 |---|---|---|
 | `expanded_widget.dart` | [`ExpandedWidget`](expanded-widget.md) | Legacy |
-| `fade_widget.dart` | Fade widget | Legacy |
 | `dotted_border.dart` | Dotted border | Legacy |
 | `dotted_decoration.dart` | Dotted decoration | Legacy |
 | `permission_utils.dart` | `PermissionUtils` | Legacy utility |
-| `log.dart` | `Log` | Legacy utility |
 
-Tổng: **46/46 public exports** đã được phân loại (7 stable foundation/component
-exports và 39 legacy/compatibility exports). Khi barrel thay đổi, inventory phải đổi trong
-cùng commit.
+Tổng: **28/28 public exports** đã được phân loại (8 stable foundation/component,
+4 kit trial và 16 legacy/compatibility). Khi barrel thay đổi, inventory phải đổi
+trong cùng commit.
