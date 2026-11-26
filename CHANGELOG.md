@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Nâng `shadcn_flutter` lên 0.0.55: `SliShadcnScope` chỉ còn bọc theme vì gói
+  đã bỏ `OverlayManagerLayer`/`PopoverOverlayHandler` (popover, menu, tooltip tự
+  cấu hình). Nâng `another_flushbar` lên 2 (không đổi API) và
+  `flutter_screenutil` 5.9.3.
 - Nâng `permission_handler` lên 13 (Android plugin 14, compileSdk 37) và
   `device_info_plus` lên 13 (`win32` 6) để app lên `alice` 2; bỏ override
   `win32: ^5.13.0` đã cũ. API dùng trong `PermissionUtil` không đổi.
