@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Nâng ràng buộc Dart SDK lên `^3.14.0` (Flutter 3.50) cho package và example.
 - Nâng `shadcn_flutter` lên 0.0.55: `SliShadcnScope` chỉ còn bọc theme vì gói
   đã bỏ `OverlayManagerLayer`/`PopoverOverlayHandler` (popover, menu, tooltip tự
   cấu hình). Nâng `another_flushbar` lên 2 (không đổi API) và

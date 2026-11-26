@@ -172,9 +172,8 @@ class SliBottomSheetFrame extends StatelessWidget {
                     Text(
                       value,
                       textAlign: titleTextAlign,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: colors.mutedForeground,
-                      ),
+                      style: Theme.of(context).textTheme.bodySmall
+                          ?.copyWith(color: colors.mutedForeground),
                     ),
                   ],
                 ],

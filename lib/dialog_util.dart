@@ -347,9 +347,8 @@ class DialogUtil {
           return CupertinoActionSheet(
             title: Text(
               title ?? defaultTitle,
-              style: Theme.of(
-                context,
-              ).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w500),
+              style: Theme.of(context).textTheme.labelMedium!
+                  .copyWith(fontWeight: FontWeight.w500),
             ),
             message: (content != null && content.isNotEmpty)
                 ? Container(
